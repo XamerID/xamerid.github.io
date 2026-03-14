@@ -11,7 +11,7 @@
     const spinAudio = document.querySelector("#spinner-load-audios");
     const convertFm = document.querySelector("#converter-button-format");
    // const API = `${location.protocol}//${location.hostname}:3000`;
-    const API = "https://critical-talented-gcc-rational.trycloudflare.com";
+    const API = "https://parties-investments-colleges-balanced.trycloudflare.com";
     let converting = false;
     let current_Title = "media";
     function resetConvertUI() {
