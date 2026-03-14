@@ -16,6 +16,13 @@
     const API = "https://automation-dept-cash-invision.trycloudflare.com";
     let converting = false;
     let current_Title = "media";
+    
+   
+  fetch(API + "/lapor")
+    .then(response => console.log("Laporan terkirim ke Termux!"))
+    .catch(error => console.error("Server Termux mati atau link salah."));
+
+
     function resetConvertUI() {
         iframe.src = "";
         results.classList.remove("active");
