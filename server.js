@@ -11,22 +11,19 @@
     const spinVideo = document.querySelector("#spinner-load-videos");
     const spinAudio = document.querySelector("#spinner-load-audios");
     const convertFm = document.querySelector("#converter-button-format");
-   //#const API = `${location.protocol}//${location.hostname}:3000`;
-
     const API = "https://territory-silly-ing-garcia.trycloudflare.com";
     let converting = false;
     let current_Title = "media";
-    
-   
+    let current_process = null;
   fetch(API + "/visit", {
   method: "POST",})
-
 
     function resetConvertUI() {
         iframe.src = "";
         results.classList.remove("active");
         loading.classList.remove("active");
         convertFm.classList.add("hidden");
+        current_process = null;
     }
     function sanitizeFilename(name) {
         return name.replace(/[\\/:*?"<>|]/g, "").trim();
@@ -103,6 +100,7 @@
             showToast("invalid links", "", 3600);
             return;
         }
+if (current_Title === current_process) return;
         resetConvertUI();
         results.classList.add("active");
         loading.classList.add("active");
@@ -114,6 +112,7 @@
             if (id) iframe.src = `https://www.youtube.com/embed/${id}`;
             const info = await fetchInfo(url);
             current_Title = sanitizeFilename(info.title || "media");
+            current_process = current_Title;
             loading.classList.remove("active");
             setupDownloadButtons(url);
         } catch {
@@ -131,6 +130,5 @@
             if (!inputIpv.value.trim()) return;
             inputIpv.value = "";
             resetConvertUI();
-
         });
 }());
