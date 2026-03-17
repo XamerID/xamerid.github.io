@@ -1,4 +1,3 @@
-// CONVERTER
 (function() {
     const inputIpv = document.querySelector("#pasteConvertUrl");
     const clearIpv = document.querySelector("#clearInputConvertBtn");
@@ -11,15 +10,15 @@
     const spinVideo = document.querySelector("#spinner-load-videos");
     const spinAudio = document.querySelector("#spinner-load-audios");
     const convertFm = document.querySelector("#converter-button-format");
-    const API = "https://territory-silly-ing-garcia.trycloudflare.com";
+    const previewImg = document.querySelector("#preview-img-converter");
+    const API = "";
     let converting = false;
     let current_Title = "media";
     let current_process = null;
-  fetch(API + "/visit", {
-  method: "POST",})
-
+    fetch(API + "/visit", {
+        method: "POST",
+    })
     function resetConvertUI() {
-        iframe.src = "";
         results.classList.remove("active");
         loading.classList.remove("active");
         convertFm.classList.add("hidden");
@@ -28,23 +27,7 @@
     function sanitizeFilename(name) {
         return name.replace(/[\\/:*?"<>|]/g, "").trim();
     }
-    function getYouTubeId(url) {
-        try {
-            const u = new URL(url);
-            if (u.hostname.includes("youtu.be"))
-                return u.pathname.slice(1);
-            if (u.searchParams.get("v"))
-                return u.searchParams.get("v");
-            if (u.pathname.includes("/embed/"))
-                return u.pathname.split("/embed/")[1];
-            if (u.pathname.includes("/shorts/"))
-                return u.pathname.split("/shorts/")[1];
 
-            return null;
-        } catch {
-            return null;
-        }
-    }
     async function fetchInfo(url) {
         const res = await fetch(`${API}/info`, {
             method: "POST",
@@ -84,45 +67,68 @@
             } finally {
                 converting = false;
                 spin.classList.remove("active");
-            } 
+            }
         };
     }
-
-    /* ================= SETUP DOWNLOAD ================= */
     function setupDownloadButtons(url) {
         handleDownload(linksVideo, spinVideo, url, "video");
         handleDownload(linksAudio, spinAudio, url, "audio");
         convertFm.classList.remove("hidden");
     }
+    function blankThumbnailConvert() {
+        const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="640" height="360">
+        <defs>
+        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#111"/>
+        <stop offset="100%" stop-color="#333"/>
+        </linearGradient>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#g)"/>
+        <text x="50%" y="50%"
+        dominant-baseline="middle"
+        text-anchor="middle"
+        fill="#fff"
+        font-size="28"
+        font-family="sans-serif">
+        No Preview
+        </text>
+        </svg>
+        `;
+        return "data:image/svg+xml," + encodeURIComponent(svg);
+    }
+    const blankFB = blankThumbnailConvert();
     converter.addEventListener("click", async () => {
         const url = inputIpv.value.trim();
         if (!url || !url.startsWith("https://")) {
             showToast("invalid links", "", 3600);
             return;
         }
-if (current_Title === current_process) return;
+        if (current_Title === current_process) return;
         resetConvertUI();
         results.classList.add("active");
         loading.classList.add("active");
-
+        iframe.classList.add("hidden");
         try {
-            /* preview iframe */
-            const id = await getYouTubeId(url);
-
-            if (id) iframe.src = `https://www.youtube.com/embed/${id}`;
             const info = await fetchInfo(url);
             current_Title = sanitizeFilename(info.title || "media");
             current_process = current_Title;
+
+            if (previewImg) {
+                previewImg.src = info.thumbnail;
+        
+ iframe.classList.remove("hidden");
+                previewImg.onerror = () => {
+                    previewImg.src = blankFB;
+                };
+            }
             loading.classList.remove("active");
             setupDownloadButtons(url);
-        } catch {
-            loading.classList.remove("active");
 
-            if (getYouTubeId(url)) {
-                setupDownloadButtons(url);
-            } else {
-                alert("failed");
-            }
+        } catch {
+            previewImg.src = blankFB;
+            loading.classList.remove("active");
+            setupDownloadButtons(url);
         }
     });
     clearIpv.addEventListener("click",
