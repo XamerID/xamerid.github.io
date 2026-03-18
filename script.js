@@ -1102,6 +1102,51 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
     const durent = [durationPG,
         cutEndTimes];
+const playLy = document.querySelector("#play-lyrics");
+    let speaking = false;
+
+    function getSelectedText() {
+        const id = document.querySelector("#tts-source").value;
+        const el = document.getElementById(id);
+        return el ? el.value.trim(): "";
+    }
+
+    function speakLyrics() {
+        const text = getSelectedText();
+        if (!text) return;
+        
+        const speech = new SpeechSynthesisUtterance(text);
+
+        speech.lang = "en-US";
+        speech.rate = 0.8;
+        speech.onend = () => {
+            speaking = false;
+            playLy.innerHTML = fa_play;
+        };
+        speechSynthesis.speak(speech);
+    }
+
+    playLy.addEventListener("click", () => {
+        const text = getSelectedText();
+        if (!text) return;
+
+        if (!speaking) {
+            speechSynthesis.cancel();
+            speakLyrics();
+            speaking = true;
+            playLy.innerHTML = fa_pause;
+        } else {
+            speechSynthesis.cancel();
+            speaking = false;
+            playLy.innerHTML = fa_play;
+        }
+    });
+ document.querySelector("#tts-source").addEventListener("change",
+        () => {
+            speechSynthesis.cancel();
+            speaking = false;
+            playLy.innerHTML = fa_play;
+        });
 
     function failCover() {
         apcx.forEach(e => {
