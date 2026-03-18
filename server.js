@@ -112,7 +112,6 @@
         if (current_Title === current_process) return;
 
         resetConvertUI();
-        results.classList.remove("hidden");
         loading.classList.add("active");
         
         try {
@@ -129,7 +128,10 @@
             }
             loading.classList.remove("active");
             iframe.classList.remove("hidden");
+            results.classList.remove("hidden");
+                
             setupDownloadButtons(url);
+
         } catch {
             previewImg.src = blankFB;
             loading.classList.remove("active");
