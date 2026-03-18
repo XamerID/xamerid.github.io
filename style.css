@@ -398,7 +398,7 @@ input[type="range"] {
     border-radius: 0.1em;
     flex-shrink: 0;
     overflow: hidden;
-    background: #000;
+    box-shadow: 5px 10px rgba(0,0,0,0.5);
     color: #ddd;
 }
 .category-audio-area span {
