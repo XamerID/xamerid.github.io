@@ -398,6 +398,7 @@ input[type="range"] {
     border-radius: 0.1em;
     flex-shrink: 0;
     overflow: hidden;
+    background: #000;
     color: #ddd;
 }
 .category-audio-area span {
@@ -408,13 +409,6 @@ input[type="range"] {
     font-size: 1.5em;
     color: #fff;
 }
-#openSetupBtn {
-    background: rgba(53, 55, 25);
-}
-#extrackAudioBtn {
-    background: #007bff;
-}
-
 .empty-message {
     display: flex;
     flex-direction: column;
