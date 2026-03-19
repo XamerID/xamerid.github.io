@@ -2483,11 +2483,12 @@ function speakLyrics() {
             showToast('An error occurred while deleting the song', "yellow");
         }
     }
-
-    async function clearAllMusic() {
+    
+      async function clearAllMusic() {
         musicFiles = [];
-        await resetPlayerUI();
-        await resetActivityEdit();
+        await Promise.all([
+            resetPlayerUI(), 
+            resetActivityEdit()]);
 
         try {
             const db = await openIndexedDB();
@@ -2499,14 +2500,13 @@ function speakLyrics() {
                 tx.onerror = e => reject(e.target.error);
                 tx.onabort = e => reject(e.target.error);
             });
-            await renderMusic(musicList, musicFiles);
-            await updateDateAudio(0);
+            await Promise.all([
+                renderMusic(musicList, musicFiles), updateDateAudio(0)]);
         } catch {
-            await renderMusic(musicList, musicFiles);
-            await updateDateAudio(0);
+            await Promise.all([
+                renderMusic(musicList, musicFiles), updateDateAudio(0)]);
         }
     }
-
     document.querySelector('#removeDateMp3').addEventListener('click',
         (e) => {
             e.stopPropagation();
