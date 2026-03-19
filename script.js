@@ -2700,7 +2700,7 @@ function speakLyrics() {
             if (isEnsure.group && isEnsure.rate) {
                 source.connect(tx.destination);
                 source.start(0, start, duration);
-                await cloneStart(tx);
+                cloneStart(tx);
                 return;
             }
 
@@ -2771,7 +2771,7 @@ function speakLyrics() {
                 mg.connect(fade).connect(tx.destination);
     
                 source.start(0, start, duration);
-                await cloneStart(tx);
+                cloneStart(tx);
             }
         }
 
