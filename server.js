@@ -11,7 +11,7 @@
     const spinAudio = document.querySelector("#spinner-load-audios");
     const convertFm = document.querySelector("#converter-button-format");
     const previewImg = document.querySelector("#preview-img-converter");
-    const API = "https://robot-revelation-facilitate-journalist.trycloudflare.com";
+    const API = "https://permitted-sauce-scan-embedded.trycloudflare.com";
     let converting = false;
     let current_Title = "media";
     let current_process = null;
