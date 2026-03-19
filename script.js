@@ -1326,8 +1326,8 @@ function speakLyrics() {
             await injectTags(track);
             isEdit(true);
         } catch {
-            resetActivityEdit();
             isEdit(false);
+            resetActivityEdit();
             showToast(e, "yellow");
         }
     }
