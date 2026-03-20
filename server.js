@@ -34,40 +34,42 @@ const hostIN = document.querySelector("#host-info");
 
     async function fetchInfo(url, retries = 3, timeout = 12000) {
 
-    for (let i = 0; i < retries; i++) {
+        for (let i = 0; i < retries; i++) {
 
-        const controller = new AbortController();
-        const timer = setTimeout(() => controller.abort(), timeout);
+            const controller = new AbortController();
+            const timer = setTimeout(() => controller.abort(), timeout);
 
-        try {
+            try {
 
-            const res = await fetch(`${API}/info`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ url }),
-                signal: controller.signal
-            });
+                const res = await fetch(`${API}/info`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        url
+                    }),
+                    signal: controller.signal
+                });
 
-            clearTimeout(timer);
+                clearTimeout(timer);
 
-            if (!res.ok) throw new Error("Server error");
+                if (!res.ok) throw new Error("Server error");
 
-            return await res.json();
+                return await res.json();
 
-        } catch (err) {
+            } catch (err) {
 
-            clearTimeout(timer);
+                clearTimeout(timer);
 
-            if (i === retries - 1) throw err;
+                if (i === retries - 1) throw err;
 
-            console.log("Retry request...", i + 1);
+                console.log("Retry request...", i + 1);
 
+            }
         }
     }
-}
-        
+
     function handleDownload(btn, spin, url, type) {
         btn.onclick = async () => {
             if (converting) {
@@ -129,64 +131,58 @@ const hostIN = document.querySelector("#host-info");
 
     const blankFB = blankThumbnailConvert();
 
-    
-
-     converter.addEventListener("click", async () => {
-    if (!navigator.onLine) {
-        showToast("internet required", "", 3600);
-        return;
-    }
-
-    const url = inputIpv.value.trim();
-    if (!url || !url.startsWith("https://")) {
-        showToast("invalid links", "", 3600);
-        return;
-    }
-
-    resetConvertUI();
-    loading.classList.add("active");
-
-    try {
-        const info = await fetchInfo(url);
-
-        if (info.error) {
-            throw new Error("unsupported media");
+    converter.addEventListener("click", async () => {
+        if (!navigator.onLine) {
+            showToast("internet required", "", 3600);
+            return;
+        }
+        const url = inputIpv.value.trim();
+        if (!url || !url.startsWith("https://")) {
+            showToast("invalid links", "", 3600);
+            return;
         }
 
-        current_Title = sanitizeFilename(info.title || "media");
-        current_process = current_Title;
-        
+        resetConvertUI();
+        loading.classList.add("active");
+
+        try {
+            const info = await fetchInfo(url);
+
+            if (info.error) {
+                throw new Error("unsupported media");
+            }
+
+            current_Title = sanitizeFilename(info.title || "media");
+            current_process = current_Title;
+
             if (previewImg) {
-            previewImg.referrerPolicy = "no-referrer"; 
-            previewImg.onerror = () => {
-                console.warn("Thumbnail blocked by provider policy, using fallback.");
-                previewImg.src = blankFB;
-                previewImg.onerror = null; 
-            };
+                previewImg.referrerPolicy = "no-referrer";
+                previewImg.onerror = () => {
+                    console.warn("Thumbnail blocked by provider policy, using fallback.");
+                    previewImg.src = blankFB;
+                    previewImg.onerror = null;
+                };
+                previewImg.src = info.thumbnail || blankFB;
+            }
 
-            previewImg.src = info.thumbnail || blankFB;
+            loading.classList.remove("active");
+            results.classList.remove("hidden");
+            hostIN.textContent = `${info.platform || 'Media'} - ${info.title || 'No Title'}`;
+            setupDownloadButtons(url);
+
+        } catch (e) {
+            console.error("fetchInfo error:", e);
+            showToast(e.message === "unsupported media" ? "Media tidak didukung": "Gagal mengambil info", "", 3600);
+
+            hostIN.textContent = "failed to fetch media info";
+            if (previewImg) previewImg.src = blankFB;
+
+            loading.classList.remove("active");
+
+            results.classList.remove("hidden");
+            setupDownloadButtons(url);
         }
-        
-        loading.classList.remove("active");
-        results.classList.remove("hidden"); 
-        
-        hostIN.textContent = `${info.platform || 'Media'} - ${info.title || 'No Title'}`;
-
-        setupDownloadButtons(url);
-
-    } catch (e) {
-        console.error("fetchInfo error:", e);
-        showToast(e.message === "unsupported media" ? "Media tidak didukung" : "Gagal mengambil info", "", 3600);
-        
-        hostIN.textContent = "failed to fetch media info";
-        if (previewImg) previewImg.src = blankFB;
-        
-        loading.classList.remove("active");
-
-        results.classList.remove("hidden");
-        setupDownloadButtons(url);
-    }
-});
+    });
 
     clearIpv.addEventListener("click",
         () => {
