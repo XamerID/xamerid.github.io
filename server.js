@@ -129,63 +129,65 @@ const hostIN = document.querySelector("#host-info");
 
     const blankFB = blankThumbnailConvert();
 
-    converter.addEventListener("click", async () => {
+    
 
+     converter.addEventListener("click", async () => {
     if (!navigator.onLine) {
-        showToast("internet required for downloader", "", 3600);
+        showToast("internet required", "", 3600);
         return;
     }
 
     const url = inputIpv.value.trim();
-
     if (!url || !url.startsWith("https://")) {
         showToast("invalid links", "", 3600);
         return;
     }
 
-    if (current_Title === current_process) return;
-
     resetConvertUI();
     loading.classList.add("active");
 
     try {
-
         const info = await fetchInfo(url);
 
         if (info.error) {
-            showToast("unsupported media", "", 3600);
-            return;
+            throw new Error("unsupported media");
         }
 
         current_Title = sanitizeFilename(info.title || "media");
         current_process = current_Title;
-
-        if (previewImg) {
-            previewImg.src = info.thumbnail || blankFB;
-
-            previewImg.onerror = () => {
-                previewImg.src = blankFB;
-            };
-        }
-
-        loading.classList.remove("active");
-        iframe.classList.remove("hidden");
-        results.classList.remove("hidden");
         
-        hostIN.textContent = `${info.platform} - ${info.title}`;
+            if (previewImg) {
+            previewImg.referrerPolicy = "no-referrer"; 
+            previewImg.onerror = () => {
+                console.warn("Thumbnail blocked by provider policy, using fallback.");
+                previewImg.src = blankFB;
+                previewImg.onerror = null; 
+            };
+
+            previewImg.src = info.thumbnail || blankFB;
+        }
+        
+        loading.classList.remove("active");
+        results.classList.remove("hidden"); 
+        
+        hostIN.textContent = `${info.platform || 'Media'} - ${info.title || 'No Title'}`;
 
         setupDownloadButtons(url);
 
     } catch (e) {
         console.error("fetchInfo error:", e);
-
-hostIN.textContent = "failed to fetch media info";
-
+        showToast(e.message === "unsupported media" ? "Media tidak didukung" : "Gagal mengambil info", "", 3600);
+        
+        hostIN.textContent = "failed to fetch media info";
         if (previewImg) previewImg.src = blankFB;
-
+        
         loading.classList.remove("active");
+
+        results.classList.remove("hidden");
+        setupDownloadButtons(url);
     }
 });
+
     clearIpv.addEventListener("click",
         () => {
             if (!inputIpv.value.trim()) return;
