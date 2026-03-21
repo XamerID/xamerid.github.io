@@ -1323,7 +1323,7 @@ function speakLyrics() {
             };
             visualizer('stop');
             if (are data) {
-            await injectTags(track);
+            injectTags(track);
             isEdit(true);
             }
         } catch {
