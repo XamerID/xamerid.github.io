@@ -1165,20 +1165,23 @@ function speakLyrics() {
         try {
             isProcessing = false;
             isPreview = false;
-
             areData = null;
             codData = null;
             currentCutId = null;
             asCounter = 0;
 
-            URL.revokeObjectURL(s);
-            cutAudioPlayer.src = '';
-            cutAudioPlayer.dataset.cutId = '';
-            delete cutAudioPlayer.dataset.cutId;
-            cutAudioPlayer.pause();
-            cutAudioPlayer.currentTime = 0;
-            audioBtn.innerHTML = fa_play;
-
+            const oldSrc = cutAudioPlayer.src;
+            
+            if (oldSrc.startsWith('blob:')) {
+                cutAudioPlayer.pause();
+                cutAudioPlayer.currentTime = 0;
+                cutAudioPlayer.removeAttribute('src');
+                cutAudioPlayer.load();
+                URL.revokeObjectURL(oldSrc);
+                cutAudioPlayer.dataset.cutId = '';
+                delete cutAudioPlayer.dataset.cutId;
+                audioBtn.innerHTML = fa_play;
+            }
             timeStep = 1;
             formatTimesBtn.textContent = timeStep + 's';
             startSlider.value = endSlider.value = audioProgres.value = 0;
@@ -1192,11 +1195,12 @@ function speakLyrics() {
                 inputIds[key].textContent = '';
             });
             if (isRunning) visualizer("stop");
-        } catch {}
+
+        } catch {
+        }
         updateRangeTrim();
         failCover();
     }
-
     async function injectTags(track) {
         try {
             // ID3____
