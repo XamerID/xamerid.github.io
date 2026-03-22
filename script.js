@@ -1220,7 +1220,7 @@ function speakLyrics() {
                 });
             };
 
-            let thumb = track.thumbnailUrl || track.thumbnailUrl || "";
+            let thumb = track.thumbnailUrl || "";
 
             if (thumb.startsWith("data:mage/")) {
                 thumb = thumb.replace("data:mage/", "data:image/");
