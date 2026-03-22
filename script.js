@@ -1165,21 +1165,20 @@ function speakLyrics() {
         try {
             isProcessing = false;
             isPreview = false;
-            cutAudioPlayer.pause();
-            cutAudioPlayer.currentTime = 0;
-            audioBtn.innerHTML = fa_play;
-            const s = cutAudioPlayer.src;
-            if (s && s.startsWith('blob:')) {
-                URL.revokeObjectURL(s);
-                cutAudioPlayer.src = '';
-                cutAudioPlayer.dataset.cutId = '';
-                delete cutAudioPlayer.dataset.cutId;
-            }} catch {
-        } finally {
+
             areData = null;
             codData = null;
             currentCutId = null;
             asCounter = 0;
+
+            URL.revokeObjectURL(s);
+            cutAudioPlayer.src = '';
+            cutAudioPlayer.dataset.cutId = '';
+            delete cutAudioPlayer.dataset.cutId;
+            cutAudioPlayer.pause();
+            cutAudioPlayer.currentTime = 0;
+            audioBtn.innerHTML = fa_play;
+
             timeStep = 1;
             formatTimesBtn.textContent = timeStep + 's';
             startSlider.value = endSlider.value = audioProgres.value = 0;
@@ -1192,9 +1191,10 @@ function speakLyrics() {
                 inputIds[key].value = '';
                 inputIds[key].textContent = '';
             });
-            updateRangeTrim();
-            failCover();
-        }
+            if (isRunning) visualizer("stop");
+        } catch {}
+        updateRangeTrim();
+        failCover();
     }
 
     async function injectTags(track) {
@@ -1248,7 +1248,7 @@ function speakLyrics() {
                 });
                 set(file, thumb);
             }
-    
+
             let res;
             try {
                 res = await fetch(thumb, {
@@ -1258,7 +1258,7 @@ function speakLyrics() {
             } catch (e) {
                 return failCover();
             }
-            
+
             let blob = await res.blob();
             if (!blob.type || blob.type.trim() === "") {
                 blob = new Blob([await blob.arrayBuffer()], {
@@ -1276,13 +1276,10 @@ function speakLyrics() {
                 albumArtInput.value = '';
                 const emptyTransfer = new DataTransfer();
                 albumArtInput.files = emptyTransfer.files;
-              if (isRunning)      visualizer('stop');
-
             }} catch {
             failCover();
         }
     }
-
     async function injectData(track) {
         await resetActivityEdit();
         try {
@@ -1292,29 +1289,35 @@ function speakLyrics() {
             });
             const obj = URL.createObjectURL(blob);
             areData = await blob.arrayBuffer();
-            cutAudioPlayer.src = obj;
-            cutAudioPlayer.preload = "metadata";
-            cutAudioPlayer.load();
-            currentCutId = track.id;
 
-            visualizer('start', 'wave');
+            const loadAudio = new Promise((resolve, reject) => {
+                cutAudioPlayer.src = obj;
+                cutAudioPlayer.preload = "metadata";
+                currentCutId = track.id;
 
-            cutAudioPlayer.onloadedmetadata = async () => {
-                const d = cutAudioPlayer.duration;
-                if (d >= 540) {
-                    isEdit(false);
-                    resetActivityEdit();
-                    showToast('maximum duration limit is around 9 minutes');
-                    return;
-                } 
+                cutAudioPlayer.onloadedmetadata = async () => {
+                    const d = cutAudioPlayer.duration;
+                    if (d >= 540) {
+                        reject("maximum duration limit is around 9 minutes");
+                        return;
+                    }
 
-                startSlider.max = endSlider.max = audioProgres.max = d;
-                endSlider.value = d;
-                startSlider.value = audioProgres.value = 0;
-                durent.forEach(e => e.textContent = formatTime(d));
-                
-                await Promise.all([applyHighlight(), updateRangeTrim()]);
-            };
+                    startSlider.max = endSlider.max = audioProgres.max = d;
+                    endSlider.value = d;
+                    startSlider.value = audioProgres.value = 0;
+                    durent.forEach(e => e.textContent = formatTime(d));
+
+                    await Promise.all([applyHighlight(), updateRangeTrim()]);
+                    resolve(); 
+                };
+
+                cutAudioPlayer.onerror = () => reject("Failed to load audio file");
+            });
+
+            visualizer('start',
+                'wave');
+
+            await loadAudio;
 
             cutAudioPlayer.ontimeupdate = () => {
                 const c = cutAudioPlayer.currentTime;
@@ -1325,19 +1328,20 @@ function speakLyrics() {
                 audioProgres.value = c;
                 currentPG.textContent = formatTime(c);
             };
+
             visualizer('stop');
+
+            injectTags(track);
+            isEdit(true);
             
-            if (areData) {
-                injectTags(track);
-                isEdit(true);
-            }
-        } catch {
+        } catch (e) {
             isEdit(false);
-            resetActivityEdit();
+            await resetActivityEdit();
             showToast(e, "yellow");
+        } finally {
+            isProcessing = false;
         }
     }
-
     document.querySelector('#resetRowProgress').addEventListener('click',
         async (event) => {
             event.stopPropagation();
