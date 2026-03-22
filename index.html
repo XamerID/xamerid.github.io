@@ -577,15 +577,6 @@ rendering audio...
 <a id="downloadVeoLink" style="opacity:0;"></a>
 <a id="downloadCutAudioLink" style="opacity:0"></a>
 
-<script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('sw.js')
-                .then(() => console.log("PWA Ready Offline!"))
-                .catch(err => console.error("SW:", err));
-        });
-    }
-</script>
 <script src="lib/jsmediatags.min.js" defer></script>
 <script src="lib/lame.min.js" defer></script>
 <script src="lib/browser-id3-writer.min.js" defer></script> 
