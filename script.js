@@ -2548,8 +2548,8 @@ function speakLyrics() {
 
             setTimeout(() => {
                 URL.revokeObjectURL(url);
-                delete downloadCutAudioLink.href;
-                delete downloadCutAudioLink.download;
+                downloadCutAudioLink.removeAttribute('href');
+                downloadCutAudioLink.removeAttribute('download');
                 asCounter = 0;
             }, 1000);
             showToast('succeed ✓');
