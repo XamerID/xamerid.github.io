@@ -2922,25 +2922,27 @@ function speakLyrics() {
                 eBite = parseInt(btn.dataset.rate, 10);
             });
         });
-
+let currentAlbumArtUrl = null;
         albumArtInput.addEventListener('change',
             (event) => {
                 const file = event.target.files[0];
-                apcx.forEach(e => {
-                    if (file) {
-                        const url = URL.createObjectURL(file);
-                        e.src = url;
+                if (currentAlbumArtUrl) {
+                    URL.revokeObjectURL(currentAlbumArtUrl);
+                    currentAlbumArtUrl = null;
+                }
+                if (file) {
+                    currentAlbumArtUrl = URL.createObjectURL(file);
+                    apcx.forEach(e => {
+                        e.src = currentAlbumArtUrl;
                         e.style.visibility = 'visible';
-                        e.onload = () => {
-                            URL.revokeObjectURL(url);
-                        };
-                    } else {
+                    });
+                } else {
+                    apcx.forEach(e => {
                         e.src = '';
                         e.style.visibility = 'hidden';
-                    }
-                });
+                    });
+                }
             });
-
         inputIds.title.addEventListener('input',
             () => {
                 const title = inputIds.title.value.trim();
