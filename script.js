@@ -2385,44 +2385,41 @@ function speakLyrics() {
     }
 
     async function parseMusic(files) {
-        setLoadEl(true, 0, 'rendering audio...');
+        setLoadEl(true, 0, 'Preparing audio...');
         try {
+            const existingIds = new Set(musicFiles.map(f => f.id));
             const pushFiles = [];
-            let pushCount = 0;
-
-            for (const file of files) {
+            let duplicateCount = 0;
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
                 const result = await processFile(file);
                 if (result) {
-                    pushFiles.push(result);
+                    if (existingIds.has(result.id) || pushFiles.some(f => f.id === result.id)) {
+                        duplicateCount++;
+                    } else {
+                        pushFiles.push(result);
+                    }
                 }
-                pushCount++;
-                const p = Math.round((pushCount / files.length) * 100);
-                setLoadEl(true, p, 'rendering audio...');
-            }
-            if (pushFiles.length === 0) {
-                event.target.value = '';
-                return;
+                const p = Math.round(((i + 1) / files.length) * 100);
+                setLoadEl(true, p, `Processing audio (${i + 1}/${files.length})...`);
             }
 
-            const existing = new Set(musicFiles.map(f => f.id));
-            const unique = pushFiles.filter(newFile => !existing.has(newFile.id));
-            const cek = pushFiles.length - unique.length;
-
-            if (cek > 0) {
-                showToast(`${cek} duplicate file(s) skipped. Maybe they already exist?`);
-                return;
+            if (duplicateCount > 0) {
+                showToast(`${duplicateCount} duplicate file(s) skipped.`);
             }
-            if (unique.length > 0) {
-                musicFiles.push(...unique);
+
+            if (pushFiles.length > 0) {
+                musicFiles.push(...pushFiles);
                 await loadAudioData();
+            } else if (duplicateCount === 0) {
+                return;
             }
+
         } catch {
-            setLoadEl(false);
-            files.target = '';
-            showToast('An error occurred while processing the audio file. Please try again', "yellow");
+            showToast('An error occurred during processing.', "yellow");
         } finally {
             setLoadEl(false);
-            files.target = '';
+            if (files.target) files.target.value = '';
         }
     }
 
