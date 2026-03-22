@@ -1301,8 +1301,8 @@ function speakLyrics() {
 
                 cutAudioPlayer.onloadedmetadata = async () => {
                     const d = cutAudioPlayer.duration;
-                    if (d >= 540) {
-                        reject("maximum duration limit is around 9 minutes");
+                    if (d >= 420) {
+                        reject("maximum duration limit is around 7 minutes");
                         return;
                     }
 
