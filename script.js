@@ -2633,55 +2633,53 @@ function speakLyrics() {
         function floatTo16BitPCM(f32) {
             const len = f32.length;
             const out = new Int16Array(len);
-
             for (let i = 0; i < len; i++) {
-                let s = f32[i];
-                if (s > 1) s = 1;
-                else if (s < -1) s = -1;
-
-                out[i] = s < 0 ? s * 32768: s * 32767;
+                let s = Math.max(-1, Math.min(1, f32[i]));
+                out[i] = (s < 0 ? s * 0x8000: s * 0x7FFF) | 0;
             }
             return out;
         }
 
         async function cloneStart(tx) {
-            const red = await tx.startRendering();
-            const numChannels = red.numberOfChannels;
-            const sampleRate = red.sampleRate;
-            const ch0 = red.getChannelData(0);
-            const ch1 = numChannels > 1 ? red.getChannelData(1): null;
-            const encoder = new lamejs.Mp3Encoder(
-                numChannels,
+            const renderedBuffer = await tx.startRendering(); 
+            const {
+                numberOfChannels,
                 sampleRate,
-                eBite
-            );
-            const blockSize = 1152 * 2; 
-            const total = ch0.length;
+                length: total
+            } = renderedBuffer;
+
+            const ch0 = renderedBuffer.getChannelData(0);
+            const ch1 = numberOfChannels > 1 ? renderedBuffer.getChannelData(1): null;
+
+            const encoder = new lamejs.Mp3Encoder(numberOfChannels, sampleRate, eBite || 128);
+
+            const blockSize = 1152; 
             const mp3Data = [];
-            let lastYield = 0;
+            let lastYield = performance.now();
 
             for (let i = 0; i < total; i += blockSize) {
                 const end = Math.min(i + blockSize, total);
                 const leftChunk = floatTo16BitPCM(ch0.subarray(i, end));
-                const rightChunk = ch1
-                ? floatTo16BitPCM(ch1.subarray(i, end)): null;
-                const buf = encoder.encodeBuffer(leftChunk, rightChunk);
+                let rightChunk = null;
+                if (ch1) {
+                    rightChunk = floatTo16BitPCM(ch1.subarray(i, end));
+                }
 
-                if (buf.length) mp3Data.push(buf);
+                const mp3buf = (numberOfChannels === 2)
+                ? encoder.encodeBuffer(leftChunk, rightChunk): encoder.encodeBuffer(leftChunk);
 
-                // Yield UI 
+                if (mp3buf.length > 0) mp3Data.push(new Uint8Array(mp3buf));
+
                 const now = performance.now();
-                if (now - lastYield > 40) {
-                    lastYield = now;
-                    const percent = Math.round((i / total) * 100);
-                    setLoadEl(true, percent, "convert to mp3...");
-
-                    await new Promise(r => setTimeout(r, 0));
+                if (now - lastYield > 50) {
+                    const percent = Math.floor((i / total) * 100);
+                    setLoadEl(true, percent, `Encoding MP3... ${percent}%`);
+                    await new Promise(resolve => setTimeout(resolve, 0));
+                    lastYield = performance.now();
                 }
             }
             const endBuf = encoder.flush();
-            if (endBuf.length) mp3Data.push(endBuf);
-            
+            if (endBuf.length > 0) mp3Data.push(new Uint8Array(endBuf));
             const mp3Blob = new Blob(mp3Data, {
                 type: "audio/mp3"
             });
