@@ -2982,8 +2982,8 @@ function speakLyrics() {
         try {
             await Promise.all([
                 openIndexedDB(),
-                loadAudioData(),
-                resetPlayerUI()]);
+                loadAudioData()]);
+            resetPlayerUI();
         } catch (err) {
             console.error(err);
             await clearAllMusic();
