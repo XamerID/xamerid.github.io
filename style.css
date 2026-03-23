@@ -10,7 +10,9 @@
     --space-base: 1.5625rem;
     --space: 1.25rem;
     --eq-gradient-start: #39ff14;
-    --eq-gradient-end: #007bff; 
+    --eq-gradient-end: #007bff;
+    --progress: #fff;
+    --bg-progress: #111; 
 }
 html,
 body {
@@ -53,6 +55,42 @@ input[type="range"] {
     color: inherit;
     font-family: inherit;
 }
+.linear {
+    --progress: #007bff;
+    --bg-progress: #edf1f7;
+
+    html, body, .player-bottom-category, .convert-overlay-content, .popup-content, .popup-header, .popup-progress-bar {
+        background: #fff;
+    }
+    #openSetupBtn {
+        background: #008000;
+    }
+    #extrackAudioBtn {
+        background: #007bff;
+    }
+    #addFileBtn {
+        background: #ff1493;
+    }
+    #addFileBtn i {
+        color: #fff;
+    }
+
+:is(.header-content, .music-item, .player-bottom-category, .popup-content, .popup-header, .popup-progress-bar, #preview-editting) * {
+        color: #000;
+    }
+:is(#resetEditBtn, .add-cut-audio-btn) {
+        background: #d6d7db;
+    }
+:is(.header-content, .category-audio-area, #filter-mode, .paste-input-container input[type="text"]) {
+        background: #edf1f7;
+    }
+:is(#currentTimes, #currentDurations) {
+        color: #000;
+    }
+:is(#clearInputConvertBtn, .side-menu-overlay) {
+        background: rgba(0,0,0,0.1);
+    }
+}
 /* !Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  * Copyright 2024 Fonticons, Inc. */
@@ -76,6 +114,9 @@ input[type="range"] {
 }
 .fas:before,.fa-solid:before {
     content: var(--fa);
+}
+.fa-sun {
+    --fa: "\f185"
 }
 .fa-bell {
     --fa: "\f0f3"
@@ -353,8 +394,8 @@ input[type="range"] {
     opacity: 0.5;
 }
 #menuBtn,
-#filterBtn.active,
-#repeatBtn.active {
+:is(#filterBtn,
+#repeatBtn).active {
     opacity: 1;
 }
 .header-content label {
@@ -729,13 +770,9 @@ input[type="range"] {
     margin: 0;
     color: #888;
 }
-#musicBtn.active,
-#artistBtn.active,
-#albumBtn.active,
-#genreBtn.active {
+:is(#musicBtn,#artistBtn,#albumBtn,#genreBtn).active {
     color: #000;
 }
-
 #pre-list-edit {
     padding: 0 var(--padding-base);
 }
@@ -1364,7 +1401,7 @@ input[type="range"] {
     width: var(--space);
     height: var(--space);
     border-radius: 100%;
-    background: #fff;
+    background: var(--progress);
     cursor: pointer;
 }
 
