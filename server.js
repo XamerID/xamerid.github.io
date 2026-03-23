@@ -13,7 +13,7 @@
     const previewImg = document.querySelector("#preview-img-converter");
 const hostIN = document.querySelector("#host-info");
 
-    const API = "https://soon-communist-urw-species.trycloudflare.com";
+    const API = "https://avi-past-obtain-hits.trycloudflare.com";
     let converting = false;
     let current_Title = "media";
     let current_process = null;
