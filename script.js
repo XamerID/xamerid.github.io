@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         toastEnabled = !toastEnabled; modeMessageBtn.innerHTML = toastEnabled ? `<i class="fas fa-bell"></i>&nbsp;message`: `<i class="fas fa-bell-slash"></i>&nbsp;message`;
     });
 
-    // eq safety
+
     let eqEnabled = false;
 
     let subEQ = 0;
@@ -1301,7 +1301,7 @@ function speakLyrics() {
 
                 cutAudioPlayer.onloadedmetadata = async () => {
                     const d = cutAudioPlayer.duration;
-                    if (d >= 420) {
+                    if (d >= 480) {
                         reject("maximum duration limit is around 7 minutes");
                         return;
                     }
