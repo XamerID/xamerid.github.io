@@ -1,4 +1,4 @@
-(function() {
+(function(){
     const inputIpv = document.querySelector("#pasteConvertUrl");
     const clearIpv = document.querySelector("#clearInputConvertBtn");
     const converter = document.querySelector("#converter-btn");
@@ -12,7 +12,6 @@
     const convertFm = document.querySelector("#converter-button-format");
     const previewImg = document.querySelector("#preview-img-converter");
 const hostIN = document.querySelector("#host-info");
-
     const API = "https://avi-past-obtain-hits.trycloudflare.com";
     let converting = false;
     let current_Title = "media";
@@ -20,7 +19,6 @@ const hostIN = document.querySelector("#host-info");
     fetch(API + "/visit", {
         method: "POST",
     })
-
     function resetConvertUI() {
         results.classList.add("hidden");
         loading.classList.remove("active");
@@ -31,16 +29,11 @@ const hostIN = document.querySelector("#host-info");
     function sanitizeFilename(name) {
         return name.replace(/[\\/:*?"<>|]/g, "").trim();
     }
-
     async function fetchInfo(url, retries = 3, timeout = 15000) {
-
         for (let i = 0; i < retries; i++) {
-
             const controller = new AbortController();
             const timer = setTimeout(() => controller.abort(), timeout);
-
             try {
-
                 const res = await fetch(`${API}/info`, {
                     method: "POST",
                     headers: {
@@ -52,35 +45,25 @@ const hostIN = document.querySelector("#host-info");
                     }),
                     signal: controller.signal
                 });
-
                 clearTimeout(timer);
-
                 const text = await res.text();
                 const data = text ? JSON.parse(text): {};
-
                 if (!res.ok) {
                     throw new Error(data.error || `Server Error (${res.status})`);
                 }
-
                 if (!data) {
                     throw new Error("Format data tidak valid");
                 }
-
                 return data;
-
             } catch (err) {
-
                 clearTimeout(timer);
-
                 if (i === retries - 1) {
                     throw err;
                 }
-
                 await new Promise(r => setTimeout(r, 1500 * (i + 1)));
             }
         }
     }
-
     function handleDownload(btn, spin, url, type) {
         btn.onclick = async () => {
             if (converting) {
@@ -99,24 +82,19 @@ const hostIN = document.querySelector("#host-info");
                 const a = document.createElement("a");
                 a.href = downloadUrl;
                 a.download = `${current_Title}.${type === "video" ? "mp4": "mp3"}`;
-                a.click();
-                URL.revokeObjectURL(downloadUrl);
+                a.click();               URL.revokeObjectURL(downloadUrl);
             } catch {
-                alert("conversion failed");
-                convertFm.classList.add("hidden");
+                alert("conversion failed");              convertFm.classList.add("hidden");
             } finally {
-                converting = false;
-                spin.classList.remove("active");
+                converting = false;                spin.classList.remove("active");
             }
         };
     }
-
     function setupDownloadButtons(url) {
         handleDownload(linksVideo, spinVideo, url, "video");
         handleDownload(linksAudio, spinAudio, url, "audio");
         convertFm.classList.remove("hidden");
     }
-
     function blankThumbnailConvert() {
         const svg = `
         <svg xmlns="http://www.w3.org/2000/svg" width="640" height="360">
@@ -139,50 +117,35 @@ const hostIN = document.querySelector("#host-info");
         `;
         return "data:image/svg+xml," + encodeURIComponent(svg);
     }
-
     const blankFB = blankThumbnailConvert();
-
     converter.addEventListener("click", async () => {
         if (!navigator.onLine) {
             showToast("internet required", "", 3600);
             return;
         }
         const url = inputIpv.value.trim();
-        if (!url || !url.startsWith("https://")) {
-            showToast("invalid links", "", 3600);
-            return;
-        }
-
+        if (!url || !url.startsWith("https://"))return;
         resetConvertUI();
         loading.classList.add("active");
-
         try {
             const info = await fetchInfo(url);
-
             if (info.error) {
                 throw new Error("unsupported media");
             }
-
             current_Title = sanitizeFilename(info.title || "media");
             current_process = current_Title;
-
             if (info.thumbnail && previewImg) {
-
                 const params = new URLSearchParams();
                 params.append("url", info.thumbnail);
-
                 const finalProxyUrl = `${API}/proxy-img?${params.toString()}`;
 
                 previewImg.style.display = "none";
                 previewImg.onload = () => {
-                    previewImg.style.display = "block";
-                    loading.classList.remove("active");
+                    previewImg.style.display = "block";                 loading.classList.remove("active");
                 };
-
                 previewImg.onerror = () => {
                     previewImg.src = blankFB;
-                    previewImg.style.display = "block";
-                    loading.classList.remove("active");
+                    previewImg.style.display = "block";                  loading.classList.remove("active");
                 };
                 previewImg.src = finalProxyUrl;
             }
@@ -190,14 +153,11 @@ const hostIN = document.querySelector("#host-info");
             results.classList.remove("hidden");
             hostIN.textContent = `${info.platform || 'Media'} - ${info.title || 'No Title'}`;
             setupDownloadButtons(url);
-
-        } catch (e) {
-            console.error("fetchInfo error:", e);
+        } catch {
             resetConvertUI();
             hostIN.textContent = "failed to fetch media info";
         }
     });
-
     clearIpv.addEventListener("click",
         () => {
             if (!inputIpv.value.trim()) return;
