@@ -1023,9 +1023,9 @@ input[type="range"] {
     right: 10px;
     width: 20px;
 }
-#loading-converter.active,
-#spinner-load-videos.active,
-#spinner-load-audios.active {
+:is(#loading-converter,
+#spinner-load-videos,
+#spinner-load-audios).active {
     opacity: 1;
     animation: spin 0.5s linear infinite;
 }
