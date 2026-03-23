@@ -2979,12 +2979,19 @@ let currentAlbumArtUrl = null;
     openMusicBtn.addEventListener('click',
         () => activPageMode(openMusicBtn));
 
+    const isSpeechSupported = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
+
     window.addEventListener("DOMContentLoaded", async () => {
         try {
             await Promise.all([
                 openIndexedDB(),
                 loadAudioData()]);
             resetPlayerUI();
+
+            if (!isSpeechSupported) { document.querySelector(".lyrics-preview-play").style.display = 'none';
+            } else {
+                document.querySelector(".lyrics-preview-play").style.display = 'flex';
+            }
         } catch (err) {
             console.error(err);
             await clearAllMusic();
