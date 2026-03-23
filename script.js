@@ -2980,6 +2980,7 @@ let currentAlbumArtUrl = null;
         () => activPageMode(openMusicBtn));
 
     const isSpeechSupported = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
+const contentSpeech = document.querySelector(".lyrics-preview-play");
 
     window.addEventListener("DOMContentLoaded", async () => {
         try {
@@ -2988,9 +2989,10 @@ let currentAlbumArtUrl = null;
                 loadAudioData()]);
             resetPlayerUI();
 
-            if (!isSpeechSupported) { document.querySelector(".lyrics-preview-play").style.display = 'none';
+            if (!isSpeechSupported) {
+                contentSpeech.style.display = 'none';
             } else {
-                document.querySelector(".lyrics-preview-play").style.display = 'flex';
+                contentSpeech.style.display = 'flex';
             }
         } catch (err) {
             console.error(err);
