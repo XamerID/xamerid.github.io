@@ -692,7 +692,7 @@ input[type="range"] {
     border-radius: 100%;
     font-size: 1em;
     box-shadow: 5px 0px #555;
-    background: #fff;
+    background: #aaa;
     color: #000;
 }
 
@@ -1543,14 +1543,13 @@ input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
     width: 14em;
-    height: 0.7em;
+    height: 0.5em;
     flex-flow: 1;
     transform: rotate(-90deg);
     transform-origin: center;
     background: transparent;
     border: 1px solid #444;
-    border-right: 2px solid #888;
-    border-radius: 0.7em;
+    border-radius: 0.5em;
 }
 .eq-slider-merger input[type="range"] {
     -webkit-appearance: none;
