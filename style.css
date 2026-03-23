@@ -1422,8 +1422,7 @@ input[type="range"] {
 #eq-audio-area {
     z-index: 4455;
 }
-#eq-audio-area.active,
-#setup-audio-area.active {
+:is(#eq-audio-area,#setup-audio-area).active {
     transform: translateY(0);
     pointer-events: auto;
 }
@@ -1499,11 +1498,11 @@ input[type="range"] {
     flex-wrap: nowrap;
     gap: 2em;
 }
-#closePopupBtn i,
-#closeEqBtn i,
-#closeSetupBtn i,
-#closeMetaBtn i,
-#resetEqBtn i {
+:is(#closePopupBtn,
+#closeEqBtn,
+#closeSetupBtn,
+#closeMetaBtn,
+#resetEqBtn) i {
     font-size: 1.4em;
     border-bottom: 2px solid #bbb;
     color: #aaa;
