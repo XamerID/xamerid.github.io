@@ -33,8 +33,7 @@ body {
     overflow-y: auto;
     background: #000;
 }
-html::-webkit-scrollbar,
-body::-webkit-scrollbar {
+:is(html, body)::-webkit-scrollbar {
     display: none;
 }
 a,
@@ -383,12 +382,7 @@ input[type="range"] {
     gap: 2em;
     background: rgba(20,20,20);
 }
-#repeatBtn,
-#openCurvaEq,
-#filterBtn,
-#opqBtn,
-#clearSearchBtn,
-#menuBtn {
+.header-content button {
     font-size: 1.1em;
     color: #fff;
     opacity: 0.5;
@@ -1450,8 +1444,8 @@ input[type="range"] {
     overflow-x: hidden;
     overflow-y: auto;
 }
-.eq-audio-area::-webkit-scrollbar,
-.setup-audio-area::-webkit-scrollbar {
+:is(.eq-audio-area,
+.setup-audio-area)::-webkit-scrollbar {
     display: none;
 }
 #canvas-visualizer {
@@ -1597,8 +1591,7 @@ input[type="range"] {
     flex-flow: 1;
     background: transparent;
 }
-.eq-slider input[type="range"]::-webkit-slider-thumb,
-.eq-slider-merger input[type="range"]::-webkit-slider-thumb {
+:is(.eq-slider, .eq-slider-merger) input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     width: var(--padding-base);
     height: var(--padding-base);
@@ -1847,8 +1840,8 @@ input[type="range"] {
     pointer-events: auto;
     transform: translateY(0);
 }
-#meta-audio-area::-webkit-scrollbar,
-.file-name-and-preview-row::-webkit-scrollbar {
+:is(#meta-audio-area,
+.file-name-and-preview-row)::-webkit-scrollbar {
     display: none;
 }
 #closeMetaBtn {
@@ -1973,8 +1966,8 @@ input[type="range"] {
     justify-content: space-between;
     gap: var(--margin-base);
 }
-.output-preview-area label,
-.change-file-area label {
+:is(.output-preview-area,
+.change-file-area) label {
     position: relative;
     display: flex;
     justify-content: center;
@@ -1983,8 +1976,8 @@ input[type="range"] {
     padding: var(--padding-base) 0;
     border: 1px solid #444;
 }
-.output-preview-area input,
-.change-file-area input {
+:is(.output-preview-area,
+.change-file-area) input {
     display: flex;
     width: 100%;
     padding: 0 var(--padding-base);
@@ -2007,8 +2000,7 @@ input[type="range"] {
     background: #fff;
     color: #111;
 }
-.output-preview-area input::placeholder,
-.change-file-area input::placeholder {
+:is(.output-preview-area,.change-file-area) input::placeholder {
     color: #888;
     opacity: 0.4;
 }
@@ -2033,7 +2025,7 @@ input[type="range"] {
     background: transparent;
     border: none;
 }
-.costum-comnt-name textarea {
+:is(.costum-lyrics-name,.costum-comnt-name) textarea {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
@@ -2044,6 +2036,9 @@ input[type="range"] {
     outline: none;
     border: none;
     color: #000;
+}
+.costum-lyrics-name textarea {
+    font-weight: 900;
 }
 .costum-lyrics-name {
     display: flex;
@@ -2055,19 +2050,6 @@ input[type="range"] {
     background: transparent;
     overflow-y: auto;
     border: none;
-}
-.costum-lyrics-name textarea {
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    background: transparent;
-    padding: 0 var(--padding-base);
-    overflow-y: scroll;
-    font-size: 0.9em;
-    font-weight: 900;
-    outline: none;
-    border: none;
-    color: #000;
 }
 .lyrics-preview-play {
     display: flex;
