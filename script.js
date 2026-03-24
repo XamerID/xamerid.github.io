@@ -1460,7 +1460,7 @@ function speakLyrics() {
         });
         document.querySelectorAll(".active-dominan-color").forEach(e => {
             e.style.transition = "background 1s ease";
-            e.style.background = "#333";
+            e.style.background = "rgba(52,59,60)";
             e.querySelectorAll("*").forEach(txt => (txt.style.color = "#fff"));
         });
     }
