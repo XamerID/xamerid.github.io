@@ -11,8 +11,6 @@
     --space: 1.25rem;
     --eq-gradient-start: #39ff14;
     --eq-gradient-end: #007bff;
-    --progress: #fff;
-    --bg-progress: #111; 
 }
 html,
 body {
@@ -22,7 +20,6 @@ body {
     overflow: hidden;
     font-family: 'Poppins', 'Microsoft YaHei', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     border: none;
-    background: #fff;
     scrollbar-width: none;
     -ms-overflow-style: none;
     overscroll-behavior-y: contain;
@@ -54,33 +51,7 @@ input[type="range"] {
     color: inherit;
     font-family: inherit;
 }
-.linear {
-    --progress: #007bff;
-    --bg-progress: #edf1f7;
 
-    #openSetupBtn {
-        background: #008000;}
-    #extrackAudioBtn {
-        background: #007bff;}
-    #addFileBtn {
-        background: #ff1493;}
-    #addFileBtn i {
-        color: #fff;}
-    .side-menu-overlay {
-        background: rgba(0,0,0,0.1);}
-        
-:is(html, body, .header-content, .category-audio-area, #filter-mode, .player-bottom-category,    .convert-overlay-content) {
-        background: #edf1f7;}
-:is(.paste-input-container input[type="text"],.popup-content, .popup-header, .popup-progress-bar, .music-item, .empty-message, #clearInputConvertBtn) {
-        background: #fff;}
-:is(.header-content, .music-item, .player-bottom-category, .flow-step, .popup-content, .popup-header, .popup-progress-bar, #preview-editting) * {
-        color: #000;}
-:is(#resetEditBtn, .add-cut-audio-btn) {
-        background: #d6d7db;}
-:is(#currentTimes, #currentDurations, .category-name) {
-        color: #000;
-  }
-}
 /* !Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  * Copyright 2024 Fonticons, Inc. */
@@ -1386,7 +1357,7 @@ input[type="range"] {
     width: var(--space);
     height: var(--space);
     border-radius: 100%;
-    background: var(--progress);
+    background: #fff;
     cursor: pointer;
 }
 
