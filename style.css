@@ -66,23 +66,20 @@ input[type="range"] {
         background: #ff1493;}
     #addFileBtn i {
         color: #fff;}
+    .side-menu-overlay {
+        background: rgba(0,0,0,0.1);}
         
 :is(html, body, .header-content, .category-audio-area, #filter-mode, .player-bottom-category,    .convert-overlay-content) {
         background: #edf1f7;}
-:is(.paste-input-container input[type="text"],.popup-content, .popup-header, .popup-progress-bar, .music-item, .empty-message) {
+:is(.paste-input-container input[type="text"],.popup-content, .popup-header, .popup-progress-bar, .music-item, .empty-message, #clearInputConvertBtn) {
         background: #fff;}
 :is(.header-content, .music-item, .player-bottom-category, .flow-step, .popup-content, .popup-header, .popup-progress-bar, #preview-editting) * {
         color: #000;}
 :is(#resetEditBtn, .add-cut-audio-btn) {
         background: #d6d7db;}
 :is(#currentTimes, #currentDurations, .category-name) {
-        color: #000;}
-.side-menu-overlay {
-        background: rgba(0,0,0,0.1);
-    }
-#clearInputConvertBtn {
-    background:#aaa;
-}
+        color: #000;
+  }
 }
 /* !Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
