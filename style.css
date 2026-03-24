@@ -77,9 +77,12 @@ input[type="range"] {
         background: #d6d7db;}
 :is(#currentTimes, #currentDurations, .category-name) {
         color: #000;}
-:is(#clearInputConvertBtn, .side-menu-overlay) {
+.side-menu-overlay {
         background: rgba(0,0,0,0.1);
     }
+#clearInputConvertBtn {
+    background:#aaa;
+}
 }
 /* !Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
