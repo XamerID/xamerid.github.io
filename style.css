@@ -57,8 +57,8 @@ input[type="range"] {
 .linear {
     --progress: #007bff;
     --bg-progress: #edf1f7;
-
-    html, body, .convert-overlay-content, .popup-content, .popup-header, .popup-progress-bar {
+    
+    :is(.paste-input-container input[type="text"],.popup-content, .popup-header, .popup-progress-bar, .music-item, .empty-message) {
         background: #fff;}
     #openSetupBtn {
         background: #008000;}
@@ -73,7 +73,7 @@ input[type="range"] {
         color: #000;}
 :is(#resetEditBtn, .add-cut-audio-btn) {
         background: #d6d7db;}
-:is(.header-content, .category-audio-area, #filter-mode, .player-bottom-category, .paste-input-container input[type="text"]) {
+:is(html, body, .header-content, .category-audio-area, #filter-mode, .player-bottom-category,    .convert-overlay-content) {
         background: #edf1f7;}
 :is(#currentTimes, #currentDurations, .category-name) {
         color: #000;}
