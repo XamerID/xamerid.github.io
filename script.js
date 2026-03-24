@@ -2549,28 +2549,27 @@ function speakLyrics() {
         }
 
         async function writerTags(mp3Blob) {
-            const name = inputIds.name.value.trim() || "";
-            const title = inputIds.title.value.trim() || "";
-            const artist = inputIds.artist.value.trim() || "";
-            const album = inputIds.album.value.trim() || "";
-            const albumArtist = inputIds.albumArtist.value.trim() || "";
-            const genre = inputIds.genre.value.trim() || "";
-            const composer = inputIds.composer.value.trim() || "";
-            const publisher = inputIds.publisher.value.trim() || "";
-            const trackNumber = inputIds.trackNo.value.trim() || "";
-            const totalTrack = inputIds.totalTrack.value.trim() || "";
-            const discNumber = inputIds.discNo.value.trim() || "";
-            const totalDisc = inputIds.totalDisc.value.trim() || "";
-            const key = inputIds.key.value.trim() || "";
-            const bpm = inputIds.bpm.value.trim() || "";
-            const year = inputIds.year.value.trim() || "";
-            const sourceUrl = inputIds.sourceUrl.value.trim() || "";
-            const comment = inputIds.comment.value.trim() || "";
-            const lyrics = inputIds.lyrics.value.trim() || "";
-            const nameExt = name + `_XDA-${generateUniqueId()}.mp3`;
+                 const name = inputIds.name.value.trim() || "",
+            title = inputIds.title.value.trim() || "",
+            artist = inputIds.artist.value.trim() || "",
+            album = inputIds.album.value.trim() || "",
+            albumArtist = inputIds.albumArtist.value.trim() || "",
+            genre = inputIds.genre.value.trim() || "",
+            composer = inputIds.composer.value.trim() || "",
+            publisher = inputIds.publisher.value.trim() || "",
+            trackNumber = inputIds.trackNo.value.trim() || "",
+            totalTrack = inputIds.totalTrack.value.trim() || "",
+            discNumber = inputIds.discNo.value.trim() || "",
+            totalDisc = inputIds.totalDisc.value.trim() || "",
+            key = inputIds.key.value.trim() || "",
+            bpm = inputIds.bpm.value.trim() || "",
+            year = inputIds.year.value.trim() || "",
+            sourceUrl = inputIds.sourceUrl.value.trim() || "",
+            comment = inputIds.comment.value.trim() || "",
+            lyrics = inputIds.lyrics.value.trim() || "",
+            nameExt = name + `_XDA-${generateUniqueId()}.mp3`;
 
             const mp3Buffer = await mp3Blob.arrayBuffer();
-
             const writer = new ID3Writer(mp3Buffer);
 
             const trackFormatted = trackNumber && totalTrack ? `${trackNumber}/${totalTrack}`: trackNumber;
@@ -2709,47 +2708,53 @@ function speakLyrics() {
                 return;
             }
 
-            if (!isEnsure.group && !isEnsure.rate) {
-                const s1 = biquad(tx, "lowshelf", 60, 0, subEQ);
-                const m3 = biquad(tx, "peaking", 320, 1.2, m3EQ);
-                const m1 = biquad(tx, "peaking", 1000, 1.2, m10EQ);
-                const h3 = biquad(tx, "highshelf", 3000, 0, h30EQ);
-                const h5 = biquad(tx, "highshelf", 5000, 0, h50EQ);
-                const h8 = biquad(tx, "highshelf", 8000, 0, h80EQ);
-                const h9 = biquad(tx, "highshelf", 9000, 0, h90EQ);
-                const b1 = biquad(tx, "highpass", 90);
-                const b2 = biquad(tx, "peaking", 70, 0.5, bassEQ * 10);
-                const b3 = biquad(tx, "lowpass", 100);
-                const b4 = tx.createGain();
+           if (!isEnsure.group && !isEnsure.rate) {
+                const s1 = biquad(tx, "lowshelf", 60, 0, subEQ), 
+                m3 = biquad(tx, "peaking", 320, 1.2, m3EQ),
+                m1 = biquad(tx, "peaking", 1000, 1.2, m10EQ),
+                h3 = biquad(tx, "highshelf", 3000, 0, h30EQ),
+                h5 = biquad(tx, "highshelf", 5000, 0, h50EQ),
+                h8 = biquad(tx, "highshelf", 8000, 0, h80EQ),
+                h9 = biquad(tx, "highshelf", 9000, 0, h90EQ);
+                
+                const b1 = biquad(tx, "highpass", 90),
+                b2 = biquad(tx, "peaking", 70, 0.5, bassEQ * 10),
+                b3 = biquad(tx, "lowpass", 100),
+                b4 = tx.createGain();
                 b4.gain.value = bassEQ;
-                const ba = biquad(tx, "highpass", 110);
-                const bb = biquad(tx, "peaking", 92, 0.2, bassBoostEQ * 10);
-                const bc = biquad(tx, "lowpass", 140);
-                const bg = tx.createGain();
+                
+                const ba = biquad(tx, "highpass", 110),
+                bb = biquad(tx, "peaking", 92, 0.2, bassBoostEQ * 10),
+                bc = biquad(tx, "lowpass", 140),
+                bg = tx.createGain();
                 bg.gain.value = bassBoostEQ;
-                const de = tx.createDelay(5);
+                
+                const de = tx.createDelay(5),
+                df = tx.createGain(),
+                dg = tx.createGain();
                 de.delayTime.value = 0.002 + virtualizerEQ * 0.05;
-                const df = tx.createGain();
                 df.gain.value = Math.min(0.05, 0.5 + virtualizerEQ);
-                const dg = tx.createGain();
                 dg.gain.value = virtualizerEQ;
-                const vL = tx.createGain();
+                
+                const vL = tx.createGain(),
+                vR = tx.createGain(),
+                vx = tx.createGain();
                 vL.gain.value = 1;
-                const vR = tx.createGain();
                 vR.gain.value = 1;
-                const vx = tx.createGain();
                 vx.gain.value = virtualizerEQ * 0.5;
                 const sp = tx.createChannelSplitter(2);
-                const rb = tx.createConvolver();
-                rb.buffer = reverbImpulse(tx, 2.5);
-                const rx = tx.createGain();
-                rx.gain.value = reverbEQ;
-                const vo = tx.createGain();
-                vo.gain.value = 1 - bassBoostEQ * 0.2;
-                const cp = createCompressor(tx);
-                const lt = createLimiter(tx);
-                const mg = tx.createGain();
                 
+                const rb = tx.createConvolver(),
+                rx = tx.createGain();
+                rb.buffer = reverbImpulse(tx, 2.5);
+                rx.gain.value = reverbEQ;
+                
+                const vo = tx.createGain(),
+                cp = createCompressor(tx),
+                lt = createLimiter(tx),
+                mg = tx.createGain();
+                vo.gain.value = 1 - bassBoostEQ * 0.2;
+
                 const fin = cutNums.fin ?? +fadeInSlider.value;
                 const fade = tx.createGain();
                 fade.gain.value = 1;
@@ -2774,11 +2779,11 @@ function speakLyrics() {
                 vo.connect(rb).connect(rx).connect(mg);
                 vo.connect(cp).connect(mg);
                 mg.connect(fade).connect(tx.destination);
-    
+
                 source.start(0, start, duration);
                 cloneStart(tx);
             }
-        }
+}
 
         function ensureExport() {
             if (isEnsure.duration && (!eqEnabled || (isEnsure.group && isEnsure.rate))) {
