@@ -37,8 +37,7 @@ a,
 ul,
 li,
 button,
-input[type="text"],
-input[type="range"] {
+input:is([type="text"], [type="range"]) {
     -webkit-tap-highlight-color: transparent;
     webkit-appearance: none;
     appearance: none;
@@ -1804,10 +1803,6 @@ input[type="range"] {
 #meta-audio-area.active {
     pointer-events: auto;
     transform: translateY(0);
-}
-:is(#meta-audio-area,
-.file-name-and-preview-row)::-webkit-scrollbar {
-    display: none;
 }
 #closeMetaBtn {
     display: flex;
