@@ -57,9 +57,7 @@ input[type="range"] {
 .linear {
     --progress: #007bff;
     --bg-progress: #edf1f7;
-    
-    :is(.paste-input-container input[type="text"],.popup-content, .popup-header, .popup-progress-bar, .music-item, .empty-message) {
-        background: #fff;}
+
     #openSetupBtn {
         background: #008000;}
     #extrackAudioBtn {
@@ -68,13 +66,15 @@ input[type="range"] {
         background: #ff1493;}
     #addFileBtn i {
         color: #fff;}
-
+        
+:is(html, body, .header-content, .category-audio-area, #filter-mode, .player-bottom-category,    .convert-overlay-content) {
+        background: #edf1f7;}
+:is(.paste-input-container input[type="text"],.popup-content, .popup-header, .popup-progress-bar, .music-item, .empty-message) {
+        background: #fff;}
 :is(.header-content, .music-item, .player-bottom-category, .flow-step, .popup-content, .popup-header, .popup-progress-bar, #preview-editting) * {
         color: #000;}
 :is(#resetEditBtn, .add-cut-audio-btn) {
         background: #d6d7db;}
-:is(html, body, .header-content, .category-audio-area, #filter-mode, .player-bottom-category,    .convert-overlay-content) {
-        background: #edf1f7;}
 :is(#currentTimes, #currentDurations, .category-name) {
         color: #000;}
 :is(#clearInputConvertBtn, .side-menu-overlay) {
