@@ -58,34 +58,25 @@ input[type="range"] {
     --progress: #007bff;
     --bg-progress: #edf1f7;
 
-    html, body, .player-bottom-category, .convert-overlay-content, .popup-content, .popup-header, .popup-progress-bar {
-        background: #fff;
-    }
+    html, body, .convert-overlay-content, .popup-content, .popup-header, .popup-progress-bar {
+        background: #fff;}
     #openSetupBtn {
-        background: #008000;
-    }
+        background: #008000;}
     #extrackAudioBtn {
-        background: #007bff;
-    }
+        background: #007bff;}
     #addFileBtn {
-        background: #ff1493;
-    }
+        background: #ff1493;}
     #addFileBtn i {
-        color: #fff;
-    }
+        color: #fff;}
 
-:is(.header-content, .music-item, .player-bottom-category, .popup-content, .popup-header, .popup-progress-bar, #preview-editting) * {
-        color: #000;
-    }
+:is(.header-content, .music-item, .player-bottom-category, .flow-step, .popup-content, .popup-header, .popup-progress-bar, #preview-editting) * {
+        color: #000;}
 :is(#resetEditBtn, .add-cut-audio-btn) {
-        background: #d6d7db;
-    }
-:is(.header-content, .category-audio-area, #filter-mode, .paste-input-container input[type="text"]) {
-        background: #edf1f7;
-    }
-:is(#currentTimes, #currentDurations) {
-        color: #000;
-    }
+        background: #d6d7db;}
+:is(.header-content, .category-audio-area, #filter-mode, .player-bottom-category, .paste-input-container input[type="text"]) {
+        background: #edf1f7;}
+:is(#currentTimes, #currentDurations, .category-name) {
+        color: #000;}
 :is(#clearInputConvertBtn, .side-menu-overlay) {
         background: rgba(0,0,0,0.1);
     }
