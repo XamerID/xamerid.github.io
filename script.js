@@ -648,8 +648,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!dur || isNaN(dur)) return;
         const p = (time / dur) * 100;
         const gradient = `linear-gradient(to right,
-        var(--progress) ${p}%,
-        var(--bg-progress) ${p}%)`;
+        #fff ${p}%,
+        #111 ${p}%)`;
         [progressRange,
             progressBorder].forEach(e => {
                 e.value = time;
@@ -2982,30 +2982,8 @@ let currentAlbumArtUrl = null;
     const isSpeechSupported = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
 const contentSpeech = document.querySelector(".lyrics-preview-play");
 
-let isTheme = false;
-    const root = document.documentElement;
-    const themeBtn = document.querySelector("#changeThemeBtn");
-    const storedTheme = localStorage.getItem("themePage");
-    themeBtn.addEventListener('click', () => {
-        isTheme = !isTheme;
-        if (isTheme) {
-            root.classList.add('linear');
-            localStorage.setItem("themePage", 'linear');
-            themeBtn.querySelector('i').style.color = "#007bff";
-        } else {
-            root.classList.remove('linear');
-            localStorage.removeItem("themePage");
-            themeBtn.querySelector('i').style.color = "rgba(85,85,85)";
-        }
-    });
-
     window.addEventListener("DOMContentLoaded", async () => {
         try {
-if (storedTheme === 'linear') {
-                    isTheme = true;
-                    root.classList.add('linear');
-                    themeBtn.querySelector('i').style.color = "#007bff";
-                }
             await Promise.all([
                 openIndexedDB(),
                 loadAudioData()]);
