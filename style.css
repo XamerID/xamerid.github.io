@@ -277,7 +277,7 @@ input[type="range"] {
     text-align: center;
     width: 80%;
     padding: 20px 25px;
-    margin: 5em 0;
+    margin-top: 10em;
     border-radius: var(--border-base);
     overflow: hidden;
     font-size: 1em;
