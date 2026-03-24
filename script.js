@@ -1,26 +1,22 @@
 let isPrompt;
-let musicFiles = [];
-let playingList = [];
-let currentIndex = -1;
-let deactiveSong = null;
-let isRepeat = false;
-let isPlaying = false;
-let areData = null; 
-let codData = null; 
-let currentCutId = null;
-let isPreview = false;
-let isDecode = false;
-let asCounter = 0;
-let toastNotif;
-let toastMessage;
-let toastEnabled = true;
-let audioPlayer;
-let cutAudioPlayer;
+let musicFiles = [], 
+playingList = [], 
+currentIndex = -1, 
+deactiveSong = null, 
+isRepeat = false, 
+isPlaying = false, 
+isPreview = false;
+let areData = null, 
+codData = null, 
+currentCutId = null, 
+isDecode = false, 
+asCounter = 0;
+let toastNotif, toastMessage, toastEnabled = true;
 document.addEventListener('DOMContentLoaded', async () => {
-    audioPlayer = document.querySelector('#audioPlayer');
-    cutAudioPlayer = document.querySelector('#cutAudioPlayer');
     toastNotif = document.querySelector('#toastNotif');
     toastMessage = document.querySelector(".toast-message");
+const audioPlayer = document.querySelector('#audioPlayer');
+    const cutAudioPlayer = document.querySelector('#cutAudioPlayer');
     const addFileBtn = document.querySelector('#addFileBtn');
     const fileInput = document.querySelector('#fileInput');
     const folderInput = document.querySelector('#folderInput');
