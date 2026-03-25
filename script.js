@@ -1727,26 +1727,26 @@ function speakLyrics() {
 
     const musicMessage = `<ol class="empty-message">
     <li class="flow-step">
-    <i class="fas fa-plus"></i>
+    <i class="fas fa-plus" style="background:#ffa500; color:#fff;"></i>
     <label>
     <span>Click Add</span>
     <span>add audio files to the page</span></label>
     </li>
     <li class="flow-step">
-    <i class="fas fa-play"></i>
+    <i class="fas fa-play" style="background:rgba(52, 59, 60); color:#fff;"></i>
     <label class="label-flow">
     <span>Click a list item</span>
     <span>Play the audio as usual</span></label>
     </li>
     <li class="flow-step">
-    <i class="fas fa-pen"></i>
+    <i class="fas fa-pen" style="background:rgba(34, 73, 99); color:#fff;"></i>
     <label class="label-flow">
     <span>Click Edit</span>
     <span>Select the track you want to edit</span>
     </label>
     </li>
     <li class="flow-step">
-    <i class="fas fa-cut"></i>
+    <i class="fas fa-cut" style="background:rgba(85, 26, 25); color:#fff;"></i>
     <label class="label-flow">
     <span>Create New Audio File</span>
     <span>Start the editing process and wait until it’s complete</span></label>
