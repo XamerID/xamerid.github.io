@@ -160,7 +160,7 @@ const hostIN = document.querySelector("#host-info");
     });
     clearIpv.addEventListener("click",
         () => {
-            if (!inputIpv.value.trim()) return;
+            if (!inputIpv.value.trim()) return hostIN.textContent = "";
             inputIpv.value = "";
         });
 }());
