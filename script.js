@@ -2937,12 +2937,7 @@ let currentAlbumArtUrl = null;
                         e.src = currentAlbumArtUrl;
                         e.style.visibility = 'visible';
                     });
-                } else {
-                    apcx.forEach(e => {
-                        e.src = '';
-                        e.style.visibility = 'hidden';
-                    });
-                }
+                } 
             });
         inputIds.title.addEventListener('input',
             () => {
