@@ -2926,6 +2926,7 @@ let currentAlbumArtUrl = null;
         albumArtInput.addEventListener('change',
             (event) => {
                 const file = event.target.files[0];
+                if (!file) return; 
                 if (currentAlbumArtUrl) {
                     URL.revokeObjectURL(currentAlbumArtUrl);
                     currentAlbumArtUrl = null;
