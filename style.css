@@ -428,8 +428,16 @@ input:is([type="text"], [type="range"]) {
     color: #999;
 }
 .flow-step i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: auto;
+    aspect-ratio: 1/1;
     font-size: 1.5em;
-    color: #aaa;
+    border-radius: 5px;
+    flex-shrink: 0;
+    color: #fff;
 }
 .article-info {
     text-align: center;
