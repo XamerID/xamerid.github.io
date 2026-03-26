@@ -1813,19 +1813,17 @@ function speakLyrics() {
             const img = track.thumbnailUrl?.trim() || '';
             const has = img !== '';
             const thumbnail = has
-            ? `<div class="thumbnail" style="background-image: url('${img}');"></div>`: `<div class="thumbnail">${svgn}</div>`;
+            ? `<img src="${img}" alt="img">`: `<img src="${svgn}" alt="img">`;         
             listItem.innerHTML = `
             <div class="track-inner">
             <button class="delete-btn"><i class="fas fa-times"></i></button>
-            ${thumbnail}
-            </div>
+            <div class="thumbnail">${thumbnail}</div></div> 
             <div class="track-info">
             <span class="track-title">${title}</span>
             <span class ="track-artist">${artist}</span>
             </div>
             <div class="add-cut-audio-btn"><i class="fas fa-pen"></i>
-            <div class="load-add-spinner"></div></div>
-            `;
+            <div class="load-add-spinner"></div></div>`;
             listItem.addEventListener('click',
                 async (e) => {
                     e.preventDefault();
