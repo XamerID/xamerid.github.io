@@ -421,7 +421,6 @@ const audioPlayer = document.querySelector('#audioPlayer');
         #000 100%
         )`;
     }
-
     Object.keys(sliders).forEach(id => {
         const s = sliders[id];
         let v = values[id];
@@ -431,15 +430,13 @@ const audioPlayer = document.querySelector('#audioPlayer');
         s.addEventListener("input", () => {
             let newVal = parseFloat(s.value);
             upEqRange(id);
-            v.style.color = newVal > lastVal ? "#fff000": "";
+            if (eqEnabled) v.style.color = newVal > lastVal ? "#fff000": "";
             lastVal = newVal;
             eventEQ[id]?.(newVal);
         });
-        s.addEventListener("touchend", () => {
-            v.style.color = "";
-        });
+        s.addEventListener("touchend", () => 
+            v.style.color = "");
     });
-
     function setEqRange() {
         Object.keys(eventEQ).forEach(id => {
             if (sliders[id]) {
@@ -448,8 +445,6 @@ const audioPlayer = document.querySelector('#audioPlayer');
                 upEqRange(id);
         }});
     }
-
-    /* EQ TOGGLE EVENT */
     eqToggleBtn.addEventListener('click',
         async () => {
             if (!eqEnabled) {
@@ -463,7 +458,6 @@ const audioPlayer = document.querySelector('#audioPlayer');
             eqStatus.textContent = eqEnabled
             ? 'CONNECT': 'BYPASS';
         });
-
     function readEQ(key = null) {
         const n = 0.0;
         const v = {
