@@ -969,25 +969,21 @@ input:is([type="text"], [type="range"]) {
     font-size: 0.8em;
     color: #888;
 }
-#loading-converter,
+
+#loading-converter, 
 #spinner-load-videos,
 #spinner-load-audios {
     position: absolute;
     z-index: 5;
-    right: 5px;
-    width: 35px;
+    right: 10px;
+    width: 20px;
     height: auto;
     aspect-ratio: 1/1;
     border-radius: 100%;
-    border: 2px solid #fff;
-    border-right: 2px solid transparent;
+    border: 3px solid #fff;
+    border-right: 3px solid transparent;
     opacity: 0;
     transition: opacity 0.5s ease;
-}
-#spinner-load-videos,
-#spinner-load-audios {
-    right: 10px;
-    width: 20px;
 }
 :is(#loading-converter,
 #spinner-load-videos,
