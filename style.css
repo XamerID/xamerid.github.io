@@ -401,8 +401,9 @@ input:is([type="text"], [type="range"]) {
 .empty-message {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     box-sizing: border-box;
-    padding: 3em 0.9em;
+    padding: var(--padding-base);
     width: 100%;
     flex-grow: 1;
     gap: 2em;
@@ -428,11 +429,12 @@ input:is([type="text"], [type="range"]) {
     height: auto;
     aspect-ratio: 1/1;
     font-size: 1.5em;
-    border-radius: 5px;
+    border-radius: var(--border-base);
     flex-shrink: 0;
     color: #fff;
 }
 .article-info {
+    margin: var(--margin-base);
     text-align: center;
     font-size: 0.6em;
     color: #fff;
