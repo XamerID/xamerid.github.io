@@ -462,15 +462,24 @@ input:is([type="text"], [type="range"]) {
 }
 .thumbnail {
     display: flex;
+    justify-content: center;
     position: relative;
+    width: 60px;
+    height: auto;
+    aspect-ratio: 1/1;
+    flex-shrink: 0;
+    border-radius: 0.2em;
+    overflow: hidden;
+}
+.thumbnail img {
     width: 60px;
     height: auto;
     aspect-ratio: 1/1;
     flex-shrink: 0;
     background-size: cover;
     background-position: center;
+    object-fit: cover;
     border-radius: 0.2em;
-    overflow: hidden;
 }
 .music-item .delete-btn {
     display: none;
