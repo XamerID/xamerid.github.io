@@ -1768,7 +1768,6 @@ input:is([type="text"], [type="range"]) {
     background: #555;
     color: #fff;
 }
-
 #meta-audio-area {
     position: fixed;
     bottom: 0;
@@ -1805,6 +1804,7 @@ input:is([type="text"], [type="range"]) {
     overflow: hidden;
     width: 100%;
     font-size: 0.7em;
+    background:#fff;
     color: #888;
 }
 .file-name-and-preview-row {
@@ -1896,7 +1896,6 @@ input:is([type="text"], [type="range"]) {
     background: rgba(0,0,0,0.2);
     color: #fff;
 }
-
 .output-preview-area,
 .change-file-area {
     position: relative;
@@ -1945,6 +1944,7 @@ input:is([type="text"], [type="range"]) {
     background: #fff;
     color: #111;
 }
+.costum-lyrics-name textarea::--placeholder,
 :is(.output-preview-area,.change-file-area) input::placeholder {
     color: #888;
     opacity: 0.4;
@@ -1960,17 +1960,15 @@ input:is([type="text"], [type="range"]) {
     color: #eee;
     cursor: pointer;
 }
-.costum-comnt-name {
+.costum-lyrics-name {
     display: flex;
-    box-sizing: border-box;
     width: 100%;
-    height: 80px;
-    overflow-y: scroll;
-    flex-wrap: normal;
+    height: 150px;
     background: transparent;
+    overflow-y: auto;
     border: none;
 }
-:is(.costum-lyrics-name,.costum-comnt-name) textarea {
+.costum-lyrics-name textarea {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
@@ -1982,21 +1980,7 @@ input:is([type="text"], [type="range"]) {
     border: none;
     color: #000;
 }
-.costum-lyrics-name textarea {
-    font-weight: 900;
-}
-.costum-lyrics-name {
-    display: flex;
-    box-sizing: border-box;
-    width: 100%;
-    height: 120px;
-    overflow-y: scroll;
-    flex-wrap: normal;
-    background: transparent;
-    overflow-y: auto;
-    border: none;
-}
-.lyrics-preview-play {
+.input-preview-play {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -2006,8 +1990,8 @@ input:is([type="text"], [type="range"]) {
     background: #444;
     color: #fff;
 }
-.lyrics-preview-play button,
-.lyrics-preview-play select {
+.input-preview-play button,
+.input-preview-play select {
     flex-flow: 1;
     padding: 0.5em 1em;
     font-size: 0.7em;
