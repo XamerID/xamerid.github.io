@@ -1,5 +1,9 @@
 (function() {
     let isFilter = false;
+const openMusicBtn = document.querySelector('#openMusicBtn');
+    const openConvertBtn = document.querySelector('#openConvertBtn');
+    const convertPageEl = document.querySelector('#convertPageEl');
+    const playerMusic = document.querySelector('#player-control-item');
     const showMetaEl = document.querySelector('#meta-audio-area');
     const showEqEl = document.querySelector('#eq-audio-area');
     const showSetupEl = document.querySelector('#setup-audio-area');
@@ -81,7 +85,6 @@
     document.querySelector('#dateBtn').addEventListener('click', () => {
         dateSeved.classList.toggle('hidden');
     });
-
     document.querySelector('#menuBtn').addEventListener("click", () => fadeEP(sideMenu));
 
     document.addEventListener("click", (e) => {
@@ -90,6 +93,26 @@
             dateSeved.classList.add('hidden');
             body.style.overflow = '';
         }});
+async function activPageMode(btn, page) {
+        [openMusicBtn, openConvertBtn]
+        .forEach(btn => btn?.classList.remove('active'));
+        switch (page) {
+            case convertPageEl:
+                openConvertBtn.style.display = 'flex';
+                playerMusic.classList.add('hidden');
+                break;
+            default:
+                convertPageEl.classList.remove('active');
+                playerMusic.classList.remove('hidden');
+                break;
+        }
+        if (btn) btn.classList.add('active');
+        if (page) page.classList.add('active');
+    }
+    openConvertBtn.addEventListener('click',
+        () => activPageMode(openConvertBtn, convertPageEl));
+    openMusicBtn.addEventListener('click',
+        () => activPageMode(openMusicBtn));
     
     function wm() {
         const w = document.getElementById('langWatermark');
