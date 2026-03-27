@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const repeatBtn = document.querySelector('#repeatBtn');
     const currentTimes = document.querySelector('#currentTimes');
     const currentDurations = document.querySelector('#currentDurations');
-    const playerMusic = document.querySelector('#player-control-item');
 
     const eqToggleBtn = document.querySelector('#eqToggleBtn');
     const eqStatus = document.querySelector('#eq-status');
@@ -2730,32 +2729,34 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
     }());
 
-    const openMusicBtn = document.querySelector('#openMusicBtn');
-    const openConvertBtn = document.querySelector('#openConvertBtn');
-    const convertPageEl = document.querySelector('#convertPageEl');
-    async function activPageMode(btn, page) {
-        [openMusicBtn, openConvertBtn]
-        .forEach(btn => btn?.classList.remove('active'));
-        switch (page) {
-            case convertPageEl:
-                openConvertBtn.style.display = 'flex';
-                playerMusic.classList.add('hidden');
-                break;
-            default:
-                convertPageEl.classList.remove('active');
-                playerMusic.classList.remove('hidden');
-                break;
-        }
-        if (btn) btn.classList.add('active');
-        if (page) page.classList.add('active');
-    }
-    openConvertBtn.addEventListener('click',
-        () => activPageMode(openConvertBtn, convertPageEl));
-    openMusicBtn.addEventListener('click',
-        () => activPageMode(openMusicBtn));
-
-const isTalk = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
+    const installer = document.querySelector('#installPrompt');
+    const isTalk = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
     const contentIns = document.querySelector(".input-preview-play");
+    document.querySelector('#installNowBtn')?.addEventListener('click', async () => {
+        if (!isPrompt) return;
+        installer.classList.remove('show');
+        isPrompt.prompt();
+        const {
+            outcome
+        } = await isPrompt.userChoice;
+        if (outcome === 'accepted');
+        isPrompt = null;
+    });
+    document.querySelector('#installLaterBtn')?.addEventListener('click',
+        () => {
+            installer.classList.remove('show');
+            setTimeout(() => installer.classList.add('hidden'), 1000);
+        });
+    window.addEventListener('beforeinstallprompt',
+        (e) => {
+            e.preventDefault();
+            isPrompt = e;
+            setTimeout(() => {
+                installer.classList.remove('hidden');
+                installer.classList.add('show');
+            }, 7200);
+        });
+
     window.addEventListener("DOMContentLoaded", async () => {
         try {
             await Promise.all([
