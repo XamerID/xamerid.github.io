@@ -792,7 +792,6 @@ input:is([type="text"], [type="range"]) {
     font-size: 0.8em;
     color: #ddd;
 }
-
 #convertPageEl {
     position: fixed;
     inset: 0;
@@ -801,7 +800,6 @@ input:is([type="text"], [type="range"]) {
     flex-direction: column;
     width: 100%;
     overflow: hidden;
-    transform: translateX(+100%);
     pointer-events: none;
     background: #000000;
     opacity: 0;
@@ -825,9 +823,6 @@ input:is([type="text"], [type="range"]) {
     padding-bottom: 70px;
     flex-shrink: 0;
     background: #000;
-}
-.overlay-content::-webkit-scrollbar {
-    display: none;
 }
 .paste-input-container {
     position: relative;
@@ -882,51 +877,42 @@ input:is([type="text"], [type="range"]) {
     cursor: pointer;
 }
 #converter-results {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    width: 100%;
-    gap: 2em;
-    overflow: hidden;
-}
-#video-preview-iframe {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: auto;
-    margin-top: var(--margin-base);
-    overflow: hidden;
+    gap: 2em;
+    margin: var(--margin-base) 0;
 }
-#video-preview-iframe img {
+#converter-results img {
+    flex-shrink: 0;
     width: 100%;
     height: auto;
     display: block;
     object-fit: contain;
 }
-.label-converter {
-    position: absolute;
-    z-index: 5;
-    top: 0.5em;
-    right: 0.5em;
-    font-size: 1em;
-    color: #fff;
-}
-#converter-button-format {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    z-index: 50;
+#host-info {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     width: 100%;
-    padding: 0.5em;
-    gap: 1em;
+    margin: 1em 0;
+    gap: 2em;
 }
-#converter-button-format button {
+#host-info label {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 2em;
+    font-size: 1em;
+    color: #ccc;
+}
+#host-info i {
+    font-size: 1.2em;
+    color: #ff2400;
+}
+#host-info button {
     position: relative;
     flex-grow: 1;
     display: flex;
@@ -949,20 +935,13 @@ input:is([type="text"], [type="range"]) {
     background: #666;
     color: #fff;
 }
-#host-info {
-    margin: 1em 0;
-    width: 100%;
-    text-align: center;
-    font-size: 0.9em;
-    color: #bf00ff;
-}
 .converter-info {
+    margin: var(--margin-base) 0;
     text-align: center;
     font-style: italic;
     font-size: 0.8em;
     color: #888;
 }
-
 #loading-converter, 
 #spinner-load-videos,
 #spinner-load-audios {
@@ -976,15 +955,14 @@ input:is([type="text"], [type="range"]) {
     border: 3px solid #fff;
     border-right: 3px solid transparent;
     opacity: 0;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.4s ease;
 }
 :is(#loading-converter,
 #spinner-load-videos,
 #spinner-load-audios).active {
     opacity: 1;
-    animation: spin 0.5s linear infinite;
+    animation: spin 0.4s linear infinite;
 }
-
 #sampleRateConfirm {
     position: fixed;
     inset: 0;
