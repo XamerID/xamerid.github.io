@@ -2755,7 +2755,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     openMusicBtn.addEventListener('click',
         () => activPageMode(openMusicBtn));
 
-    const isSpeechSupported = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
+    const isTalk = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
     const contentSpeech = document.querySelector(".lyrics-preview-play");
     window.addEventListener("DOMContentLoaded", async () => {
         try {
@@ -2764,7 +2764,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 loadAudioData()]);
             resetPlayerUI();
 
-            if (!isSpeechSupported) {
+            if (!isTalk) {
                 contentSpeech.style.display = 'none';
             } else {
                 contentSpeech.style.display = 'flex';
