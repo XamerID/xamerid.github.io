@@ -50,10 +50,6 @@ input:is([type="text"], [type="range"]) {
     color: inherit;
     font-family: inherit;
 }
-
-/* !Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com
- * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
- * Copyright 2024 Fonticons, Inc. */
 @font-face {
     font-family: "Font Awesome 6 Free";
     font-style: normal;
@@ -218,7 +214,6 @@ input:is([type="text"], [type="range"]) {
         transform: translateX(-100%);
     }
 }
-
 #toastNotif {
     position: fixed;
     inset: 0;
@@ -263,7 +258,6 @@ input:is([type="text"], [type="range"]) {
 .hidden {
     display: none !important;
 }
-
 .install-popup {
     position: fixed;
     display: flex;
@@ -332,7 +326,6 @@ input:is([type="text"], [type="range"]) {
     background: transparent;
     color: #222;
 }
-
 .header-content {
     display: flex;
     justify-content: center;
