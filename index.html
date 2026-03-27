@@ -322,13 +322,11 @@ step="0">
 <label for="albumArtInput" translate="no"> <input type="file" id="albumArtInput" accept="image/*" style="display:none;" />+ change cover</label>
 </div>
 <div class="change-file-area">
-<label>
-<input type="text" id="fileNameInput" placeholder="file name" /></label>
+<label><input type="text" id="fileNameInput" placeholder="file name" /></label>
 <label id="resetInputBtn" translate="no"><i class="fas fa-undo"></i>RESET</label>
 </div>
 </div>
-
-<div class="lyrics-preview-play">
+<div class="input-preview-play">
 <button>READ : </button>
 <select id="tts-source">
 <option value="titleNameInput">TITLE</option>
@@ -343,108 +341,52 @@ step="0">
 </select>
 <button id="play-lyrics"><i class="fas fa-play"></i></button>
 </div>
-
 <div class="output-preview-area">
-<label><p>
-TITLE
-</p>
+<label><p>TITLE</p>
 <input type="text" id="titleNameInput" placeholder="song title" /></label>
-
-<label><p>
-ARTIST
-</p>
+<label><p>ARTIST</p>
 <input type="text" id="artistNameInput" placeholder="artist name" /></label>
-
-<label><p>
-ALBUM
-</p>
+<label><p>ALBUM</p>
 <input type="text" id="albumNameInput" placeholder="album name" /></label>
-
-<label><p>
-ALBUM ARTIST
-</p>
+<label><p>ALBUM ARTIST</p>
 <input type="text" id="albumArtistInput" placeholder="album Artist name" /></label>
-
-<label><p>
-GENRE
-</p>
+<label><p>GENRE</p>
 <input type="text" id="genreInput" placeholder="genre" /></label>
-
-<label><p>
-COMPOSER
-</p>
+<label><p>COMPOSER</p>
 <input type="text" id="composerInput" placeholder="marc query" /></label>
-
-<label><p>
-PUBLISHER
-</p>
+<label><p>PUBLISHER</p>
 <input type="text" id="publisherInput" placeholder="mvo music" /></label>
-
 <div class="change-metadata">
 <div class="output-preview-area">
-<label translate="no"><p>
-No.TRACK
-</p>
-<input type="number" id="trackNumberInput" placeholder="12" /></label>
-</div>
+<label translate="no"><p>No.TRACK</p>
+<input type="number" id="trackNumberInput" placeholder="12" /></label></div>
 <div class="output-preview-area">
-<label><p>
-Total TRACK
-</p>
-<input type="number" id="totalTrackInput" placeholder="2" /></label>
+<label><p>Total TRACK</p>
+<input type="number" id="totalTrackInput" placeholder="2" /></label></div>
 </div>
-</div>
-
 <div class="change-metadata">
 <div class="output-preview-area">
-<label translate="no"><p>
-No.DISC
-</p>
-<input type="number" id="discNumberInput" placeholder="14" /></label>
-</div>
+<label translate="no"><p>No.DISC</p>
+<input type="number" id="discNumberInput" placeholder="14" /></label></div>
 <div class="output-preview-area">
-<label><p>
-Total DISC
-</p>
-<input type="number" id="totalDiscInput" placeholder="4" /></label>
+<label><p>Total DISC</p>
+<input type="number" id="totalDiscInput" placeholder="4" /></label></div>
 </div>
-</div>
-
-<label><p>
-KEY
-</p>
+<label><p>KEY</p>
 <input type="text" id="keyInput" placeholder="c#m" /></label>
-
 <div class="output-preview-area">
-<label><p>
-BPM - Beats per minute
-</p>
+<label><p>BPM</p>
 <input type="number" id="bpmInput" placeholder="128" /></label>
 </div>
 <div class="output-preview-area">
-<label><p>
-YEAR
-</p>
+<label><p>YEAR</p>
 <input type="number" id="yearInput" placeholder="2022" min="1900" max="2099" /></label>
 </div>
-
-<label><p>
-SOURCE
-</p>
+<label><p>SOURCE</p>
 <input type="text" id="sourceUrlInput" placeholder="https://sample.com" /></label>
-
-
-<label><p>
-COMMENT
-</p>
-<div class="costum-comnt-name">
-<textarea id="commentInput" placeholder="comment..."></textarea></label>
-</div>
-</label>
-
-<label><p>
-LYRICS
-</p>
+<label><p>COMMENT</p>
+<input id="commentInput" placeholder="comment..."/></label>
+<label><p>LYRICS</p>
 <div class="costum-lyrics-name">
 <textarea id="lyricsInput" placeholder="lyrics..."></textarea></label>
 </div>
