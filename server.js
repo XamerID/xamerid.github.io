@@ -1,30 +1,32 @@
-(function(){
+(function() {
     const inputIpv = document.querySelector("#pasteConvertUrl");
     const clearIpv = document.querySelector("#clearInputConvertBtn");
     const converter = document.querySelector("#converter-btn");
     const loading = document.querySelector("#loading-converter");
-    const iframe = document.querySelector("#video-preview-iframe");
     const results = document.querySelector("#converter-results");
     const linksVideo = document.querySelector("#download-links-video");
     const linksAudio = document.querySelector("#download-links-audio");
     const spinVideo = document.querySelector("#spinner-load-videos");
     const spinAudio = document.querySelector("#spinner-load-audios");
-    const convertFm = document.querySelector("#converter-button-format");
     const previewImg = document.querySelector("#preview-img-converter");
-const hostIN = document.querySelector("#host-info");
+    const hostCnt = document.querySelector("#host-info");
+    const hostIN = {
+        plat: document.querySelector("#host-plat"),
+        by: document.querySelector("#host-by"),
+        title: document.querySelector("#host-title")
+    };
     const API = "https://labels-closest-latex-neil.trycloudflare.com";
     let converting = false;
     let current_Title = "media";
     let current_process = null;
-    fetch(API + "/visit", {
-        method: "POST",
-    })
     function resetConvertUI() {
         results.classList.add("hidden");
         loading.classList.remove("active");
-        convertFm.classList.add("hidden");
-        hostIN.textContent = "";
+        hostCnt.classList.add("hidden");
+        current_Title = "media";
         current_process = null;
+        Object.keys(hostIN).forEach(key => 
+                hostIN[key].textContent = '');
     }
     function sanitizeFilename(name) {
         return name.replace(/[\\/:*?"<>|]/g, "").trim();
@@ -82,18 +84,21 @@ const hostIN = document.querySelector("#host-info");
                 const a = document.createElement("a");
                 a.href = downloadUrl;
                 a.download = `${current_Title}.${type === "video" ? "mp4": "mp3"}`;
-                a.click();               URL.revokeObjectURL(downloadUrl);
+                a.click();
+                URL.revokeObjectURL(downloadUrl);
             } catch {
-                alert("conversion failed");              convertFm.classList.add("hidden");
+                alert("conversion failed");
+                convertFm.classList.add("hidden");
             } finally {
-                converting = false;                spin.classList.remove("active");
+                converting = false;
+                spin.classList.remove("active");
             }
         };
     }
     function setupDownloadButtons(url) {
         handleDownload(linksVideo, spinVideo, url, "video");
         handleDownload(linksAudio, spinAudio, url, "audio");
-        convertFm.classList.remove("hidden");
+        hostCnt.classList.remove("hidden");
     }
     function blankThumbnailConvert() {
         const svg = `
@@ -123,8 +128,10 @@ const hostIN = document.querySelector("#host-info");
             showToast("internet required", "", 3600);
             return;
         }
-        const url = inputIpv.value.trim();
-        if (!url || !url.startsWith("https://"))return;
+        let url = inputIpv.value.trim();
+        if (!url || !url.startsWith("https://"))
+            return;
+        if (url === current_process) return;
         resetConvertUI();
         loading.classList.add("active");
         try {
@@ -132,35 +139,32 @@ const hostIN = document.querySelector("#host-info");
             if (info.error) {
                 throw new Error("unsupported media");
             }
+            current_process = url;
             current_Title = sanitizeFilename(info.title || "media");
-            current_process = current_Title;
             if (info.thumbnail && previewImg) {
                 const params = new URLSearchParams();
                 params.append("url", info.thumbnail);
                 const finalProxyUrl = `${API}/proxy-img?${params.toString()}`;
-
-                previewImg.style.display = "none";
-                previewImg.onload = () => {
-                    previewImg.style.display = "block";                 loading.classList.remove("active");
-                };
                 previewImg.onerror = () => {
                     previewImg.src = blankFB;
-                    previewImg.style.display = "block";                  loading.classList.remove("active");
+                    loading.classList.remove("active");
                 };
                 previewImg.src = finalProxyUrl;
+                hostIN.plat.textContent = `${info.platform || 'Media'}`;
+                hostIN.by.textContent = `${info.uploader || '-'}`;
+                hostIN.title.textContent = `${info.title || 'No Title'}`;
+                loading.classList.remove("active");
+                results.classList.remove("hidden");
             }
-            loading.classList.remove("active");
-            results.classList.remove("hidden");
-            hostIN.textContent = `${info.platform || 'Media'} - ${info.title || 'No Title'}`;
             setupDownloadButtons(url);
         } catch {
             resetConvertUI();
-            hostIN.textContent = "failed to fetch media info";
+            hostIN.plat.textContent = "failed to fetch media info";
         }
     });
     clearIpv.addEventListener("click",
         () => {
-            if (!inputIpv.value.trim()) return hostIN.textContent = "";
+            if (!inputIpv.value.trim()) return;
             inputIpv.value = "";
         });
 }());
