@@ -31,6 +31,8 @@
     function sanitizeFilename(name) {
         return name.replace(/[\\/:*?"<>|]/g, "").trim();
     }
+    fetch(API + "/visit", {
+        method: "POST", }) 
     async function fetchInfo(url, retries = 3, timeout = 15000) {
         for (let i = 0; i < retries; i++) {
             const controller = new AbortController();
