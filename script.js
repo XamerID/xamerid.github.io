@@ -2749,14 +2749,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (btn) btn.classList.add('active');
         if (page) page.classList.add('active');
     }
-
     openConvertBtn.addEventListener('click',
         () => activPageMode(openConvertBtn, convertPageEl));
     openMusicBtn.addEventListener('click',
         () => activPageMode(openMusicBtn));
 
-    const isTalk = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
-    const contentSpeech = document.querySelector(".lyrics-preview-play");
+const isTalk = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
+    const contentIns = document.querySelector(".input-preview-play");
     window.addEventListener("DOMContentLoaded", async () => {
         try {
             await Promise.all([
@@ -2765,12 +2764,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             resetPlayerUI();
 
             if (!isTalk) {
-                contentSpeech.style.display = 'none';
+                contentIns.style.display = 'none';
             } else {
-                contentSpeech.style.display = 'flex';
+                contentIns.style.display = 'flex';
             }
-        } catch (err) {
-            console.error(err);
+        } catch {
             await clearAllMusic();
         }
     });
