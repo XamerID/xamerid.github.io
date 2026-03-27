@@ -476,7 +476,6 @@ LYRICS
 
 <div id="convertPageEl">
 <div class="convert-overlay-content">
-<div class="converter-info">online access</div>
 <section class="paste-input-container">
 <input type="text" id="pasteConvertUrl" placeholder="paste link...">
 <button id="clearInputConvertBtn"><i class="fas fa-times"></i></button>
@@ -486,11 +485,15 @@ LYRICS
 <span id="loading-converter"></span>
 </div>
 <section id="converter-results" class="hidden">
-<main id="video-preview-iframe">
 <img id="preview-img-converter">
-<span class="label-converter">
-<i class="fas fa-video-camera"></i></span>
-<div id="converter-button-format">
+</section>
+<section id="host-info" class="hidden">
+<label><i class="fas fa-video-camera"></i>
+<p id="host-plat"></p></label>
+<label><i class="fas fa-user"></i>
+<p id="host-by"></p></label>
+<label><i class="fas fa-tags"></i>
+<p id="host-title"></p></label>
 <button id="download-links-video">
 <span class="label-bit">HQ</span>
 <span class="label-formated">VIDEO</span>
@@ -499,10 +502,7 @@ LYRICS
 <span class="label-bit">HQ</span>
 <span class="label-formated">AUDIO</span>
 <span id="spinner-load-audios"></span></button>
-</div>
-</main>
 </section>
-<label id="host-info"></label>
 <div class="converter-info">
 Download and convert videos then save them offline. Copy and paste the video link (URL) into the field provided, and let the system do the work automatically. only supports urls from YouTube, Make sure you have permission to retrieve the URL.
 </div>
