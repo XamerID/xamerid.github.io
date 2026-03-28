@@ -1276,10 +1276,10 @@ const playerItem = document.querySelector("#player-control-item");
         const paint = `rgb(${r}, ${g}, ${b})`;
         let light = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
         let text = light > 0.5 ? "#000": "#fff";
-        if (playerItem) {
+if (playerItem) {
             playerItem.style.transition = "background 1s ease";
-            playerItem.style.background = "rgba(52,59,60)";
-            playerItem.querySelectorAll("*").forEach(txt => (txt.style.color = "#fff"));
+            playerItem.style.background = `${paint}`;
+            playerItem.querySelectorAll("*").forEach(txt => (txt.style.color = text));
         }
     }
     function resetPopup() {
