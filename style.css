@@ -890,10 +890,10 @@ input:is([type="text"], [type="range"]) {
 #converter-results {
     position: relative;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: auto;
     gap: 2em;
     margin: var(--margin-base) 0;
 }
@@ -904,14 +904,7 @@ input:is([type="text"], [type="range"]) {
     display: block;
     object-fit: contain;
 }
-#host-info {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin: 1em 0;
-    gap: 2em;
-}
-#host-info label {
+#converter-results label {
     display: flex;
     justify-content: flex-start;
     width: 100%;
@@ -919,11 +912,11 @@ input:is([type="text"], [type="range"]) {
     font-size: 1em;
     color: #ccc;
 }
-#host-info i {
+#converter-results i {
     font-size: 1.2em;
     color: #ff2400;
 }
-#host-info button {
+#converter-results button {
     position: relative;
     flex-grow: 1;
     display: flex;
