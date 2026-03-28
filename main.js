@@ -1793,7 +1793,7 @@ const playerItem = document.querySelector("#player-control-item");
     });
 
     function setLoadEl(state = false,
-        percent, stageText = '') {
+        percent = 0, stageText = 'Preparing audio') {
         const radius = 54;
         const circum = 2 * Math.PI * radius;
         const offset = circum - (percent / 100) * circum;
@@ -2183,9 +2183,9 @@ const playerItem = document.querySelector("#player-control-item");
             };
         });
     }
-
+    let isFileMode = false;
     async function parseMusic(files) {
-        setLoadEl(true, 0, 'Preparing audio...');
+        setLoadEl(true);
         try {
             const existingIds = new Set(musicFiles.map(f => f.id));
             const pushFiles = [];
@@ -2201,7 +2201,12 @@ const playerItem = document.querySelector("#player-control-item");
                     }
                 }
                 const p = Math.round(((i + 1) / files.length) * 100);
-                setLoadEl(true, p, `Processing audio (${i + 1}/${files.length})...`);
+                
+                if (!isFileMode) {
+                    setLoadEl(true, p, `Processing audio...`);
+                } else {
+                    setLoadEl(true, p, `Processing audio (${i + 1}/${files.length})...`);
+                }
             }
             if (duplicateCount > 0) {
                 showToast(`${duplicateCount} duplicate file(s) skipped.`);
@@ -2219,7 +2224,6 @@ const playerItem = document.querySelector("#player-control-item");
             if (files.target) files.target.value = '';
         }
     }
-    let isFileMode = false;
     addFileBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         if (isFileMode) {
@@ -2624,7 +2628,7 @@ const playerItem = document.querySelector("#player-control-item");
             setAppend(false);
             confirmBox.classList.add('hidden');
             if (state) {
-                setLoadEl(true, 0, 'rendering audio...');
+                setLoadEl(true);
                 ensureDecoded();
             } else {
                 document.body.style.overflow = '';
