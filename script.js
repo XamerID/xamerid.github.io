@@ -89,10 +89,10 @@
                 a.click();
                 URL.revokeObjectURL(downloadUrl);
             } catch {
-                alert("conversion failed");              
+                alert("conversion failed");
             } finally {
                 converting = false;
-               spin.classList.remove("active");
+                spin.classList.remove("active");
             }
         };
     }
@@ -133,7 +133,7 @@
         if (!url || !url.startsWith("https://"))
             return;
         if (url === current_process) return;
-        resetConvertUI();
+        await resetConvertUI();
         loading.classList.add("active");
         try {
             const info = await fetchInfo(url);
@@ -148,7 +148,7 @@
                 const finalProxyUrl = `${API}/proxy-img?${params.toString()}`;
                 previewImg.onerror = () => {
                     previewImg.src = blankFB;
-                             loading.classList.remove("active");
+                    loading.classList.remove("active");
                 };
                 previewImg.src = finalProxyUrl;
                 hostIN.plat.textContent = `${info.platform || 'Media'}`;
