@@ -89,11 +89,10 @@
                 a.click();
                 URL.revokeObjectURL(downloadUrl);
             } catch {
-                alert("conversion failed");
-                convertFm.classList.add("hidden");
+                alert("conversion failed");              
             } finally {
                 converting = false;
-                spin.classList.remove("active");
+               spin.classList.remove("active");
             }
         };
     }
