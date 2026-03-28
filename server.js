@@ -148,15 +148,15 @@
                 const finalProxyUrl = `${API}/proxy-img?${params.toString()}`;
                 previewImg.onerror = () => {
                     previewImg.src = blankFB;
-                    loading.classList.remove("active");
+                             loading.classList.remove("active");
                 };
                 previewImg.src = finalProxyUrl;
                 hostIN.plat.textContent = `${info.platform || 'Media'}`;
                 hostIN.by.textContent = `${info.uploader || '-'}`;
                 hostIN.title.textContent = `${info.title || 'No Title'}`;
-                loading.classList.remove("active");
-                results.classList.remove("hidden");
             }
+            loading.classList.remove("active");
+            results.classList.remove("hidden");
             setupDownloadButtons(url);
         } catch {
             resetConvertUI();
