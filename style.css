@@ -726,7 +726,7 @@ input:is([type="text"], [type="range"]) {
 #filter-mode.active {
     transform: translateY(0);
     pointer-events: auto;
-    bottom: 7em;
+    bottom: 60px;
 }
 #filter-mode button {
     display: flex;
