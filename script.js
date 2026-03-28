@@ -9,7 +9,6 @@
     const spinVideo = document.querySelector("#spinner-load-videos");
     const spinAudio = document.querySelector("#spinner-load-audios");
     const previewImg = document.querySelector("#preview-img-converter");
-    const hostCnt = document.querySelector("#host-info");
     const hostIN = {
         plat: document.querySelector("#host-plat"),
         by: document.querySelector("#host-by"),
@@ -19,10 +18,9 @@
     let converting = false;
     let current_Title = "media";
     let current_process = null;
-    function resetConvertUI() {
+   function resetConvertUI() {
         results.classList.add("hidden");
         loading.classList.remove("active");
-        hostCnt.classList.add("hidden");
         current_Title = "media";
         current_process = null;
         previewImg.src = '';
@@ -100,7 +98,8 @@
     function setupDownloadButtons(url) {
         handleDownload(linksVideo, spinVideo, url, "video");
         handleDownload(linksAudio, spinAudio, url, "audio");
-        hostCnt.classList.remove("hidden");
+        loading.classList.remove("active");
+        results.classList.remove("hidden");
     }
     function blankThumbnailConvert() {
         const svg = `
@@ -156,8 +155,6 @@
                 hostIN.by.textContent = `${info.uploader || '-'}`;
                 hostIN.title.textContent = `${info.title || 'No Title'}`;
             }
-            loading.classList.remove("active");
-            results.classList.remove("hidden");
             setupDownloadButtons(url);
         } catch {
             resetConvertUI();
