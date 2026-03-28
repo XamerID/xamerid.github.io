@@ -1937,10 +1937,9 @@ input:is([type="text"], [type="range"]) {
     background: #fff;
     color: #111;
 }
-.costum-lyrics-name textarea::--placeholder,
+.costum-lyrics-name textarea::placeholder,
 :is(.output-preview-area,.change-file-area) input::placeholder {
-    color: #888;
-    opacity: 0.4;
+    color: #ccc;
 }
 .change-file-area #resetInputBtn {
     display: flex;
