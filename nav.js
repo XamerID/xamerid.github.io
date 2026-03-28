@@ -71,12 +71,14 @@
             e.stopPropagation(); viewPopupMenu.classList.remove('active');
         });
 
-    function hideFilter() {
+        function hideFilter() {
         isFilter = !isFilter;
         if (isFilter) {
+            if (isPlayer) playerMusic.classList.add('hidden');
             showFilterEl.classList.add('active');
             openFil.classList.add('active');
         } else {
+            if (isPlayer) playerMusic.classList.remove('hidden');
             hideEP();
         }}
     filterBtn.addEventListener('click', (e) => {
