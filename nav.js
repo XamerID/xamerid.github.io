@@ -100,11 +100,11 @@
         switch (page) {
             case convertPageEl:
                 openConvertBtn.style.display = 'flex';
-                playerMusic.classList.add('hidden');
+                if (musicFiles.length) playerMusic.classList.add('hidden');
                 break;
             default:
                 convertPageEl.classList.remove('active');
-                playerMusic.classList.remove('hidden');
+                  if (musicFiles.length) playerMusic.classList.remove('hidden');
                 break;
         }
         if (btn) btn.classList.add('active');
