@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const repeatBtn = document.querySelector('#repeatBtn');
     const currentTimes = document.querySelector('#currentTimes');
     const currentDurations = document.querySelector('#currentDurations');
+const playerItem = document.querySelector("#player-control-item");
 
     const eqToggleBtn = document.querySelector('#eqToggleBtn');
     const eqStatus = document.querySelector('#eq-status');
@@ -1309,17 +1310,18 @@ document.addEventListener('DOMContentLoaded', async () => {
             e.innerHTML = `${svgn}`;
             e.style.backgroundImage = '';
         });
-        document.querySelectorAll(".active-dominan-color").forEach(e => {
-            e.style.transition = "background 1s ease";
-            e.style.background = "rgba(52,59,60)";
-            e.querySelectorAll("*").forEach(txt => (txt.style.color = "#fff"));
-        });
+        if (playerItem) {
+            playerItem.style.transition = "background 1s ease";
+            playerItem.style.background = "rgba(52,59,60)";
+            playerItem.querySelectorAll("*").forEach(txt => (txt.style.color = "#fff"));
+        }
     }
     function popupTrackInfo(track, img) {
         if (!track || playingList.length === 0) return resetPopup();
         const set = (id, val = '') => {
             document.querySelector(id).textContent = ' : ' + val;
         };
+playerItem.classList.remove('hidden');
         document.querySelectorAll('.popTitle')
         .forEach(e => e.textContent = track.title || 'unknown');
         document.querySelectorAll('.popArtist')
@@ -2293,6 +2295,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
             await Promise.all([
                 renderMusic(musicList, musicFiles), updateDateAudio(0)]);
+playerItem.classList.add('hidden');
         } catch {
             await Promise.all([
                 renderMusic(musicList, musicFiles), updateDateAudio(0)]);
