@@ -25,6 +25,7 @@
         hostCnt.classList.add("hidden");
         current_Title = "media";
         current_process = null;
+        previewImg.src = '';
         Object.keys(hostIN).forEach(key => 
                 hostIN[key].textContent = '');
     }
