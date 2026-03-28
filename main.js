@@ -5,7 +5,8 @@ currentIndex = -1,
 deactiveSong = null,
 isRepeat = false,
 isPlaying = false,
-isPreview = false;
+isPreview = false,
+isPlayer = false;
 let areData = null,
 codData = null,
 currentCutId = null,
@@ -1275,11 +1276,11 @@ const playerItem = document.querySelector("#player-control-item");
         const paint = `rgb(${r}, ${g}, ${b})`;
         let light = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
         let text = light > 0.5 ? "#000": "#fff";
-        document.querySelectorAll(".active-dominan-color").forEach(e => {
-            e.style.transition = "background 1s ease";
-            e.style.background = `${paint}`;
-            e.querySelectorAll("*").forEach(txt => (txt.style.color = text));
-        });
+        if (playerItem) {
+            playerItem.style.transition = "background 1s ease";
+            playerItem.style.background = "rgba(52,59,60)";
+            playerItem.querySelectorAll("*").forEach(txt => (txt.style.color = "#fff"));
+        }
     }
     function resetPopup() {
         ['#popAlbum',
@@ -1321,7 +1322,8 @@ const playerItem = document.querySelector("#player-control-item");
         const set = (id, val = '') => {
             document.querySelector(id).textContent = ' : ' + val;
         };
-playerItem.classList.remove('hidden');
+        isPlayer = true;
+        playerItem.classList.remove('hidden');
         document.querySelectorAll('.popTitle')
         .forEach(e => e.textContent = track.title || 'unknown');
         document.querySelectorAll('.popArtist')
@@ -1374,6 +1376,10 @@ playerItem.classList.remove('hidden');
         if (deactiveSong) {
             if ('clearAppBadge' in navigator &&
                 navigator.clearAppBadge());
+        }
+        if (!musicFiles.length) {
+            isPlayer = false;
+            playerItem.classList.add('hidden');
         }
         resetPopup();
     }
@@ -2295,7 +2301,6 @@ playerItem.classList.remove('hidden');
             });
             await Promise.all([
                 renderMusic(musicList, musicFiles), updateDateAudio(0)]);
-playerItem.classList.add('hidden');
         } catch {
             await Promise.all([
                 renderMusic(musicList, musicFiles), updateDateAudio(0)]);
