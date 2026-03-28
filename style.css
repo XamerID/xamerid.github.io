@@ -673,7 +673,7 @@ input:is([type="text"], [type="range"]) {
     width: 100%;
     white-space: nowrap;
     height: 50px;
-    padding: 0 2em;
+    padding: 0 1em;
     background: #000;
 }
 .category-btn {
