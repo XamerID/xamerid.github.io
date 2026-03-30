@@ -337,7 +337,7 @@ input:is([type="text"],[type="range"]) {
     width: 100%;
     padding: var(--padding-base);
     gap: 2em;
-    background: rgba(20,20,20);
+    background: #141414;
 }
 .header-content button {
     font-size: 1.1em;
@@ -374,7 +374,7 @@ input:is([type="text"],[type="range"]) {
     padding: var(--padding-base);
     padding-top: 0.25em;
     gap: var(--margin-base);
-    background: rgba(20,20,20);
+    background: #141414;
 }
 .category-audio-area button {
     display: flex;
