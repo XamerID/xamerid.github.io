@@ -7,8 +7,8 @@
 <link rel="stylesheet" href="style.css" />
 <link rel="manifest" href="manifest.json" />
 </head>
+
 <body>
-    
 <div class="header-content">
 <label>
 <span id="countMusic1"></span>
@@ -398,8 +398,7 @@ step="0">
 </nav>
 
 <nav id="sideMenu" class="side-menu-overlay">
-<div class="side-menu">
-<ul class="sub-side-menu">
+<ul class="side-menu">
 <li id="changeInputBtn"><i class="fas fa-folder-open"></i>Change input</li>
 <li id="modeMessageBtn"><i class="fas fa-bell"></i>&nbsp;message</li>
 <hr class="separator">
@@ -413,7 +412,6 @@ step="0">
 <span id="langWatermark" aria-hidden="true" translate="no"></span>
 </article>
 </ul>
-</div>
 </nav>
 
 <div id="convertPageEl">
@@ -434,14 +432,14 @@ step="0">
 <p id="host-by"></p></label>
 <label><i class="fas fa-tags"></i>
 <p id="host-title"></p></label>
-<button id="download-links-video">
+<button id="links-video">
 <span class="label-bit">HQ</span>
 <span class="label-formated">VIDEO</span>
-<span id="spinner-load-videos"></span></button>
-<button id="download-links-audio">
+<span id="spinner-videos"></span></button>
+<button id="links-audio">
 <span class="label-bit">HQ</span>
 <span class="label-formated">AUDIO</span>
-<span id="spinner-load-audios"></span></button>
+<span id="spinner-audios"></span></button>
 </section>
 <div class="converter-info">
 Download and convert videos then save them offline. Copy and paste the video link (URL) into the field provided, and let the system do the work automatically. only supports urls from YouTube, Make sure you have permission to retrieve the URL.
@@ -512,7 +510,8 @@ rendering audio...
 
 <audio id="audioPlayer" style="display:none;"></audio>
 <audio id="cutAudioPlayer" style="display:none;"></audio>
-<a id="downloadCutAudioLink" style="opacity:0"></a>
+<a id="downloadLinkEd" style="opacity:0"></a>
+<a id="downloadLinkCt" style="opacity:0;"></a>
 
 <script src="lib/jsmediatags.min.js" defer></script>
 <script src="lib/lame.min.js" defer></script>
