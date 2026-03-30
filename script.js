@@ -1592,7 +1592,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
           
-    const musicMessage = `<ol class="empty-message">
+    const musicMessage = `<ul class="empty-message">
     <li class="flow-step">
     <i class="fas fa-plus"></i>
     <label>
@@ -1617,7 +1617,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span>Create New Audio File</span>
     <span>Start the editing process and wait until it’s complete</span></label>
     </li>
-    </ol>
+    </ul>
     <div class="article-info">©2024 - 2025</div>`;
     function updateStateId(list,
         track) {
