@@ -408,14 +408,38 @@ input:is([type="text"],[type="range"]) {
     flex-grow: 1;
     gap: 2em;
 }
+.empty-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    padding: var(--padding-base);
+    width: 100%;
+    flex-grow: 1;
+    gap: 2em;
+}
 .flow-step {
+    position: relative;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     gap: 1.5em;
     width: 100%;
 }
+.flow-step::before {
+    content: "";
+    position: absolute;
+    left: 30px;
+    bottom: -30px;
+    height: 30px;
+    width: 2px;
+    background: #ddd;
+}
+.flow-step:nth-child(1)::before {
+    background: #ffa400;
+}
 .flow-step label {
+    position: relative;
     display: flex;
     flex-direction: column;
     font-size: 0.9em;
@@ -434,7 +458,7 @@ input:is([type="text"],[type="range"]) {
     color: #fff;
 }
 .article-info {
-    margin: var(--margin-base);
+    margin: var(--padding-base);
     text-align: center;
     font-size: 0.6em;
     color: #fff;
