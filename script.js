@@ -1596,19 +1596,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     <li class="flow-step">
     <i class="fas fa-plus" style="background:#ffa500; color:#fff;"></i>
     <label>
-    <span>Click Add</span>
+    <span>To Add</span>
     <span>add audio files to the page</span></label>
     </li>
     <li class="flow-step">
     <i class="fas fa-play" style="background:rgba(52, 59, 60); color:#fff;"></i>
     <label class="label-flow">
-    <span>Click a list item</span>
-    <span>Play the audio as usual</span></label>
+    <span>To play</span>
+    <span>click on the song to play</span></label>
     </li>
     <li class="flow-step">
     <i class="fas fa-pen" style="background:rgba(34, 73, 99); color:#fff;"></i>
     <label class="label-flow">
-    <span>Click Edit</span>
+    <span>To Edit</span>
     <span>Select the track you want to edit</span>
     </label>
     </li>
@@ -1619,7 +1619,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span>Start the editing process and wait until it’s complete</span></label>
     </li>
     </ol>
-    <div class="article-info">© 2024 - 2025</div>`;
+    <div class="article-info">©2024 - 2025</div>`;
     function updateStateId(list,
         track) {
         let isDen = false;
