@@ -429,14 +429,14 @@ input:is([type="text"],[type="range"]) {
 .flow-step::before {
     content: "";
     position: absolute;
-    left: 30px;
-    bottom: -30px;
-    height: 30px;
-    width: 2px;
-    background: #ddd;
+    left: 20px;
+    bottom: -20px;
+    height: 20px;
+    width: 1px;
+    background: #444;
 }
 .flow-step:nth-child(1)::before {
-    background: #ffa400;
+    background: #ff355e;
 }
 .flow-step label {
     position: relative;
@@ -449,12 +449,12 @@ input:is([type="text"],[type="range"]) {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 60px;
+    width: 40px;
     height: auto;
     aspect-ratio: 1/1;
-    font-size: 1.5em;
-    border-radius: 0.35em;
+    border-radius: 100%;
     flex-shrink: 0;
+    background: #444;
     color: #fff;
 }
 .article-info {
