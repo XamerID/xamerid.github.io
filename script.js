@@ -1591,29 +1591,28 @@ document.addEventListener('DOMContentLoaded', async () => {
                 repeatBtn.classList.remove('active');
             }
         });
-
+          
     const musicMessage = `<ol class="empty-message">
     <li class="flow-step">
-    <i class="fas fa-plus" style="background:#ffa500; color:#fff;"></i>
+    <i class="fas fa-plus"></i>
     <label>
     <span>To Add</span>
     <span>add audio files to the page</span></label>
     </li>
     <li class="flow-step">
-    <i class="fas fa-play" style="background:rgba(52, 59, 60); color:#fff;"></i>
+    <i class="fas fa-play"></i>
     <label class="label-flow">
     <span>To play</span>
     <span>click on the song to play</span></label>
     </li>
     <li class="flow-step">
-    <i class="fas fa-pen" style="background:rgba(34, 73, 99); color:#fff;"></i>
+    <i class="fas fa-pen"></i>
     <label class="label-flow">
     <span>To Edit</span>
-    <span>Select the track you want to edit</span>
-    </label>
+    <span>Select the track you want to edit</span></label>
     </li>
     <li class="flow-step">
-    <i class="fas fa-cut" style="background:rgba(85, 26, 25); color:#fff;"></i>
+    <i class="fas fa-cut"></i>
     <label class="label-flow">
     <span>Create New Audio File</span>
     <span>Start the editing process and wait until it’s complete</span></label>
