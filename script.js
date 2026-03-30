@@ -1247,7 +1247,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     resetEditBtn.addEventListener('click', (event) => {
         event.stopPropagation();
-        if (isDecode) return showToast('almost decode...');
+       if (isDecode) return showToast('processing, wait a moment and try again...');
         if (isProcessing) {
             document.querySelectorAll(".load-add-spinner").forEach(e => e.classList.remove('active'));
         }
@@ -1597,7 +1597,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     <i class="fas fa-plus"></i>
     <label>
     <span>To Add</span>
-    <span>add audio files to the page</span></label>
+    <span>click the plus button at the bottom </span></label>
     </li>
     <li class="flow-step">
     <i class="fas fa-play"></i>
@@ -1614,10 +1614,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     <li class="flow-step">
     <i class="fas fa-cut"></i>
     <label class="label-flow">
-    <span>Create New Audio File</span>
-    <span>Start the editing process and wait until it’s complete</span></label>
+    <span>To make</span>
+    <span>start creating and wait until the process is complete</span></label>
     </li>
     </ul>
+    <div class="article-info" style="color:#888;">privacy? in short, the files you upload will be temporarily stored in browser's storage, and never uploaded.</div>
     <div class="article-info">©2024 - 2025</div>`;
     function updateStateId(list,
         track) {
