@@ -365,15 +365,13 @@ input:is([type="text"],[type="range"]) {
 }
 .category-audio-area button {
     display: flex;
+    flex-shrink: 0;
     justify-content: center;
     align-items: center;
     padding: var(--padding-base);
     width: 100%;
     gap: 1em;
     font-size: 0.7em;
-    border-radius: 0.1em;
-    flex-shrink: 0;
-    overflow: hidden;
     box-shadow: 5px 10px rgba(0,0,0,0.5);
     color: #fff;
 }
@@ -439,13 +437,6 @@ input:is([type="text"],[type="range"]) {
     font-size: 0.6em;
     color: #fff;
 }
-.category-name {
-    padding: var(--padding-base);
-    padding-bottom: 0;
-    font-size: 0.9em;
-    font-weight: 900;
-    color: #fff;
-}
 .music-item {
     display: flex;
     width: 100%;
@@ -497,6 +488,13 @@ input:is([type="text"],[type="range"]) {
     transform: translateX(0);
     visibility: visible;
 }
+.category-name {
+    padding: var(--padding-base);
+    padding-bottom: 0;
+    font-size: 0.9em;
+    font-weight: 900;
+    color: #fff;
+}
 .track-info {
     display: flex;
     flex-direction: column;
@@ -505,7 +503,6 @@ input:is([type="text"],[type="range"]) {
     min-width: 0;
     margin: 0 var(--padding-base);
     overflow: hidden;
-    text-overflow: ellipsis;
     color: #fff;
 }
 .track-info :is(.track-title, .track-artist) {
