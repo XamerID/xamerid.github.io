@@ -41,7 +41,7 @@ body {
     font-display: block;
     src: url(lib/icon.woff2) format("woff2");
 }
-.fas,.fa-solid {
+.fas {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     display: var(--fa-display,inline-block);
@@ -52,7 +52,7 @@ body {
     line-height: 1;
     text-rendering: auto;
 }
-:is(.fas,.fa-solid):before {
+.fas:before {
     content: var(--fa);
 }
 .fa-sun {
