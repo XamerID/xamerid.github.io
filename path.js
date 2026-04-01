@@ -67,7 +67,7 @@
         }
     }
     function handleDownload(btn, spin, url, type) {
-        btn.onclick = async () => {
+         btn.addEventListener('click', async () => {
             if (converting) {
                 showToast("loading previous data", 1800);
                 return;
@@ -91,7 +91,7 @@
                 converting = false;
                 spin.classList.remove("active");
             }
-        };
+        });
     }
     function setupDownloadButtons(url) {
         handleDownload(linksVideo, spinVideo, url, "video");
@@ -122,7 +122,7 @@
         return "data:image/svg+xml," + encodeURIComponent(svg);
     }
     const blankFB = blankThumbnailConvert();
-    converter.addEventListener("click", async () => {
+    converter.addEventListener('click', async () => {
         if (!navigator.onLine) {
             showToast("internet required", 3600);
             return;
