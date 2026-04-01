@@ -344,8 +344,7 @@ input:is([type="text"],[type="range"]) {
     white-space: nowrap;
     width: 100%;
     font-size: 1.1em;
-    color: #fff;
-    opacity: 0.5;
+    color: #555;
 }
 .header-content input {
     flex-grow: 1;
@@ -376,7 +375,7 @@ input:is([type="text"],[type="range"]) {
     flex-shrink: 0;
     overflow: hidden;
     box-shadow: 5px 10px rgba(0,0,0,0.5);
-    color: #ddd;
+    color: #fff;
 }
 .category-audio-area span {
     white-space: nowrap;
@@ -384,7 +383,6 @@ input:is([type="text"],[type="range"]) {
 }
 .category-audio-area i {
     font-size: 1.5em;
-    color: #fff;
 }
 .empty-message {
     display: flex;
