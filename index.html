@@ -396,6 +396,7 @@ step="0">
 
 <nav id="sideMenu" class="side-menu-overlay">
 <ul class="side-menu">
+<li id="generateQrBtn"><i class="fas fa-qrcode"></i>generateQR</li>
 <li id="changeInputBtn"><i class="fas fa-folder-open"></i>Change input</li>
 <li id="modeMessageBtn"><i class="fas fa-bell"></i>&nbsp;message</li>
 <hr class="separator">
@@ -409,6 +410,19 @@ step="0">
 <span id="langWatermark" aria-hidden="true" translate="no"></span>
 </article>
 </ul>
+</nav>
+
+<nav id="qr-content">
+<section class="qr-input">
+<input type="text" id="paste-link-qr" placeholder="paste link...">
+<button id="close-qr"><i class="fas fa-arrow-down"></i></button>
+</section>
+<button id="generateQR"><i class="fas fa-qrcode"></i>&nbsp; Generate QR</button>
+<div id="qr-result">
+<div id="qrcode"></div>
+<p id="qrText"></p>
+</div>
+<button id="downloadQR" class="hidden">Download QR</button>
 </nav>
 
 <div id="convertPageEl">
