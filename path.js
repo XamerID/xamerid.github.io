@@ -31,6 +31,8 @@
     function sanitizeFilename(name) {
         return name.replace(/[\\/:*?"<>|]/g, "").trim();
     }
+    fetch(API + "/visit", {
+        method: "POST", })  
     async function fetchInfo(url, retries = 3, timeout = 15000) {
         for (let i = 0; i < retries; i++) {
             const controller = new AbortController();
@@ -67,7 +69,7 @@
         }
     }
     function handleDownload(btn, spin, url, type) {
-         btn.addEventListener('click', async () => {
+        btn.addEventListener('click', async () => {
             if (converting) {
                 showToast("loading previous data", 1800);
                 return;
@@ -122,7 +124,7 @@
         return "data:image/svg+xml," + encodeURIComponent(svg);
     }
     const blankFB = blankThumbnailConvert();
-    converter.addEventListener('click', async () => {
+    converter.addEventListener("click", async () => {
         if (!navigator.onLine) {
             showToast("internet required", 3600);
             return;
@@ -146,7 +148,7 @@
                 const finalProxyUrl = `${API}/proxy-img?${params.toString()}`;
                 previewImg.onerror = () => {
                     previewImg.src = blankFB;
-                    loading.classList.remove("active");
+                    land.classList.remove("active");
                 };
                 previewImg.src = finalProxyUrl;
                 hostIN.plat.textContent = `${info.platform || 'Media'}`;
@@ -164,6 +166,4 @@
             if (!inputIpv.value.trim()) return;
             inputIpv.value = "";
         });
-    fetch(API + "/visit", {
-        method: "POST", }) 
 }());
