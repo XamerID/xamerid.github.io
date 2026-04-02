@@ -1238,7 +1238,7 @@ input:is([type="text"],[type="range"]) {
     word-break: break-all;
 }
 #generateQR,
-#DownloadQR {
+#downloadQR {
     display: flex;
     justify-content: center;
     align-items: center;
