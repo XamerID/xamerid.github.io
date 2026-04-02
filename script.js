@@ -2727,15 +2727,16 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
     }());
 
-    (function() {
-    const qnt = document.querySelector('#qr-content');
+        (function() {
+    const qrov = document.querySelector('#qr-overlay');
+    const qrnt = document.querySelector("#qr-content");
     const oqrn = document.querySelector("#generateQrBtn");
     
         function navigation(nav) {
             [showMetaEl, showEqEl,
                 showSetupEl,
                 showFilterEl,
-                openFil, qnt].forEach(e => e.classList.remove('active'));
+                openFil, qrov].forEach(e => e.classList.remove('active'));
             if (!nav) return;
             if (nav) nav.classList.add('active');
         }
@@ -2886,10 +2887,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelector("#generateQR").addEventListener("click", generateQR);
     document.querySelector("#downloadQR").addEventListener("click", downloadQR);
     oqrn.addEventListener('click', () => {
-        navigation(qnt);
+        navigation(qrov);
         sideMenu.classList.remove('active');
     });
-    document.querySelector("#close-qr").addEventListener("click", () => navigation());
+    document.addEventListener('click', (e) => {
+        if (e.target === qrov) navigation();
+    });
     })();
 
     const installer = document.querySelector('#installPrompt');
