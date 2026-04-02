@@ -2871,7 +2871,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
             
             btn.classList.remove('hidden');
-            text.textContent = url;
+            try {
+                let domain = new URL(url).hostname;
+                domain = domain.replace(/^www\./, "");
+                text.textContent = domain;
+            } catch (e) {
+                text.textContent = 'QR CODE';
+            }
         }
     function downloadQR() {
         const element = document.getElementById("qr-result");
