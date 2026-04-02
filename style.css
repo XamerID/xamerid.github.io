@@ -1162,30 +1162,38 @@ input:is([type="text"],[type="range"]) {
     padding: 2em;
     color: #222;
 }
-
-#qr-content {
+#qr-overlay {
     position: fixed;
     left: 0;
     bottom: 0;
     z-index: 5000;
+     display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.2);
+    pointer-events: none;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+#qr-overlay.active {
+    transform: translateY(0);
+    pointer-events: auto;
+    visibility: visible;
+}
+#qr-content {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    width: 100%;
+    width: 100%; 
     height: auto;
+    border-radius: 25px 25px 0 0;
     gap: 1em;
     padding: 1em;
+    font-size: 1em;
     background: #fff;
-    pointer-events: none;
-    border-radius: 25px 25px 0 0;
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
-}
-#qr-content.active {
-    transform: translateY(0);
-    pointer-events: auto;
-    visibility: visible;
 }
 .qr-input {
     display: flex;
@@ -1202,14 +1210,6 @@ input:is([type="text"],[type="range"]) {
     height: 50px;
     border-radius: 100px;
     padding: 0 1em;
-    font-size: 1em;
-    background: rgba(0,0,0,0.05);
-}
-.qr-input button {
-    width: 50px; 
-    height: 50px;
-    aspect-ratio: 1/1;
-    border-radius: 100%;
     font-size: 1em;
     background: rgba(0,0,0,0.05);
 }
@@ -1253,7 +1253,6 @@ input:is([type="text"],[type="range"]) {
 #generateQR i {
     font-size: 1.5em;
 }
-
 #viewPopupMenu {
     position: fixed;
     bottom: 0;
