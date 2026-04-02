@@ -2844,10 +2844,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         setInterval(wm, 1000);
 
     function generateQR() {
-        let url = document.getElementById("paste-link-qr").value.trim();
-        const btn = document.getElementById("downloadQR");
-        const qr = document.getElementById("qrcode");
-        const text = document.getElementById("qrText");
+        let url = document.querySelector("#paste-link-qr").value.trim();
+        const btn = document.querySelector("#downloadQR");
+        const qr = document.querySelector("#qrcode");
+        const text = document.querySelector("#qrText");
 
         if (!url) {
             alert("please enter the link");
@@ -2869,9 +2869,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         text.textContent = "QR";
     }
     function downloadQR() {
-        const element = document.querySelector("qrCode");
+        const element = document.getElementById("qr-result");
         if (!element) {
-            alert("QR belum ada bro");
+            alert("no QR?");
             return;
         }
         html2canvas(element, {
