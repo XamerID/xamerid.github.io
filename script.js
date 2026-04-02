@@ -2843,31 +2843,36 @@ document.addEventListener('DOMContentLoaded', async () => {
         wm();
         setInterval(wm, 1000);
 
-    function generateQR() {
-        let url = document.querySelector("#paste-link-qr").value.trim();
-        const btn = document.querySelector("#downloadQR");
-        const qr = document.querySelector("#qrcode");
-        const text = document.querySelector("#qrText");
+    let currentQR = null;
+        function generateQR() {
+            let url = document.querySelector("#paste-link-qr").value.trim().toLowerCase();
+            const btn = document.querySelector("#downloadQR");
+            const qr = document.querySelector("#qrcode");
+            const text = document.querySelector("#qrText");
 
-        if (!url) {
-            alert("please enter the link");
-            return;
-        }
-        if (!url.startsWith("http://") && !url.startsWith("https://")) {
-            url = "https://" + url;
-        }
-        btn.classList.add('hidden');
-        qr.innerHTML = "";
+            if (!url) {
+                alert("please enter the link");
+                return;
+            }
+            if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                url = "https://" + url;
+            }
+            if (url === currentQR) return;
 
-        new QRCode(qr, {
-            text: url,
-            width: 256,
-            height: 256,
-            correctLevel: QRCode.CorrectLevel.H
-        });
-        btn.classList.remove('hidden');
-        text.textContent = "QR";
-    }
+            currentQR = url;
+            btn.classList.add('hidden');
+            qr.innerHTML = "";
+
+            new QRCode(qr, {
+                text: url,
+                width: 256,
+                height: 256,
+                correctLevel: QRCode.CorrectLevel.H
+            });
+            
+            btn.classList.remove('hidden');
+            text.textContent = url;
+        }
     function downloadQR() {
         const element = document.getElementById("qr-result");
         if (!element) {
