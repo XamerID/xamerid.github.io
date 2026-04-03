@@ -1083,6 +1083,22 @@ input:is([type="text"],[type="range"]) {
     pointer-events: auto;
     visibility: visible;
 }
+#installPrompt i.active {
+    position: relative;
+    color: #008000;
+}
+#installPrompt i.active::after {
+    content: "✓";
+    position: absolute;
+    left: 10px;
+    bottom: -10px;
+    border-radius: 100px;
+    padding: 5px;
+    font-size: 10px;
+    flex-shrink: 0;
+    background: #008000;
+    color: #fff;
+}
 #langWatermark {
     font-size: 0.8em;
     color: #222;
