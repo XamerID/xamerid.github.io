@@ -21,6 +21,7 @@
     let current_process = null;
     function resetConvertUI() {
         results.classList.add("hidden");
+land.classList.remove("active");
         current_Title = "media";
         current_process = null;
         previewImg.src = '';
@@ -172,7 +173,6 @@ land.classList.remove("active");
                 setupDownloadButtons(url);
             } catch {
                 resetConvertUI();
-land.classList.remove("active");
                 showToast("failed to fetch media info", 1800);
             }
         });
