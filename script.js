@@ -2823,7 +2823,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             const code = document.querySelector("#qrcode");
             const text = document.querySelector("#qrText");
             if (!input) {
-                alert("please enter the link");
+            if (currentQR) {
+                currentQR = null;
+                code.innerHTML = '';
+                text.textContent = '';
+                btn.classList.add('hidden');
+                }
+                alert("Please enter address / link");
                 return;
             }
             let finalData = "";
