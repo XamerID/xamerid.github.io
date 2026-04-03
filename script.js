@@ -2909,10 +2909,20 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const contentIns = document.querySelector(".input-preview-play");
     const isTalk = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
-    
-    document.querySelector("#installPrompt")?.addEventListener('click', async () => {
+    const installPrompt = document.querySelector("#installPrompt");
+    let isPrompt = null;
+    function isAppInstalled() {
+        return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    }
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        isPrompt = e;
+    });
+    installPrompt.addEventListener('click', async () => {
         if (!isPrompt) return;
+
         sideMenu.classList.remove('active');
+
         await isPrompt.prompt();
         const {
             outcome
@@ -2921,12 +2931,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.log('User accepted install');
         }
         isPrompt = null;
-    });   
-    window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        isPrompt = e;
     });
-
     window.addEventListener("DOMContentLoaded",
         async () => {
             try {
@@ -2937,10 +2942,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 setInterval(wm(), 1000);
 
+                if (isAppInstalled()) {
+                    installPrompt.querySelector('i').classList.add('active');
+                }
                 if (!isTalk) {
                     contentIns.style.display = 'none';
-                } else {
-                    contentIns.style.display = 'flex';
                 }
             } catch {
                 await clearAllMusic();
