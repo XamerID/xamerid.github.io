@@ -21,7 +21,6 @@
     let current_process = null;
     function resetConvertUI() {
         results.classList.add("hidden");
-        land.classList.remove("active");
         current_Title = "media";
         current_process = null;
         previewImg.src = '';
@@ -152,6 +151,7 @@
             try {
                 const info = await fetchInfo(url);
                 if (info.error) {
+land.classList.remove("active");
                     throw new Error("unsupported media");
                 }
                 current_process = url;
@@ -172,6 +172,7 @@
                 setupDownloadButtons(url);
             } catch {
                 resetConvertUI();
+land.classList.remove("active");
                 showToast("failed to fetch media info", 1800);
             }
         });
