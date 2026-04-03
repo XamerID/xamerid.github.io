@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const extrackAudioBtn = document.querySelector('#extrackAudioBtn');
     const confirmBox = document.querySelector('#sampleRateConfirm');
     const rateButtons = document.querySelectorAll('.rate-btn');
-    const downloadLinkEd = document.querySelector('#downloadLinkEd');
+    const downloadLinka = document.querySelector('#downloadLinka');
 
     const openMusicBtn = document.querySelector('#openMusicBtn');
     const openConvertBtn = document.querySelector('#openConvertBtn');
@@ -2343,13 +2343,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         function finalize(outBlob, outFile) {
             setLoadEl(false);
             const url = URL.createObjectURL(outBlob);
-            downloadLinkEd.href = url;
-            downloadLinkEd.download = outFile;
-            downloadLinkEd.click();
+            downloadLinka.href = url;
+            downloadLinka.download = outFile;
+            downloadLinka.click();
             setTimeout(() => {
                 URL.revokeObjectURL(url);
-                downloadLinkEd.removeAttribute('href');
-                downloadLinkEd.removeAttribute('download');
+                downloadLinka.removeAttribute('href');
+                downloadLinka.removeAttribute('download');
                 asCounter = 0;
             }, 1000);
             showToast('succeed ✓');
