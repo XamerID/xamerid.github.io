@@ -81,7 +81,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         toastEnabled = !toastEnabled; modeMessageBtn.innerHTML = toastEnabled ? `<i class="fas fa-bell"></i>&nbsp;message`: `<i class="fas fa-bell-slash"></i>&nbsp;message`;
     });
 
-    let isPrompt;
     let musicFiles = [];
     let playingList = [];
     let currentIndex = -1;
