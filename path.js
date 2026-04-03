@@ -2,7 +2,7 @@
     const inputIpv = document.querySelector("#pasteConvertUrl");
     const clearIpv = document.querySelector("#clearInputConvertBtn");
     const converter = document.querySelector("#converter-btn");
-    const downloadLinkCt = document.querySelector("#downloadLinkCt");
+    const downloadLinke = document.querySelector("#downloadLinke");
     const land = document.querySelector("#loading-converter");
     const results = document.querySelector("#converter-results");
     const linksVideo = document.querySelector("#links-video");
@@ -25,8 +25,10 @@
         current_Title = "media";
         current_process = null;
         previewImg.src = '';
-        Object.keys(hostIN).forEach(key => 
-                hostIN[key].textContent = '');
+        downloadLinkCt.removeAttribute('href');
+        downloadLinkCt.removeAttribute('download');
+        Object.keys(hostIN).forEach(key =>
+            hostIN[key].textContent = '');
     }
     function sanitizeFilename(name) {
         return name.replace(/[\\/:*?"<>|]/g, "").trim();
@@ -83,10 +85,15 @@
                 if (!res.ok) throw new Error();
                 const blob = await res.blob();
                 const downloadUrl = URL.createObjectURL(blob);
-                downloadLinkCt.href = downloadUrl;
-                downloadLinkCt.download = `${current_Title}.${type === "video" ? "mp4": "mp3"}`;
+                downloadLinke.href = downloadUrl;
+                downloadLinke.download = `${current_Title}.${type === "video" ? "mp4": "mp3"}`;
                 downloadLinkCt.click();
-                URL.revokeObjectURL(downloadUrl);
+                setTimeout(() => {
+                    URL.revokeObjectURL(downloadUrl);
+                    downloadLinke.removeAttribute('href');
+                    downloadLinke.removeAttribute('download');
+                    asCounter = 0;
+                }, 1000);
             } catch {
                 alert("conversion failed");
             } finally {
@@ -96,8 +103,14 @@
         });
     }
     function setupDownloadButtons(url) {
-        handleDownload(linksVideo, spinVideo, url, "video");
-        handleDownload(linksAudio, spinAudio, url, "audio");
+        handleDownload(linksVideo,
+            spinVideo,
+            url,
+            "video");
+        handleDownload(linksAudio,
+            spinAudio,
+            url,
+            "audio");
         land.classList.remove("active");
         results.classList.remove("hidden");
     }
@@ -124,43 +137,44 @@
         return "data:image/svg+xml," + encodeURIComponent(svg);
     }
     const blankFB = blankThumbnailConvert();
-    converter.addEventListener("click", async () => {
-        if (!navigator.onLine) {
-            showToast("internet required", 3600);
-            return;
-        }
-        let url = inputIpv.value.trim();
-        if (!url || !url.startsWith("https://"))
-            return;
-        if (url === current_process) return;
-        await resetConvertUI();
-        land.classList.add("active");
-        try {
-            const info = await fetchInfo(url);
-            if (info.error) {
-                throw new Error("unsupported media");
+    converter.addEventListener("click",
+        async () => {
+            if (!navigator.onLine) {
+                showToast("internet required", 3600);
+                return;
             }
-            current_process = url;
-            current_Title = sanitizeFilename(info.title || "media");
-            if (info.thumbnail && previewImg) {
-                const params = new URLSearchParams();
-                params.append("url", info.thumbnail);
-                const finalProxyUrl = `${API}/proxy-img?${params.toString()}`;
-                previewImg.onerror = () => {
-                    previewImg.src = blankFB;
-                    land.classList.remove("active");
-                };
-                previewImg.src = finalProxyUrl;
-                hostIN.plat.textContent = `${info.platform || 'Media'}`;
-                hostIN.by.textContent = `${info.uploader || '-'}`;
-                hostIN.title.textContent = `${info.title || 'No Title'}`;
+            let url = inputIpv.value.trim();
+            if (!url || !url.startsWith("https://"))
+                return;
+            if (url === current_process) return;
+            await resetConvertUI();
+            land.classList.add("active");
+            try {
+                const info = await fetchInfo(url);
+                if (info.error) {
+                    throw new Error("unsupported media");
+                }
+                current_process = url;
+                current_Title = sanitizeFilename(info.title || "media");
+                if (info.thumbnail && previewImg) {
+                    const params = new URLSearchParams();
+                    params.append("url", info.thumbnail);
+                    const finalProxyUrl = `${API}/proxy-img?${params.toString()}`;
+                    previewImg.onerror = () => {
+                        previewImg.src = blankFB;
+                        land.classList.remove("active");
+                    };
+                    previewImg.src = finalProxyUrl;
+                    hostIN.plat.textContent = `${info.platform || 'Media'}`;
+                    hostIN.by.textContent = `${info.uploader || '-'}`;
+                    hostIN.title.textContent = `${info.title || 'No Title'}`;
+                }
+                setupDownloadButtons(url);
+            } catch {
+                resetConvertUI();
+                showToast("failed to fetch media info", 1800);
             }
-            setupDownloadButtons(url);
-        } catch {
-            resetConvertUI();
-            showToast("failed to fetch media info", 1800);
-        }
-    });
+        });
     clearIpv.addEventListener("click",
         () => {
             if (!inputIpv.value.trim()) return;
