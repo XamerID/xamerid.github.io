@@ -25,8 +25,8 @@
         current_Title = "media";
         current_process = null;
         previewImg.src = '';
-        downloadLinkCt.removeAttribute('href');
-        downloadLinkCt.removeAttribute('download');
+        downloadLinke.removeAttribute('href');
+               downloadLinke.removeAttribute('download');
         Object.keys(hostIN).forEach(key =>
             hostIN[key].textContent = '');
     }
