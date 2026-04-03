@@ -8,20 +8,19 @@
 <link rel="stylesheet" href="style.css" />
 <link rel="manifest" href="manifest.json" />
 </head>
-
 <body>
 <div class="header-content">
 <label>
-<span id="countMusic1"></span>
+<span id="countMusic"></span>
 <input type="text" id="searchInput" placeholder="song..."></label>
 <button id="repeatBtn"><i class="fas fa-repeat"></i></button>
-<button id="opqBtn"><i class="fas fa-sliders"></i></button>
+<button id="openEqBtn"><i class="fas fa-sliders"></i></button>
 <button id="filterBtn"><i class="fas fa-list-check"></i></button>
 <button id="clearSearchBtn" style="display:none;"><i class="fas fa-times"></i></button>
 <button id="menuBtn" class="active"><i class="fas fa-bars"></i></button>
 </div>
 
-<div class="category-audio-area" translate="no">
+<div class="setup-audios" translate="no">
 <button id="openSetupBtn">
 <i class="fas fa-lock"></i>
 <span>PROGRESS</span>
@@ -34,7 +33,7 @@
 
 <section id="pre-list-edit">
 <div id="preview-editting">
-<img class="albumArtPreview" src="" alt="cover" style="visibility:hidden;" />
+<img class="albumArtPreview" alt="cover" style="visibility:hidden;" />
 <div class="pre-track-info">
 <strong id="preTitle"></strong>
 <strong><span class="duration-of-selection-results" style="margin-right:0.7em;" translate="no">00:00</span><span id="preArtist"></span></strong>
@@ -99,8 +98,8 @@ step="0.01">
 <div class="popup-header">
 <div class="all-cover-art"></div>
 <div class="popup-info-header">
-<span class="popTitle">unknown</span>
-<span class="popArtist">unknown</span>
+<span class="popTitle"></span>
+<span class="popArtist"></span>
 </div>
 <button id="closePopupBtn"><i class="fas fa-arrow-down"></i></button>
 </div>
@@ -149,7 +148,7 @@ step="0.01">
 </div>
 <canvas id="canvas-visualizer"></canvas>
 <div class="setup-button">
-<button id="openEqBtn">
+<button id="openEqns">
 <i class="fas fa-sliders"></i>
 <span>EQ</span>
 <span id="eq-status">BYPASS</span>
@@ -394,21 +393,17 @@ step="0">
 </div>
 </nav>
 
-<nav id="sideMenu" class="side-menu-overlay">
+<nav id="sideMenu" class="hidden">
 <ul class="side-menu">
-<li id="generateQrBtn"><i class="fas fa-qrcode"></i>generateQR</li>
-<li id="changeInputBtn"><i class="fas fa-folder-open"></i>Change input</li>
-<li id="modeMessageBtn"><i class="fas fa-bell"></i>&nbsp;message</li>
+<li id="installPrompt"><i class="fas fa-maap"></i>create shortcut</button>
+<li id="generateQrBtn"><i class="fas fa-qrcode"></i>Generate QR</li>
 <hr class="separator">
-<li id="dateBtn"> <i class="fas fa-database"></i>&nbsp;Data seved</li>
-<ol id="date-seved" class="hidden">
-<li><button id="removeDateMp3"><i class="fas fa-times"></i></button>music :<p id="dataSaveDb"></p>
--<p id="countMusic2"></p>
-</li>
-</ol>
-<article class="end-info-block">
-<span id="langWatermark" aria-hidden="true" translate="no"></span>
-</article>
+<li id="changeInputBtn"><i class="fas fa-folder-open"></i>Change Input</li>
+<li id="modeMessageBtn"><i class="fas fa-bell"></i>Message</li>
+<hr class="separator">
+<li id="dateBtn"> <i class="fas fa-database"></i>Data seved</li>
+<li id="date-seved" class="hidden"><i id="removeDateMp3" class="fas fa-times"></i><p id="dataSaveDb"></p></li>
+<li id="langWatermark" aria-hidden="true" translate="no"></li>
 </ul>
 </nav>
 
@@ -426,15 +421,59 @@ step="0">
 </div>
 </nav>
 
+<nav id="sampleRateConfirm" class="hidden">
+<div class="confirm-inner">
+<div id="get-output-edit">
+</div>
+<section id="audio-rate-group" class="hidden">
+<button class="rate-btn active" data-rate="64">MP3 64_KBPS</button>
+<button class="rate-btn" data-rate="128">MP3 128_KBPS</button>
+<button class="rate-btn" data-rate="160">MP3 160_KBPS</button>
+<button class="rate-btn" data-rate="192">MP3 192_KBPS</button>
+<button class="rate-btn" data-rate="256">MP3 256_KBPS</button>
+<button class="rate-btn" data-rate="320">MP3 320_KBPS</button>
+</section>
+
+<div class="confirm-actions">
+<button id="cancelRate">CANCEL</button>
+<button id="okRate">OKE</button>
+</div>
+</div>
+</nav>
+
+<div id="toastNotif">
+<span class="toast-message"></span>
+</div>
+
+<div id="encodeLoading" class="hidden">
+<div class="progress-percent-grup">
+<div class="circle-wrapper">
+<svg class="progress-ring" width="120" height="120">
+<circle class="progress-ring__bg" cx="60" cy="60" r="54" />
+<circle id="encodeBarss" class="progress-ring__circle" cx="60" cy="60" r="54" />
+</svg>
+<p id="encodeSpin"></p>
+<div class="encode-percent">
+<p id="encodePercent"></p>
+</div>
+</div>
+<div class="encode-stage">
+<p id="encodeStage"></p>
+</div>
+</div>
+</div>
+
 <div id="convertPageEl">
 <div class="convert-overlay-content">
 <section class="paste-input-container">
-<input type="text" id="pasteConvertUrl" placeholder="paste link...">
 <button id="clearInputConvertBtn"><i class="fas fa-times"></i></button>
+<input type="text" id="pasteConvertUrl" placeholder="paste link...">
+<button id="converter-btn"><i class="fas fa-search"></i></button>
+<div class="loading-converter">
+<span id="loading-converter"></span></div>
 </section>
-<div class="action-paste-input">
-<button id="converter-btn">SEARCH</button>
-<span id="loading-converter"></span>
+<div class="converter-info">
+copy and paste video link into input, click the <i class="fas fa-search"></i> to start searching video and let the system do the work automatically. <br>note : only supports urls from YouTube - Make sure you have permission to retrieve the link, This tool is intended for downloading copyright-free content.
 </div>
 <section id="converter-results" class="hidden">
 <img id="preview-img-converter">
@@ -453,70 +492,6 @@ step="0">
 <span class="label-formated">AUDIO</span>
 <span id="spinner-audios"></span></button>
 </section>
-<div class="converter-info">
-copy and paste the link into input, click search to search for videos and let the system do the work automatically. Make sure you have permission to retrieve the link, This tool is intended for downloading copyright-free content.
-</div>
-</div>
-</div>
-
-<div id="installPrompt" class="install-popup hidden">
-<div class="install-popup-content">
-<div class="install-sample">
-<img src="lib/icon.webp" alt="img" />
-<div class="install-txt">
-<span>pwa</span>
-<p>create shortcut</p>
-</div>
-</div>
-</div>
-<div class="install-actions">
-<button id="installNowBtn">Install</button>
-<button id="installLaterBtn">Later</button>
-</div>
-</div>
-</div>
-
-<div id="toastNotif">
-<span class="toast-message"></span>
-</div>
-
-<div id="encodeLoading" class="hidden">
-<div class="progress-percent-grup">
-<div id="circle-wrapper">
-<svg class="progress-ring" width="120" height="120">
-<circle class="progress-ring__bg" cx="60" cy="60" r="54" />
-<circle id="encodeBarss" class="progress-ring__circle" cx="60" cy="60" r="54" />
-</svg>
-<div class="encode-percent">
-<p id="encodePercent"></p>
-</div>
-</div>
-<div class="encode-stage">
-<p class="" id="encodeSpin"></p>
-<p id="encodeStage">
-rendering audio...
-</p>
-</div>
-</div>
-</div>
-
-<div id="sampleRateConfirm" class="hidden">
-<div class="confirm-inner">
-<div id="get-output-edit">
-</div>
-<section id="audio-rate-group" class="hidden">
-<button class="rate-btn active" data-rate="64">MP3 64_KBPS</button>
-<button class="rate-btn" data-rate="128">MP3 128_KBPS</button>
-<button class="rate-btn" data-rate="160">MP3 160_KBPS</button>
-<button class="rate-btn" data-rate="192">MP3 192_KBPS</button>
-<button class="rate-btn" data-rate="256">MP3 256_KBPS</button>
-<button class="rate-btn" data-rate="320">MP3 320_KBPS</button>
-</section>
-
-<div class="confirm-actions">
-<button id="cancelRate">CANCEL</button>
-<button id="okRate">OKE</button>
-</div>
 </div>
 </div>
 
