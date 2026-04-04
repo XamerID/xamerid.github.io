@@ -2757,7 +2757,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         } = await isPrompt.userChoice;
         if (outcome === 'accepted') {
             console.log('User accepted install');
-        }
+        } 
         isPrompt = null;
     });
     window.addEventListener("DOMContentLoaded",
