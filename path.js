@@ -21,12 +21,12 @@
     let current_process = null;
     function resetConvertUI() {
         results.classList.add("hidden");
-land.classList.remove("active");
+        land.classList.remove("active");
         current_Title = "media";
         current_process = null;
         previewImg.src = '';
         downloadLinke.removeAttribute('href');
-               downloadLinke.removeAttribute('download');
+        downloadLinke.removeAttribute('download');
         Object.keys(hostIN).forEach(key =>
             hostIN[key].textContent = '');
     }
@@ -144,15 +144,13 @@ land.classList.remove("active");
                 return;
             }
             let url = inputIpv.value.trim();
-            if (!url || !url.startsWith("https://"))
-                return;
+            if (!url || !url.startsWith("https://")) return;
             if (url === current_process) return;
             await resetConvertUI();
             land.classList.add("active");
             try {
                 const info = await fetchInfo(url);
                 if (info.error) {
-land.classList.remove("active");
                     throw new Error("unsupported media");
                 }
                 current_process = url;
