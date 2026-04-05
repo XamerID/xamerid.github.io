@@ -1175,10 +1175,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 currentCutId = track.id;
                 cutAudioPlayer.onloadedmetadata = async () => {
                     const d = cutAudioPlayer.duration;
-                    if (d >= 480) {
-                        reject("maximum duration limit is around 7 minutes");
-                        return;
-                    }
+                   
                     startSlider.max = endSlider.max = audioProgres.max = d;
                     endSlider.value = d;
                     startSlider.value = audioProgres.value = 0;
