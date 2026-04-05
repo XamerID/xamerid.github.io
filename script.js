@@ -1194,10 +1194,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             await loadAudio;
             cutAudioPlayer.ontimeupdate = () => {
                 const c = cutAudioPlayer.currentTime;
-                if (c >= +endSlider.value) {
-                    cutAudioPlayer.pause();
-                    cutAudioPlayer.currentTime = +startSlider.value;
-                }
+                
                 audioProgres.value = c;
                 currentPG.textContent = formatTime(c);
             };
