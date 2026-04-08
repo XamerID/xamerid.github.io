@@ -1,3 +1,4 @@
+(function(){
 const audioPlayer = document.querySelector('#audioPlayer');
 const cutAudioPlayer = document.querySelector('#cutAudioPlayer');
 const addFileBtn = document.querySelector('#addFileBtn');
@@ -1305,7 +1306,7 @@ function resetPopup() {
         '#popComment',
         '#popLyrics']
     .forEach(id => document.querySelector(id).textContent = ': Not found');
-    document.querySelectorAll('.popTitle,.popArtist').forEach(el => el.textContent = 'unknown');
+    document.querySelectorAll('.popTitle,.popArtist').forEach(el => el.textContent = ': unknown');
     document.querySelectorAll(".all-cover-art").forEach(el => {
         el.innerHTML = `${svgn}`;
         el.style.backgroundImage = '';
@@ -1397,26 +1398,29 @@ function resetPlayerUI() {
     resetPopup();
 }
 
-let dbPromise = null;
+let dbInstance = null;
 function openIndexedDB() {
-    if (dbPromise) return dbPromise;
-    dbPromise = new Promise((resolve, reject) => {
+    if (dbInstance) return Promise.resolve(dbInstance);
+    return new Promise((resolve, reject) => {
         const req = indexedDB.open('metaBase', 1);
         req.onupgradeneeded = e => {
             const db = e.target.result;
             if (!db.objectStoreNames.contains("audioFiles")) {
-                db.createObjectStore("audioFiles", { keyPath: "id" });
+                const audio = db.createObjectStore("audioFiles", {
+                    keyPath: "id"
+                });
+                audio.createIndex("name", "name", {
+                    unique: false
+                });
             }
         };
-        req.onsuccess = e => resolve(e.target.result);
-        req.onerror = e => {
-            dbPromise = null; 
-            reject(e.target.error);
+        req.onsuccess = e => {
+            dbInstance = e.target.result;
+            resolve(dbInstance);
         };
+        req.onerror = e => reject(e.target.error);
     });
-    return dbPromise;
 }
-
 async function getBase(id) {
     const db = await openIndexedDB();
     const tx = db.transaction(['audioFiles'],
@@ -2755,7 +2759,7 @@ installPrompt.addEventListener('click', async () => {
     isPrompt = null;
 });
 window.addEventListener('beforeinstallprompt', (e) => {e.preventDefault(); isPrompt = e;});
-(async () => {
+async function init() {
     try {
         await loadAudioData();
         resetPlayerUI();
@@ -2772,4 +2776,6 @@ window.addEventListener('beforeinstallprompt', (e) => {e.preventDefault(); isPro
         console.log(e);
         cleanDB();
     }
-})();
+}
+init();
+}());
