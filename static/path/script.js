@@ -1,4 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => {
 const audioPlayer = document.querySelector('#audioPlayer');
 const cutAudioPlayer = document.querySelector('#cutAudioPlayer');
 const addFileBtn = document.querySelector('#addFileBtn');
@@ -2762,12 +2761,10 @@ window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     isPrompt = e;
 });
-(async () => {
+(async() => {
     try {
-        await Promise.all([
-            loadAudioData(),
-            resetPlayerUI()
-        ]);
+        await loadAudioData();
+        resetPlayerUI();
         
         setInterval(lang_usage, 1000);
 
@@ -2777,9 +2774,8 @@ window.addEventListener('beforeinstallprompt', (e) => {
         if (!isTalk) {
             contentIns.style.display = 'none';
         }
-    } catch (e) {
+    } catch(e) {
         console.log(e);
         cleanDB();
     }
 })();
-});
