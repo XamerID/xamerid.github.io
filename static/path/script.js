@@ -2155,6 +2155,61 @@ document.querySelector('#removeDateMp3').addEventListener('click',
         if (!confirm("Are you sure you want to delete all stored data?")) return;
         cleanDB();
     });
+    
+function lang_usage() {
+    const w = document.getElementById('langWatermark');
+    if (!w) return;
+    const loc = (navigator.languages?.[0] || navigator.language || "en-US").replace("_", "-");
+    const pt = loc.split("-");
+    const cd = pt.find((p, i) => i > 0 && p.length === 2)?.toUpperCase() || "US";
+    const cn = new Intl.DisplayNames([loc], {
+        type: "region"
+    }).of(cd).toUpperCase();
+    w.textContent = `${cn} - ${cd}`;
+}
+
+const contentIns = document.querySelector(".input-preview-play");
+const isTalk = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
+const installPrompt = document.querySelector("#installPrompt");
+let isPrompt = null;
+function isAppInstalled() {
+    return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+}
+installPrompt.addEventListener('click', async () => {
+    if (!isPrompt) return;
+
+    sideMenu.classList.remove('active');
+
+    await isPrompt.prompt();
+    const {
+        outcome
+    } = await isPrompt.userChoice;
+    if (outcome === 'accepted') {
+        console.log('User accepted install');
+    }
+    isPrompt = null;
+});
+window.addEventListener('beforeinstallprompt', (e) => {e.preventDefault(); isPrompt = e;});
+async function init() {
+    try {
+        await Promise.all([
+            loadAudioData(),
+        resetPlayerUI(),
+        setInterval(lang_usage, 1000)]);
+
+        if (isAppInstalled()) {
+            installPrompt.querySelector('i').classList.add('active');
+        }
+        if (!isTalk) {
+            contentIns.style.display = 'none';
+        }
+    } catch (e) {
+        console.log(e);
+        cleanDB();
+    }
+}
+
+init();
 
 'use strict';
 (function () {
@@ -2724,73 +2779,5 @@ document.querySelector('#removeDateMp3').addEventListener('click',
         if (e.target === qrov) navigation();
     });
 })();
-
-function lang_usage() {
-    const w = document.getElementById('langWatermark');
-    if (!w) return;
-    const loc = (navigator.languages?.[0] || navigator.language || "en-US").replace("_", "-");
-    const pt = loc.split("-");
-    const cd = pt.find((p, i) => i > 0 && p.length === 2)?.toUpperCase() || "US";
-    const cn = new Intl.DisplayNames([loc], {
-        type: "region"
-    }).of(cd).toUpperCase();
-    w.textContent = `${cn} - ${cd}`;
-}
-
-const contentIns = document.querySelector(".input-preview-play");
-const isTalk = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
-const installPrompt = document.querySelector("#installPrompt");
-let isPrompt = null;
-function isAppInstalled() {
-    return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-}
-installPrompt.addEventListener('click', async () => {
-    if (!isPrompt) return;
-
-    sideMenu.classList.remove('active');
-
-    await isPrompt.prompt();
-    const {
-        outcome
-    } = await isPrompt.userChoice;
-    if (outcome === 'accepted') {
-        console.log('User accepted install');
-    }
-    isPrompt = null;
-});
-window.addEventListener('beforeinstallprompt', (e) => {e.preventDefault(); isPrompt = e;});
-
-async function init() {
-    try {
-        
-        const data = await loadAudioData();
-        window.musicFiles = data || []; 
-
-        
-        resetPlayerUI();
-        
-        
-        setInterval(lang_usage, 1000);
-
-        
-        showToast('Membuka halaman', 2500);
-
-   
-        if (isAppInstalled()) {
-            const icon = installPrompt.querySelector('i');
-            if(icon) icon.classList.add('active');
-        }
-        
-        if (!isTalk && contentIns) {
-            contentIns.style.display = 'none';
-        }
-
-    } catch (e) {
-        console.error("Gagal inisialisasi:", e);
-        
-    }
-}
-
-init();
 
 });
