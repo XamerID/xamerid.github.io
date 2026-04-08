@@ -2,6 +2,7 @@
     const $ = s => document.querySelector(s);
     const input = $("#pasteConvertUrl");
     const clear = $("#clearInputConvertBtn");
+    const cleanBtn = $("#clean-links-convert");
     const convert = $("#converter-btn");
     const loading = $("#loading-converter");
     const results = $("#converter-results");
@@ -17,12 +18,12 @@
     let currentURL = null;
     let currentTitle = "media";
     function resetUI() {
-        loading.classList.remove("active");
-        results.classList.remove("active");
+        [loading, results].forEach(el => el.classList.remove("active"));
         preview.src = "";
         hostPlat.textContent = "";
         hostTitle.textContent = "";
         currentURL = null;
+        busy = false;
         currentTitle = "media";
     }
     function sanitize(name) {
@@ -91,6 +92,7 @@
         if (url === currentURL) return;
         resetUI();
         loading.classList.add("active");
+        busy = true;
         await new Promise(r => requestAnimationFrame(r));
         try {
             const info = await fetchInfo(url);
@@ -123,6 +125,10 @@
     clear.onclick = ()=> {
         input.value = "";
         input.focus();
+    };
+    cleanBtn.onclick = () => {
+        input.value = "";
+        resetUI();
     };
     fetch(API + `/visit`, {
         method: "POST", }) 
