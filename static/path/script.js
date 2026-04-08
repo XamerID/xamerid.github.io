@@ -49,9 +49,9 @@ const confirmBox = document.querySelector('#sampleRateConfirm');
 const rateButtons = document.querySelectorAll('.rate-btn');
 const downloadLinka = document.querySelector('#downloadLinka');
 
-const openMusicBtn = document.querySelector('#openMusicBtn'),
-const openConvertBtn = document.querySelector('#openConvertBtn'),
-const convertPageEl = document.querySelector('#convertPageEl'),
+const openMusicBtn = document.querySelector('#openMusicBtn');
+const openConvertBtn = document.querySelector('#openConvertBtn');
+const convertPageEl = document.querySelector('#convertPageEl');
 const showMetaEl = document.querySelector('#meta-audio-area');
 const showEqEl = document.querySelector('#eq-audio-area');
 const showSetupEl = document.querySelector('#setup-audio-area');
