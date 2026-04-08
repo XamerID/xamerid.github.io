@@ -2776,6 +2776,6 @@ window.addEventListener('beforeinstallprompt', (e) => {
         }
     } catch(e) {
         console.log(e);
-        cleanDB();
+        // cleanDB();
     }
 })();
