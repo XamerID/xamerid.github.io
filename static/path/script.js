@@ -1,4 +1,4 @@
-(function(){
+document.addEventListener('DOMContentLoaded', async () => {
 const audioPlayer = document.querySelector('#audioPlayer');
 const cutAudioPlayer = document.querySelector('#cutAudioPlayer');
 const addFileBtn = document.querySelector('#addFileBtn');
@@ -2793,4 +2793,4 @@ async function init() {
 
 init();
 
-}());
+});
