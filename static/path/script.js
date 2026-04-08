@@ -1,3 +1,4 @@
+document.addEventListener('DOMContentLoaded', () => {
 const audioPlayer = document.querySelector('#audioPlayer');
 const cutAudioPlayer = document.querySelector('#cutAudioPlayer');
 const addFileBtn = document.querySelector('#addFileBtn');
@@ -2781,3 +2782,4 @@ window.addEventListener('beforeinstallprompt', (e) => {
         cleanDB();
     }
 })();
+});
