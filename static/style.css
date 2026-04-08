@@ -46,7 +46,7 @@ body {
     font-style: normal;
     font-weight: normal;
     font-display: block;
-    src: url(lib/icon.woff2) format("woff2");
+    src: url(static/lib/icon.woff2) format("woff2");
 }
 .fas {
     -moz-osx-font-smoothing: grayscale;
