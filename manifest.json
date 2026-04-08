@@ -1,7 +1,7 @@
 {
   "name": "CROSS DEVICE",
   "short_name": "PWA",
-  "description": "pow.web",
+  "description": "web",
   "start_url": "index.html",
   "display": "standalone",
   "theme_color": "#000000",
