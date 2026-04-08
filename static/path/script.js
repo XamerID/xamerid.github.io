@@ -2762,23 +2762,35 @@ window.addEventListener('beforeinstallprompt', (e) => {e.preventDefault(); isPro
 
 async function init() {
     try {
-        await Promise.all([
-            loadAudioData(),
-        resetPlayerUI(),
-        setInterval(lang_usage, 1000)]);
-showToast('membuka halaman, load...', 2800);
+        
+        const data = await loadAudioData();
+        window.musicFiles = data || []; 
 
+        
+        resetPlayerUI();
+        
+        
+        setInterval(lang_usage, 1000);
 
+        
+        showToast('Membuka halaman', 2500);
+
+   
         if (isAppInstalled()) {
-            installPrompt.querySelector('i').classList.add('active');
+            const icon = installPrompt.querySelector('i');
+            if(icon) icon.classList.add('active');
         }
-        if (!isTalk) {
+        
+        if (!isTalk && contentIns) {
             contentIns.style.display = 'none';
         }
+
     } catch (e) {
-        console.log(e);
-        cleanDB();
+        console.error("Gagal inisialisasi:", e);
+        
     }
 }
+
 init();
+
 }());
