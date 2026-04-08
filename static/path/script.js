@@ -2759,12 +2759,13 @@ installPrompt.addEventListener('click', async () => {
     isPrompt = null;
 });
 window.addEventListener('beforeinstallprompt', (e) => {e.preventDefault(); isPrompt = e;});
+
 async function init() {
     try {
-        await loadAudioData();
-        resetPlayerUI();
-        
-        setInterval(lang_usage, 1000);
+        await Promise.all([
+            loadAudioData(),
+        resetPlayerUI(),
+        setInterval(lang_usage, 1000)]);
 
         if (isAppInstalled()) {
             installPrompt.querySelector('i').classList.add('active');
