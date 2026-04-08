@@ -2766,6 +2766,8 @@ async function init() {
             loadAudioData(),
         resetPlayerUI(),
         setInterval(lang_usage, 1000)]);
+showToast('membuka halaman, load...', 2800);
+
 
         if (isAppInstalled()) {
             installPrompt.querySelector('i').classList.add('active');
