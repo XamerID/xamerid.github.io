@@ -1,4 +1,3 @@
-document.addEventListener('DOMContentLoaded', async () => {
 const audioPlayer = document.querySelector('#audioPlayer');
 const cutAudioPlayer = document.querySelector('#cutAudioPlayer');
 const addFileBtn = document.querySelector('#addFileBtn');
@@ -50,9 +49,9 @@ const confirmBox = document.querySelector('#sampleRateConfirm');
 const rateButtons = document.querySelectorAll('.rate-btn');
 const downloadLinka = document.querySelector('#downloadLinka');
 
-const openMusicBtn = document.querySelector('#openMusicBtn');
-const openConvertBtn = document.querySelector('#openConvertBtn');
-const convertPageEl = document.querySelector('#convertPageEl');
+const openMusicBtn = document.querySelector('#openMusicBtn'),
+const openConvertBtn = document.querySelector('#openConvertBtn'),
+const convertPageEl = document.querySelector('#convertPageEl'),
 const showMetaEl = document.querySelector('#meta-audio-area');
 const showEqEl = document.querySelector('#eq-audio-area');
 const showSetupEl = document.querySelector('#setup-audio-area');
@@ -65,10 +64,13 @@ const dateSeved = document.querySelector('#date-seved');
 const sideMenu = document.querySelector('#sideMenu');
 const menuBtn = document.querySelector('#menuBtn');
 const metaTheme = document.querySelector('meta[name="theme-color"]');
-
 const toastNotif = document.querySelector('#toastNotif');
 const toastMessage = document.querySelector(".toast-message");
+const contentIns = document.querySelector(".input-preview-play");
+const isTalk = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
+const installPrompt = document.querySelector("#installPrompt");
 
+let isPrompt = null;
 let toastEnabled = true;
 let musicFiles = [];
 let playingList = [];
@@ -84,7 +86,6 @@ let currentCutId = null;
 let isDecode = false;
 let asCounter = 0;
 let isFilter = false;
-
 let eqEnabled = false;
 const EQS = {
     sub: 0,
@@ -1028,8 +1029,7 @@ document.querySelector("#tts-source").addEventListener("change",
         playLy.innerHTML = fa_play;
     });
 function isEdit(process = false) {
-    listEdit.classList.toggle("active",
-        process);
+    listEdit.classList.toggle("active", process);
     isProcessing = false;
 }
 function failCover() {
@@ -1512,7 +1512,6 @@ async function loadTrack(index) {
                 navigator.mediaSession.metadata = new MediaMetadata({
                     title: title || "Unknown",
                     artist: artist || "Unknown Artist",
-
                     artwork: [{
                         src: img, sizes: "96x96", type: "image/jpg"
                     },
@@ -1661,7 +1660,6 @@ function renderMusic(musicList,
         const listItem = document.createElement('li');
         listItem.classList.add('music-item');
         listItem.dataset.fileId = track.id;
-
         const img = track.thumbnailUrl?.trim() || '';
         listItem.innerHTML = `
         <div class="track-inner">
@@ -1678,7 +1676,6 @@ function renderMusic(musicList,
             async (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-
                 playingList = list;
                 const index = playingList.findIndex(item => item.id === track.id);
 
@@ -2044,7 +2041,6 @@ async function parseMusic(files) {
             }
             const p = Math.round(((i + 1) / files.length) * 100);
             setLoadEl(true, p, `Processing audio ${i + 1}/${files.length}`);
-
         }
         if (duplicateCount > 0) {
             showToast(`${duplicateCount} duplicate file(s) skipped.`);
@@ -2167,19 +2163,28 @@ function lang_usage() {
     }).of(cd).toUpperCase();
     w.textContent = `${cn} - ${cd}`;
 }
-
-const contentIns = document.querySelector(".input-preview-play");
-const isTalk = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
-const installPrompt = document.querySelector("#installPrompt");
-let isPrompt = null;
 function isAppInstalled() {
     return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
 }
+async function init() {
+    try {
+        await Promise.all([
+            loadAudioData(),
+        resetPlayerUI()]);
+        setInterval(lang_usage, 1000);
+        if (isAppInstalled()) {
+            installPrompt.querySelector('i').classList.add('active');
+        }
+        if (!isTalk) {
+            contentIns.style.display = 'none';
+        }
+    } catch (e) {
+        console.log(e);
+    }
+}
 installPrompt.addEventListener('click', async () => {
     if (!isPrompt) return;
-
     sideMenu.classList.remove('active');
-
     await isPrompt.prompt();
     const {
         outcome
@@ -2190,24 +2195,6 @@ installPrompt.addEventListener('click', async () => {
     isPrompt = null;
 });
 window.addEventListener('beforeinstallprompt', (e) => {e.preventDefault(); isPrompt = e;});
-async function init() {
-    try {
-        await Promise.all([
-            loadAudioData(),
-        resetPlayerUI(),
-        setInterval(lang_usage, 1000)]);
-
-        if (isAppInstalled()) {
-            installPrompt.querySelector('i').classList.add('active');
-        }
-        if (!isTalk) {
-            contentIns.style.display = 'none';
-        }
-    } catch (e) {
-        console.log(e);
-        cleanDB();
-    }
-}
 
 init();
 
@@ -2222,8 +2209,6 @@ init();
         downloadLinka.click();
         setTimeout(() => {
             URL.revokeObjectURL(url);
-            downloadLinka.removeAttribute('href');
-            downloadLinka.removeAttribute('download');
             asCounter = 0;
         }, 1000);
         showToast('succeed ✓');
@@ -2596,9 +2581,11 @@ init();
 }());
 
 (function() {
-    const qrov = document.querySelector('#qr-overlay');
+    let currentQR = null;
+    let inputQR = document.querySelector("#paste-link-qr").value.trim();
     const genQR = document.querySelector("#generateQrBtn");
     const qrBtn = document.querySelector("#finaly-qr-btn");
+    const qrov = document.querySelector('#qr-overlay');
     function navigation(nav) {
         [showMetaEl, showEqEl,
             showSetupEl,
@@ -2698,8 +2685,6 @@ init();
     openMusicBtn.addEventListener('click',
         () => PGM(openMusicBtn));
 
-    let currentQR = null;
-    let inputQR = document.querySelector("#paste-link-qr").value.trim();
     function generateQR() {
         const code = document.querySelector("#qrcode");
         const text = document.querySelector("#qrText");
@@ -2717,7 +2702,6 @@ init();
         }
         if (/^[\d+\-\s]+$/.test(inputQR)) {
             let cleanNumber = inputQR.replace(/\D/g, "");
-
             finalData = "https://wa.me/" + cleanNumber;
             displayText = cleanNumber;
         } else {
@@ -2770,14 +2754,11 @@ init();
         navigation(qrov);
         sideMenu.classList.add('hidden');
     });
-    document.querySelector("#ClearQR").addEventListener('click', () => {
+    document.querySelector("#clearQR").addEventListener('click', () => {
         inputQR.value = '';
         generateQR();
     });
-
     document.addEventListener('click', (e) => {
         if (e.target === qrov) navigation();
     });
 })();
-
-});
