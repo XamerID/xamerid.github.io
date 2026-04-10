@@ -11,13 +11,13 @@
 <body>
 <div class="header-box">
 <label>
-<span id="countMusic"></span>
+<p id="countMusic"></p>
 <input type="text" id="searchInput" placeholder="song..."></label>
-<button id="repeatBtn"><i class="fas fa-repeat"></i></button>
-<button id="openEqBtn"><i class="fas fa-sliders"></i></button>
-<button id="filterBtn"><i class="fas fa-list-check"></i></button>
-<button id="clearSearchBtn" style="display:none;"><i class="fas fa-times"></i></button>
-<button id="menuBtn" class="active"><i class="fas fa-bars"></i></button>
+<button id="repeatBtn"><i class="fa-repeat"></i></button>
+<button id="openEqBtn"><i class="fa-sliders"></i></button>
+<button id="filterBtn"><i class="fa-list-check"></i></button>
+<button id="clearSearchBtn" style="display:none;"><i class="fa-times"></i></button>
+<button id="menuBtn" class="active"><i class="fa-bars"></i></button>
 </div>
 
 <section id="pre-list-edit">
@@ -25,15 +25,15 @@
 <img class="albumArtPreview" alt="cover" style="visibility:hidden;" />
 <div class="pre-track-info">
 <strong id="preTitle"></strong>
-<strong><span class="duration-of-selection-results" style="margin-right:0.7em;" translate="no">00:00</span><span id="preArtist"></span></strong>
+<strong><span class="duration-of-selection-results" style="margin-right:0.7em;" translate="no"></span><span id="preArtist"></span></strong>
 </div>
 <div id="setup-audios" translate="no">
-<button id="resetEditBtn"><i class="fas fa-times"></i></button>
+<button id="resetEditBtn"><i class="fa-times"></i></button>
 <button id="openSetupBtn">
-<i class="fas fa-pen"></i>
+<i class="fa-edit"></i>
 </button>
 <button id="extrackAudioBtn">
-<i class="fas fa-cut"></i>
+<i class="fa-cut"></i>
 </button>
 </div>
 </div>
@@ -65,20 +65,20 @@ step="0.01">
 </div>
 
 <div class="player-controls-group">
-<button id="prevBtn"><i class="fas fa-step-backward"></i></button>
-<button id="playPauseBtn"><i class="fas fa-play"></i></button>
-<button id="nextBtn"><i class="fas fa-step-forward"></i></button>
+<button id="prevBtn"><i class="fa-step-backward"></i></button>
+<button id="playPauseBtn"><i class="fa-play"></i></button>
+<button id="nextBtn"><i class="fa-step-forward"></i></button>
 </div>
 </div>
 
 <div class="player-bottom-box" translate="no">
-<button id="openMusicBtn" class="category-btn active"><i class="fas fa-music"></i><span>music</span></button>
+<button id="openMusicBtn" class="category-btn active"><i class="fa-music"></i><p>music</p></button>
 <button id="addFileBtn">
-<i class="fas fa-plus"></i>
+<i class="fa-plus"></i>
 <input type="file" id="fileInput" accept="audio/*" style="display:none;">
 <input type="file" id="folderInput" webkitdirectory directory multiple accept="audio/*" style="display:none;">
 </button>
-<button id="openConvertBtn" class="category-btn"><i class="fas fa-circle-down"></i><span>download</span></button>
+<button id="openConvertBtn" class="category-btn"><i class="fa-circle-down"></i><p>download</p></button>
 </div>
 </footer>
 
@@ -94,32 +94,32 @@ step="0.01">
 <div class="popup-header">
 <div class="all-cover-art"></div>
 <div class="popup-info-header">
-<span class="popTitle"></span>
-<span class="popArtist"></span>
+<p class="popTitle"></p>
+<p class="popArtist"></p>
 </div>
-<button id="closePopupBtn"><i class="fas fa-arrow-down"></i></button>
+<button id="closePopupBtn"><i class="fa-arrow-down"></i></button>
 </div>
 
 <ul class="popup-content">
-<li><strong>Title</strong><span class="popTitle"></span></li>
-<li><strong>Artist</strong><span class="popArtist"></span></li>
-<li><strong>Album</strong><span id="popAlbum"></span></li>
-<li><strong>Album Artist</strong> <span id="popAlbumArtist"></span></li>
-<li><strong>Genre</strong><span id="popGenre"></span></li>
-<li><strong>Composer</strong><span id="popComposer"></span></li>
-<li><strong>Publisher</strong><span id="popPublisher"></span></li>
-<li><strong translate="no">No.track</strong><span id="popTrackNumber"></span></li>
-<li><strong translate="no">Total.track</strong><span id="popTotalTrack"></span></li>
-<li><strong translate="no">No.disc</strong><span id="popDiscNumber"></span></li>
-<li><strong translate="no">Total.disc</strong><span id="popTotalDisc"></span></li>
-<li><strong>Key</strong><span id="popKey"></span></li>
-<li><strong>Bpm</strong><span id="popBpm"></span></li>
-<li><strong>Year</strong><span id="popYear"></span></li>
-<li><strong>File size</strong><span id="popFileSize"></span></li>
-<li><strong>File format</strong><span id="popFileFormat"></span></li>
-<li><strong>source</strong><span id="popSourceUrl"></span></li>
-<li><strong>Comment</strong><span id="popComment"></span></li>
-<li><strong>Lyrics</strong><span id="popLyrics"></span></li>
+<li><strong>Title</strong><p class="popTitle"></p></li>
+<li><strong>Artist</strong><p class="popArtist"></p></li>
+<li><strong>Album</strong><span id="popAlbum"></p></li>
+<li><strong>Album Artist</strong> <p id="popAlbumArtist"></p></li>
+<li><strong>Genre</strong><p id="popGenre"></p></li>
+<li><strong>Composer</strong><p id="popComposer"></p></li>
+<li><strong>Publisher</strong><p id="popPublisher"></p></li>
+<li><strong translate="no">No.track</strong><p id="popTrackNumber"></p></li>
+<li><strong translate="no">Total.track</strong><p id="popTotalTrack"></p></li>
+<li><strong translate="no">No.disc</strong><p id="popDiscNumber"></p></li>
+<li><strong translate="no">Total.disc</strong><p id="popTotalDisc"></p></li>
+<li><strong>Key</strong><p id="popKey"></p></li>
+<li><strong>Bpm</strong><p id="popBpm"></p></li>
+<li><strong>Year</strong><p id="popYear"></p></li>
+<li><strong>File size</strong><p id="popFileSize"></p></li>
+<li><strong>File format</strong><p id="popFileFormat"></p></li>
+<li><strong>Source</strong><p id="popSourceUrl"></p></li>
+<li><strong>Comment</strong><p id="popComment"></p></li>
+<li><strong>Lyrics</strong><p id="popLyrics"></p></li>
 </ul>
 
 <li class="popup-progress-bar">
@@ -140,18 +140,17 @@ step="0.01">
 <div class="setup-audio-area">
 <div class="sea-header" translate="no">
 <button id="resetRowProgress">RESET</button>
-<button id="closeSetupBtn"><i class="fas fa-arrow-down"></i></button>
+<button id="closeSetupBtn"><i class="fa-arrow-down"></i></button>
 </div>
 <canvas id="canvas-visualizer"></canvas>
 <div class="setup-button">
 <button id="openEqns">
-<i class="fas fa-sliders"></i>
-<span>EQ</span>
-<span id="eq-status">BYPASS</span>
+<i class="fa-sliders"></i>
+EQ<p id="eq-status">BYPASS</p>
 </button>
 <button id="openMetaBtn">
-<i class="fas fa-tags"></i>
-<span>TAGS</span>
+<i class="fa-tags"></i>
+<p>TAGS</p>
 </button>
 </div>
 
@@ -159,10 +158,10 @@ step="0.01">
 <strong>DURATION<span class="duration-of-selection-results" translate="no">00:00</span></strong>
 <div class="preview-cut-audio">
 <button id="startPreviewBtn">
-<i class="fas fa-step-backward"></i>
+<i class="fa-step-backward"></i>
 </button>
 <button id="audioBtn">
-<i class="fas fa-play"></i>
+<i class="fa-play"></i>
 </button>
 </div>
 </div>
@@ -181,8 +180,7 @@ step="0">
 
 <div class="setting-cutter-container">
 <div class="time-display-wrapper" translate="no">
-<span> min </span> <span>TRIM</span>
-<span> max </span>
+<p>min</p> <p>TRIM</p> <p>max</p>
 </div>
 
 <div class="slider-container">
@@ -194,13 +192,13 @@ step="0">
 </div>
 
 <div class="time-track-end-list">
-<button id="startMinusBtn"><i class="fas fa-backward"></i></button>
+<button id="startMinusBtn"><i class="fa-backward"></i></button>
 <span id="cutStartTimes" translate="no">00:00</span>
-<button id="startPlusBtn"><i class="fas fa-forward"></i></button>
+<button id="startPlusBtn"><i class="fa-forward"></i></button>
 <span id="format-times-options" translate="no">1s</span>
-<button id="endMinusBtn"><i class="fas fa-backward"></i></button>
+<button id="endMinusBtn"><i class="fa-backward"></i></button>
 <span id="cutEndTimes" translate="no">00:00</span>
-<button id="endPlusBtn"><i class="fas fa-forward"></i></button>
+<button id="endPlusBtn"><i class="fa-forward"></i></button>
 </div>
 </div>
 </nav>
@@ -209,12 +207,12 @@ step="0">
 <div class="eq-audio-area">
 <div class="sea-header" translate="no">
 <button id="eqToggleBtn">
-<i class="fas fa-toggle-off"></i>&nbsp;OFF
+<i class="fa-toggle-off"></i>&nbsp;OFF
 </button>
 <div class="close-setup-grup">
-<button id="resetEqBtn"><i class="fas fa-undo"></i></button>
+<button id="resetEqBtn"><i class="fa-undo"></i></button>
 <button id="closeEqBtn">
-<i class="fas fa-arrow-down"></i>
+<i class="fa-arrow-down"></i>
 </button>
 </div>
 </div>
@@ -223,77 +221,77 @@ step="0">
 <div class="eq-slider" translate="no">
 <label for="sub">60Hz</label>
 <input type="range" id="sub" min="-15" max="15" step="1" value="0">
-<span class="slider-value" id="subValue">1.00</span>
+<p class="slider-value" id="subValue">1.00</p>
 </div>
 <div class="eq-slider" translate="no">
 <label for="m3">400hz</label>
 <input type="range" id="m3" min="-15" max="15" step="1" value="0">
-<span class="slider-value" id="m3Value">1.00</span>
+<p class="slider-value" id="m3Value">1.00</p>
 </div>
 <div class="eq-slider" translate="no">
 <label for="m10">900hz</label>
 <input type="range" id="m10" min="-15" max="15" step="1" value="0">
-<span class="slider-value" id="m10Value">1.00</span>
+<p class="slider-value" id="m10Value">1.00</p>
 </div>
 <div class="eq-slider" translate="no">
 <label for="h30">3Khz</label>
 <input type="range" id="h30" min="-15" max="15" step="1" value="0">
-<span class="slider-value" id="h30Value">1.00</span>
+<p class="slider-value" id="h30Value">1.00</p>
 </div>
 <div class="eq-slider" translate="no">
 <label for="h50">5Khz</label>
 <input type="range" id="h50" min="-15" max="15" step="1" value="0">
-<span class="slider-value" id="h50Value">1.00</span>
+<p class="slider-value" id="h50Value">1.00</p>
 </div>
 <div class="eq-slider" translate="no">
 <label for="h80">8Khz</label>
 <input type="range" id="h80" min="-15" max="15" step="1" value="0">
-<span class="slider-value" id="h80Value">1.00</span>
+<p class="slider-value" id="h80Value">1.00</p>
 </div>
 <div class="eq-slider" translate="no">
 <label for="h90">9Khz</label>
 <input type="range" id="h90" min="-15" max="15" step="1" value="0">
-<span class="slider-value" id="h90Value">1.00</span>
+<p class="slider-value" id="h90Value">1.00</p>
 </div>
 </div>
 
 <div class="eq-slider-merger">
 <label for="bass">LP</label>
 <input type="range" id="bass" min="0" max="1" step="0.05" value="0">
-<span class="slider-value" id="bassValue">0.00</span>
+<p class="slider-value" id="bassValue">0.00</p>
 </div>
 <div class="eq-slider-merger" translate="no">
 <label for="BassBooster">HP</label>
 <input type="range" id="bassBoost" min="0" max="1" step="0.05" value="0">
-<span class="slider-value" id="bassBoostValue">0.00</span>
+<p class="slider-value" id="bassBoostValue">0.00</p>
 </div>
 <div class="eq-slider-merger" translate="no">
 <label for="reverb">FX-R</label>
 <input type="range" id="reverb" min="0" max="1" step="0.05" value="0">
-<span class="slider-value" id="reverbValue">0.00</span>
+<p class="slider-value" id="reverbValue">0.00</p>
 </div>
 <div class="eq-slider-merger">
 <label for="virtualizer">FX-V</label>
 <input type="range" id="virtualizer" min="0" max="1" step="0.05" value="0">
-<span class="slider-value" id="virtualizerValue">1.00</span>
+<p class="slider-value" id="virtualizerValue">1.00</p>
 </div>
 <div class="eq-slider-merger" translate="no">
 <label for="playback">X-PITCH</label>
 <input type="range" id="playback" min="0.5" max="1.5" step="0.05" value="1.00">
-<span class="slider-value" id="playbackValue">1.00</span>
+<p class="slider-value" id="playbackValue">1.00</p>
 </div>
 
 <div class="group-fade-effect">
 <div class="title-fade-effect">
-<span translate="no">Fade - In<p id="fadeInValue">
+<label translate="no">Fade - In<p id="fadeInValue">
 0.0s
 </p>
-</span>
-<span translate="no">volume</span>
-<span translate="no">Fade - Out<p id="fadeOutValue">
+</label>
+<label translate="no">volume</label>
+<label translate="no">Fade - Out<p id="fadeOutValue">
 0.0s
 </p>
-</span>
+</label>
 </div>
 <div class="eq-slider-effect">
 <input type="range" id="fadeIn" min="0" max="30" step="0.5" value="0">
@@ -303,13 +301,13 @@ step="0">
 </nav>
 
 <nav id="meta-audio-area">
-<button id="closeMetaBtn"><span></span>
-<i class="fas fa-arrow-down"></i></button>
+<button id="closeMetaBtn">
+<i class="fa-arrow-down"></i></button>
 <div class="meta-head-row">
 <div class="change-cover-header">
 <div class="change-album-art">
-<button id="showCoverBtn"><i class="fas fa-minimize"></i></button>
-<button id="deleteCoverBtn"><i class="fas fa-trash"></i></button>
+<button id="showCoverBtn"><i class="fa-minimize"></i></button>
+<button id="deleteCoverBtn"><i class="fa-trash"></i></button>
 <img class="albumArtPreview" src="img.jpeg" alt="Album Art" style="visibility:hidden; border-radius:0.2em;" />
 <label for="albumArtInput" translate="no"> <input type="file" id="albumArtInput" accept="image/*" style="display:none;" />+ change cover</label>
 </div>
@@ -321,17 +319,17 @@ step="0">
 <div class="input-preview-play">
 <button>READ : </button>
 <select id="tts-source">
-<option value="titleNameInput">TITLE</option>
-<option value="artistNameInput">ARTIST</option>
-<option value="albumNameInput">ALBUM</option>
-<option value="albumArtistInput">ALBUM ARTIST</option>
-<option value="genreInput">GENRE</option>
-<option value="composerInput">COMPOSER</option>
-<option value="publisherInput">PUBLISHER</option>
-<option value="commentInput">COMMENT</option>
-<option value="lyricsInput">LYRICS</option>
+<option value="#titleNameInput">TITLE</option>
+<option value="#artistNameInput">ARTIST</option>
+<option value="#albumNameInput">ALBUM</option>
+<option value="#albumArtistInput">ALBUM ARTIST</option>
+<option value="#genreInput">GENRE</option>
+<option value="#composerInput">COMPOSER</option>
+<option value="#publisherInput">PUBLISHER</option>
+<option value="#commentInput">COMMENT</option>
+<option value="#lyricsInput">LYRICS</option>
 </select>
-<button id="play-lyrics"><i class="fas fa-play"></i></button>
+<button id="play-lyrics"><i class="fa-play"></i></button>
 </div>
 <div class="output-preview-area">
 <label><p>TITLE</p>
@@ -385,20 +383,20 @@ step="0">
 </div>
 </div>
 <div class="description" style="background:#fff;">
-<span>tags will be written in file creation</span>
+<label>tags will be written in file creation</label>
 </div>
 </nav>
 
 <nav id="sideMenu" class="hidden">
 <ul class="side-menu">
-<li id="installPrompt"><i class="fas fa-maap"></i>create shortcut</button>
-<li id="generateQrBtn"><i class="fas fa-qrcode"></i>Generate QR</li>
+<li id="installPrompt"><i class="fa-maap"></i>Create shortcut</button>
+<li id="openQrs"><i class="fa-qrcode"></i>Generate QR</li>
 <hr class="separator">
-<li id="changeInputBtn"><i class="fas fa-folder-open"></i>Change Input</li>
-<li id="modeMessageBtn"><i class="fas fa-bell"></i>Message</li>
+<li id="changeInputBtn"><i class="fa-folder-open"></i>Change Input</li>
+<li id="modeMessageBtn"><i class="fa-bell"></i>Message</li>
 <hr class="separator">
-<li id="dateBtn"> <i class="fas fa-database"></i>Data seved</li>
-<li id="date-seved" class="hidden"><i id="removeDateMp3" class="fas fa-times"></i><p id="dataSaveDb" style="opacity:0.5;"></p></li>
+<li id="dateBtn"> <i class="fa-database"></i>Data seved</li>
+<li id="date-seved" class="hidden"><i id="removeDateMp3" class="fa-times"></i><p id="dataSaveDb" style="opacity:0.5;"></p></li>
 <li id="langWatermark" aria-hidden="true" translate="no"></li>
 </ul>
 </nav>
@@ -408,7 +406,7 @@ step="0">
 <section class="qr-input">
 <input type="text" id="paste-link-qr" placeholder="enter address / link...">
 </section>
-<button id="generateQR"><i class="fas fa-qrcode"></i>&nbsp; Generate QR</button>
+<button id="generateQR"><i class="fa-qrcode"></i>&nbsp; Generate QR</button>
 <div id="qr-result">
 <div id="qrcode"></div>
 <p id="qrText"></p>
@@ -439,9 +437,7 @@ step="0">
 </div>
 </nav>
 
-<div id="toastNotif">
-<span class="toast-message"></span>
-</div>
+<div id="toast-message"></div>
 
 <div id="encodeLoading" class="hidden">
 <div class="progress-percent-grup">
@@ -460,28 +456,29 @@ step="0">
 <div id="convertPageEl">
 <div class="convert-overlay-content">
 <section class="paste-input-container">
-<button id="clearInputConvertBtn"><i class="fas fa-times"></i></button>
+<button id="clearInputConvertBtn"><i class="fa-times"></i></button>
 <input type="text" id="pasteConvertUrl" placeholder="paste link...">
-<button id="converter-btn"><i class="fas fa-search"></i></button>
+<button id="converter-btn"><i class="fa-search"></i></button>
 <div class="loading-converter">
 <span id="loading-converter"></span></div>
 </section>
 <div class="converter-info">
-<span style="color:#fff;">note </span>: only supports urls from YouTube - Make sure you have permission to retrieve the link, This tool is intended for downloading copyright-free content.
+<span style="color:#fff;">note </span>: only supports URL from YouTube - Ensure you have authorization to access the link, This tool is designed for downloading content that is free of copyright restrictions.
 </div>
 <section id="converter-results">
-<label class="host-platform" style="color:#ff4900;"><i class="fas fa-video-camera"></i>
+<label class="host-platform" style="color:#ff4900;"><i class="fa-video-camera"></i>
 <p id="host-plat"></p></label>
 <label class="host-platform"><p id="host-title"></p></label>
 <div class="finaly-btn">
 <button id="links-video">
-<i class="fas fa-arrow-down"></i>&nbsp;Video
+<i class="fa-arrow-down"></i>&nbsp;Video
 </button>
 <button id="links-audio">
-<i class="fas fa-arrow-down"></i>&nbsp;Audio
+<i class="fa-arrow-down"></i>&nbsp;Audio
+</button>
 </button>
 <button id="clean-links-convert">
-<i class="fas fa-times"></i>&nbsp;Clean
+<i class="fa-times"></i>&nbsp;Clean
 </button></div>
 <div class="fetch-spinner">
 <span id="fetch-spinner"></span></div>
@@ -502,7 +499,6 @@ step="0">
 <script src="static/lib/browser-id3-writer.min.js" defer></script> 
 <script src="static/lib/qrcode.min.js" defer></script>
 <script src="static/lib/html2canvas.min.js" defer></script>
-
 <script src="static/path/script.js" defer></script>
 <script src="static/path/nav.js" defer></script>
 </body>
