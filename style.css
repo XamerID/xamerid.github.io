@@ -44,7 +44,7 @@ body {
 @font-face {
     font-family: "Font Awesome 6 Free";
     font-display: inline-block;
-    src: url(lib/icon.woff2) format("woff2");
+    src: url(static/lib/icon.woff2) format("woff2");
 }
 i[class] {
     -moz-osx-font-smoothing: grayscale;
