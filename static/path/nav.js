@@ -17,7 +17,6 @@
     let busy = false;
     let currentURL = null;
     let currentTitle = "media";
-
     function lang_usage() {
         const loc = (navigator.languages?.[0] || navigator.language || "en-US").replace("_", "-");
         const pt = loc.split("-");
@@ -125,12 +124,9 @@
             alert("internet required");
             return;
         }
-
         const url = input.value.trim();
         if (!url) return;
-
         let validated;
-
         try {
             validated = new URL(url);
         } catch {
@@ -141,21 +137,17 @@
             showToast("invalid protocol", 1800);
             return;
         }
-
         const domains = ['youtube.com','youtu.be', 'instagram.com','tiktok.com'];
         const hostname = validated.hostname.replace(/^www\./, '');
         const isValid = domains.some(domain =>
             hostname === domain ||
             hostname.endsWith("." + domain)
         );
-
         if (!isValid) {
             showToast("platform not supported!", 1800);
             return;
         }
-
         if (url === currentURL) return;
-
         resetUI();
         loading.classList.add("active");
         busy = true;
