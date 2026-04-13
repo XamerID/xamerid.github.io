@@ -22,7 +22,6 @@ const nextBtn = dot('#nextBtn');
 const repeatBtn = dot('#repeatBtn');
 const currentTimes = dot('#currentTimes');
 const currentDurations = dot('#currentDurations');
-const animTL = dot("#active-track-animations");
 const playerItem = dot("#player-control-item");
 
 const eqToggleBtn = dot('#eqToggleBtn');
@@ -1126,6 +1125,7 @@ async function injectTags(track) {
     }
 }
 async function injectData(track) {
+    if (!track || !track.id) return;
     await resetActivityEdit();
     try {
         isProcessing = true;
@@ -1195,6 +1195,11 @@ async function injectData(track) {
         isProcessing = false;
     }
 }
+dot("#addEdBtn").addEventListener('click', (event) => {
+    event.stopPropagation();
+    if (deactiveSong && currentCutId === deactiveSong.id) return showToast("sudah ditambahkan");
+    injectData(deactiveSong);
+});
 dot('#resetRowProgress').addEventListener('click', async (event) => {
     event.stopPropagation();
     cutAudioPlayer.pause();
@@ -1272,7 +1277,9 @@ async function setDominant(imgUrl) {
 
 }
 function resetPopup() {
-    ['#popAlbum',
+    ['#popTitle',
+        '#popArtist',
+        '#popAlbum',
         '#popAlbumArtist',
         '#popGenre',
         '#popComposer',
@@ -1294,14 +1301,16 @@ function resetPopup() {
         '#popComment',
         '#popLyrics']
     .forEach(id => dot(id).textContent = ': Not found');
-    dos('.popTitle,.popArtist').forEach(el => el.textContent = 'unknown');
     dos(".all-cover-art").forEach(el => {
         el.innerHTML = `${svgn}`;
         el.style.backgroundImage = '';
     });
-
-    animTL.textContent = 'No songs are playing';
-    animTL.classList.remove('active');
+    
+    dos(".active-track-title").forEach(el => {
+        el.textContent = "No song";
+        el.classList.remove('active');
+    });
+    dos(".active-track-artist").forEach(el => el.textContent = "unknown");
 
     playerItem.style.transition = "background 1s ease";
     playerItem.style.background = "rgba(52,59,60)";
@@ -1321,13 +1330,16 @@ function popupTrackInfo(track, img) {
                 filterBtn].forEach(m => m.classList.remove('active'));
         }
     }
-
-    animTL.textContent = `${track.title} - ${track.artist}`;
-    animTL.classList.add('active');
-
-    dos('.popTitle').forEach(el => el.textContent = track.title || 'unknown');
-    dos('.popArtist').forEach(el => el.textContent = track.artist || 'unknown');
+    
+    dos(".active-track-title").forEach(el => {
+        el.textContent = `${track.title} - ${track.artist}`;
+        el.classList.add('active');
+    });
+    dos(".active-track-artist").forEach(el => el.textContent = track.artist || "unknown");
+    
     Object.entries({
+        popTitle: track.title,
+        popArtist: track.artist,
         popAlbum: track.album,
         popAlbumArtist: track.albumArtist,
         popGenre: track.genre,
@@ -1359,12 +1371,10 @@ function resetPlayerUI() {
     currentIndex = -1;
     [progressRange,
         progressBorder].forEach(s => {
-            s.value = 0;
-            s.max = 0;
+            s.value = s.max = 0;
             s.style.background = '';
         });
-    [currentTimes,
-        currentDurations].forEach(t => t.textContent = formatTime(0));
+    [currentTimes, currentDurations].forEach(t => t.textContent = formatTime(0));
     if (audioPlayer.src && audioPlayer.src.startsWith('blob:')) {
         URL.revokeObjectURL(audioPlayer.src);
         audioPlayer.src = '';
@@ -1376,10 +1386,11 @@ function resetPlayerUI() {
         if ('clearAppBadge' in navigator &&
             navigator.clearAppBadge());
     }
-   /* if (!musicFiles.length) {
+  
+    if (!musicFiles.length) {
         isPlayer = false;
         playerItem.classList.add('hidden');
-    } */
+    } 
     
     resetPopup();
 }
@@ -1492,7 +1503,8 @@ async function loadTrack(index) {
             if (!img || img.trim() === '') {
                 img = getThumbByTitle(title);
             }
-            deactiveSong = trackMetadata.id;
+            deactiveSong = trackMetadata;
+
             popupTrackInfo(trackMetadata, img);
             if ("mediaSession" in navigator) {
                 navigator.mediaSession.metadata = new MediaMetadata({
@@ -1678,7 +1690,7 @@ function renderMusic(musicList,
                 e.preventDefault();
                 e.stopPropagation();
                 if (isProcessing) return;
-                if (currentCutId === track.id) return;
+                if (currentCutId === track.id) return showToast("sudah ditambahkan");
                 if (track.fileData) {
                     await injectData(track);
                 }
@@ -1704,10 +1716,7 @@ function renderByCategory(category) {
         musicList.innerHTML = musicMessage;
         return;
     }
-    [musicBtn,
-        artistBtn,
-        albumBtn,
-        genreBtn].forEach(b => b.classList.remove('active'));
+    [musicBtn, artistBtn, albumBtn, genreBtn].forEach(b => b.classList.remove('active'));
     let btn = `#${category}Btn`;
     dot(btn).classList.add('active');
     if (isDelten) {
@@ -2095,7 +2104,7 @@ async function deleteSongUnified(id,
                 reject(event.target.error);
             };
         });
-        if (deactiveSong === id) resetPlayerUI();
+        if (deactiveSong.id === id) resetPlayerUI();
         if (currentCutId === id) {
             isEdit(false)
             resetActivityEdit();
