@@ -1197,7 +1197,7 @@ async function injectData(track) {
 }
 dot("#addEdBtn").addEventListener('click', (event) => {
     event.stopPropagation();
-    if (deactiveSong && currentCutId === deactiveSong.id) return showToast("sudah ditambahkan");
+    if (deactiveSong && currentCutId === deactiveSong.id) return showToast("Available ✓");
     injectData(deactiveSong);
 });
 dot('#resetRowProgress').addEventListener('click', async (event) => {
@@ -1690,7 +1690,7 @@ function renderMusic(musicList,
                 e.preventDefault();
                 e.stopPropagation();
                 if (isProcessing) return;
-                if (currentCutId === track.id) return showToast("sudah ditambahkan");
+                if (currentCutId === track.id) return showToast("Available ✓");
                 if (track.fileData) {
                     await injectData(track);
                 }
