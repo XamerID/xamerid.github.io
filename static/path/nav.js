@@ -12,11 +12,11 @@
     const hostPlat = dot("#host-plat");
     const hostTitle = dot("#host-title");
     const downloadLink = dot("#downloadLinke");
-    const API = "https://fat-prediction-selling-previews.trycloudflare.com";
-    let ua = "-";
+    const API = "https://finished-fishing-performance-powder.trycloudflare.com";
+    let ua = "";
     let busy = false;
     let currentURL = null;
-    let currentTitle = "media";
+    let currentTitle = "";
     function lang_usage() {
         const loc = (navigator.languages?.[0] || navigator.language || "en-US").replace("_", "-");
         const pt = loc.split("-");
@@ -28,7 +28,7 @@
         dot('#langWatermark').textContent = `${cn} - ${cd}`;
         setInterval(1000);
     }
-    async function update() {
+     async function update() {
         await lang_usage();
 
         fetch(API + "/visit", {
@@ -41,7 +41,7 @@
             })
         });
     }
-    update();
+    update(); 
 
     function resetUI() {
         busy = false;
@@ -126,7 +126,9 @@
         }
         const url = input.value.trim();
         if (!url) return;
+
         let validated;
+
         try {
             validated = new URL(url);
         } catch {
@@ -148,6 +150,7 @@
             return;
         }
         if (url === currentURL) return;
+
         resetUI();
         loading.classList.add("active");
         busy = true;
