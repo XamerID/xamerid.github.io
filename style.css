@@ -111,9 +111,6 @@ i[class]:before {
 .fa-music {
     --fa: "\f001";
 }
-.fa-user {
-    --fa: "\f007";
-}
 .fa-tags {
     --fa: "\f02c";
 }
@@ -131,9 +128,6 @@ i[class]:before {
 }
 .fa-bars {
     --fa: "\f0c9";
-}
-.fa-ellipsis-v {
-    --fa: "\f142";
 }
 .fa-plus {
     --fa: "\+";
@@ -215,17 +209,17 @@ input:is([type="text"],[type="range"]) {
   max-height: 80px;
   border-radius: 5px;
   font-size: 1em;
+  background-color: #fff;
+  color: #000;
   overflow: hidden;
   opacity: 0;
-  visibility: hidden;
   pointer-events: none;
+  visibility: hidden;
   transform: translate(-50%, -50%);
-  transition: opacity 0.4s, background 0.4s, color 0.4s;
+  transition: opacity 0.4s, visibility 0.4s;
 }
 #toast-message.show {
     opacity: 1;
-    background-color: #fff;
-    color: #000;
     z-index: 99991;
     visibility: visible;
 }
@@ -517,8 +511,7 @@ input:is([type="text"],[type="range"]) {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 50px;
-    padding: var(--padding-base);
+    padding: 5px var(--padding-base);
     background: #333;
     pointer-events: auto;
     visibility: visible;
@@ -551,7 +544,7 @@ input:is([type="text"],[type="range"]) {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    width: 60%;
+    width: 55%;
     flex-shrink: 0;
 }
 #now-playing-preview .all-cover-art {
@@ -586,29 +579,33 @@ input:is([type="text"],[type="range"]) {
     overflow: hidden;
     will-change: transform;
 }
-#active-track-animations.active {
+.active-track-title.active {
     animation: marquee-animation 20s linear infinite;
 }
-.active-track-artist p {
+.active-track-artist {
     overflow: hidden;
     text-overflow: ellipsis;
     font-weight: normal;
     font-size: 0.8em;
-    color: #000;
+    color: #888;
 }
 .player-controls-group {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    width: 40%;
-    gap: var(--margin-base);
+    width: 45%;
     flex-shrink: 0;
 }
 .player-controls-group button {
-    flex-grow: 1;
-    width: 40px;
-    height: 40px;
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
     font-size: 1.5em;
+    color: #fff;
+}
+#addEdBtn {
+    font-size: 0.8em;
+    border: 3px solid #fff;
     color: #fff;
 }
 .player-bottom-box {
@@ -618,7 +615,7 @@ input:is([type="text"],[type="range"]) {
     align-items: center;
     width: 100%;
     height: 50px;
-    padding: 0 var(--padding-base);
+    padding: 5px var(--padding-base);
     background: rgba(0,0,0,0.9);
 }
 .category-btn {
@@ -1239,22 +1236,6 @@ input:is([type="text"],[type="range"]) {
     border-radius: 0.2em;
     flex-shrink: 0;
 }
-.popup-info-header {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin: 0 var(--margin-base);
-    gap: 0.35em;
-    overflow: hidden;
-    flex-grow: 1;
-}
-.popup-info-header p {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 0.9em;
-    color: #888;
-}
 .popup-content li {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -1301,17 +1282,17 @@ input:is([type="text"],[type="range"]) {
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
-    height: 0.25em;
+    height: 2px;
     border: 1px solid #444;
-    border-radius: 0.35em;
+    border-radius: 5px;
     outline: none;
     background: transparent;
 }
 .popup-progress-bar input::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 1.25em;
-    height: 1.25em;
+    width: 10px;
+    height: 10px;
     border-radius: 100%;
     background: #fff;
     cursor: pointer;
