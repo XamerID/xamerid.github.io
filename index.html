@@ -59,9 +59,10 @@ step="0.01">
 <div class="all-cover-art"></div>
 <div class="track-details">
 <strong>
-<p id="active-track-animations"></p>
+<p class="active-track-title"></p>
 </strong>
-<strong class="active-track-artist"><p class="popArtist"></p>
+<strong>
+<p class="active-track-artist"></p>
 </strong>
 </div>
 </div>
@@ -70,6 +71,7 @@ step="0.01">
 <button id="prevBtn"><i class="fa-step-backward"></i></button>
 <button id="playPauseBtn"><i class="fa-play"></i></button>
 <button id="nextBtn"><i class="fa-step-forward"></i></button>
+<button id="addEdBtn"><i class="fa-plus"></i></button>
 </div>
 </div>
 
@@ -95,16 +97,20 @@ step="0.01">
 <nav id="viewPopupMenu">
 <div class="popup-header">
 <div class="all-cover-art"></div>
-<div class="popup-info-header">
-<p class="popTitle"></p>
-<p class="popArtist"></p>
+<div class="track-details">
+<strong>
+<p class="active-track-title"></p>
+</strong>
+<strong>
+<p class="active-track-artist"></p>
+</strong>
 </div>
 <button id="closePopupBtn"><i class="fa-arrow-down"></i></button>
 </div>
 
 <ul class="popup-content">
-<li><strong>Title</strong><p class="popTitle"></p></li>
-<li><strong>Artist</strong><p class="popArtist"></p></li>
+<li><strong>Title</strong><p id="popTitle"></p></li>
+<li><strong>Artist</strong><p id="popArtist"></p></li>
 <li><strong>Album</strong><span id="popAlbum"></p></li>
 <li><strong>Album Artist</strong> <p id="popAlbumArtist"></p></li>
 <li><strong>Genre</strong><p id="popGenre"></p></li>
