@@ -1,21 +1,24 @@
 {
   "name": "CROSS DEVICE",
   "short_name": "PWA",
-  "description": "web",
+  "description": "converter",
   "start_url": "index.html",
   "display": "standalone",
+  "orientation": "portrait",
   "theme_color": "#000000",
   "background_color": "#000000",
   "icons": [
     {
       "src": "static/lib/icon.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "static/lib/icon.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
