@@ -2,7 +2,7 @@
   "name": "CROSS DEVICE",
   "short_name": "PWA",
   "description": "converter",
-  "start_url": "index.html",
+  "start_url": "index.html?utm_source=pwa",
   "display": "standalone",
   "orientation": "portrait",
   "theme_color": "#000000",
