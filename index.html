@@ -10,6 +10,8 @@
     <meta name="description" content="make your audio more colorful">
     <title>ID</title>
     <link rel="icon" href="static/lib/ion.jpg" type="image/jpg" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
     <link rel="stylesheet" href="style.css" />
     <link rel="manifest" href="manifest.json">
 </head>
@@ -18,11 +20,13 @@
 <main class="page-swipe">
 <div class="header">
 <input type="text" id="searchInput" placeholder="">
-<button id="repeatBtn"><i class="fa-repeat"></i></button>
-<button id="openEqBtn"><i class="fa-sliders"></i></button>
-<button id="filterBtn"><i class="fa-list-check"></i></button>
-<button id="clearSearchBtn" style="display:none;"><i class="fa-times"></i></button>
-<button id="menuBtn"><i class="fa-bars"></i></button>
+<button id="repeatBtn"><i class="material-symbols-outlined">Repeat</i></button>
+<button id="openEqBtn"><i class="material-symbols-outlined">Tune</i></button>
+<button id="filterBtn"><i class="material-symbols-outlined">Format_List_Bulleted</i></button>
+<button id="clearSearchBtn" style="display:none;"><i class="fa-times"></i class="material-symbols-outlined"></button>
+<button id="menuBtn">
+  <i class="material-symbols-outlined">menu</i>
+</button>
 </div>
 
 <section id="pre-list-edit">
@@ -33,12 +37,12 @@
 <strong id="preArtist"></strong>
 </div>
 <div id="setup-audios" translate="no">
-<button id="resetEditBtn"><i class="fa-times"></i></button>
+<button id="resetEditBtn"><i class="material-symbols-outlined">Close</i></button>
 <button id="openSetupBtn">
-<i class="fa-edit"></i>
+<i class="material-symbols-outlined">Edit_Square</i>
 </button>
 <button id="extrackAudioBtn">
-<i class="fa-cut"></i>
+<i class="material-symbols-outlined">Content_Cut</i>
 </button>
 </div>
 </div>
@@ -49,9 +53,9 @@
 <main class="converter-page">
 <div class="converter-content">
 <section class="converter-input">
-<button id="clearInputConvertBtn"><i class="fa-times"></i></button>
+<button id="clearInputConvertBtn"><i class="material-symbols-outlined">Close</i></button>
 <input type="text" id="pasteConvertUrl" placeholder="paste link...">
-<button id="converter-btn"><i class="fa-search"></i></button>
+<button id="converter-btn"><i class="material-symbols-outlined">Search</i></button>
 <div class="loading-converter">
 <span id="loading-converter"></span>
 </div>
@@ -63,19 +67,20 @@ Ensure you have authorization to access the link, This tool is designed for down
 
 <section id="converter-results">
 <label class="host-platform">
-<p><i class="fa-video-camera" style="color:#ff4900;"></i><span id="host-plat"></span></p>
+<p><i class="material-symbols-outlined" style="color:#ff4900;">Video_Camera_Front
+</i><span id="host-plat"></span></p>
 <p id="host-title"></p>
 </label>
 <div class="finaly-btn">
 <button id="links-video">
-<i class="fa-arrow-down"></i>&nbsp;Video
+<i class="material-symbols-outlined">Download</i>&nbsp;Video
 </button>
 <button id="links-audio">
-<i class="fa-arrow-down"></i>&nbsp;Audio
+<i class="material-symbols-outlined">Download</i>&nbsp;Audio
 </button>
 </button>
 <button id="clean-links-convert">
-<i class="fa-times"></i>&nbsp;Clean
+<i class="material-symbols-outlined">Close</i>&nbsp;Clean
 </button>
 </div>
 <div class="fetch-spinner">
@@ -121,24 +126,24 @@ step="0.01">
 </div>
 
 <div class="player-control">
-<button id="prevBtn"><i class="fa-step-backward"></i></button>
-<button id="playPauseBtn"><i class="fa-play"></i></button>
-<button id="nextBtn"><i class="fa-step-forward"></i></button>
+<button id="prevBtn"><i class="material-symbols-outlined">Skip_Previous</i></button>
+<button id="playPauseBtn"><i class="material-symbols-outlined">Play_Arrow</i></button>
+<button id="nextBtn"><i class="material-symbols-outlined">Skip_Next</i></button>
 </div>
 </div>
 </footer>
 
 <footer class="player-page-btn" translate="no">
-<button class="page-btn active" data-id="false"><i class="fa-music"></i><p>
+<button class="page-btn active" data-id="false"><i class="material-symbols-outlined">Library_Music</i><p>
 Library
 </p>
 </button>
 <button id="addFileBtn">
-<i class="fa-plus"></i>
+<i class="material-symbols-outlined">Add</i>
 <input type="file" id="modeFile" accept="audio/*" style="display:none;">
 <input type="file" id="modeFolder" webkitdirectory directory multiple accept="audio/*" style="display:none;">
 </button>
-<button class="page-btn" data-id="true"><i class="fa-download"></i><p>
+<button class="page-btn" data-id="true"><i class="material-symbols-outlined">Download</i><p>
 Download
 </p>
 </button>
@@ -155,7 +160,7 @@ Download
 <p class="active-track-artist"></p>
 </strong>
 </div>
-<button id="closePopupBtn"><i class="fa-arrow-down"></i></button>
+<button id="closePopupBtn"><i class="material-symbols-outlined">Arrow_Downward_Alt</i></button>
 </div>
 
 <ul class="popup-content">
@@ -221,7 +226,7 @@ step="0.01">
 <div class="setup-audio-area">
 <div class="sea-header" translate="no">
 <button id="resetRowProgress">RESET</button>
-<button id="closeSetupBtn"><i class="fa-arrow-down"></i></button>
+<button id="closeSetupBtn"><i class="material-symbols-outlined">Arrow_Downward_Alt</i></button>
 </div>
 <canvas id="visualizer"></canvas>
 <div class="setup-button">
@@ -239,10 +244,10 @@ TAGS
 <strong>DURATION<span id="duration-select" translate="no">00:00</span></strong>
 <div class="set-preview">
 <button id="startPreviewBtn">
-<i class="fa-step-backward"></i>
+<i class="material-symbols-outlined">Skip_Previous</i>
 </button>
 <button id="audioBtn">
-<i class="fa-play"></i>
+<i class="material-symbols-outlined">Play_Arrow</i>
 </button>
 </div>
 </div>
@@ -280,13 +285,13 @@ max
 </div>
 
 <div class="set-btn-box">
-<button id="startMinusBtn"><i class="fa-backward"></i></button>
+<button id="startMinusBtn"><i class="material-symbols-outlined">Fast_Rewind</i></button>
 <span id="cutStartTimes" translate="no">00:00</span>
-<button id="startPlusBtn"><i class="fa-forward"></i></button>
+<button id="startPlusBtn"><i class="material-symbols-outlined">Fast_Forward</i></button>
 <span id="format-times-options" translate="no">1.0</span>
-<button id="endMinusBtn"><i class="fa-backward"></i></button>
+<button id="endMinusBtn"><i class="material-symbols-outlined">Fast_Rewind</i></button>
 <span id="cutEndTimes" translate="no">00:00</span>
-<button id="endPlusBtn"><i class="fa-forward"></i></button>
+<button id="endPlusBtn"><i class="material-symbols-outlined">Fast_Forward</i></button>
 </div>
 </div>
 </nav>
@@ -295,12 +300,12 @@ max
 <div class="eq-audio-area">
 <div class="sea-header" translate="no">
 <button id="eqToggleBtn">
-<i class="fa-toggle-off"></i>
+<i class="material-symbols-outlined">Settings_Power
+</i>
 </button>
 <div class="close-setup-grup">
-<button id="resetEqBtn"><i class="fa-undo"></i></button>
-<button id="closeEqBtn">
-<i class="fa-arrow-down"></i>
+<button id="resetEqBtn">RESET</button>
+<button id="closeEqBtn"><i class="material-symbols-outlined">Arrow_Downward_Alt</i>
 </button>
 </div>
 </div>
@@ -416,15 +421,15 @@ Fade - Out<span id="fadeOutValue">
 
 <nav id="meta-audio-area">
 <button id="closeMetaBtn">
-<i class="fa-arrow-down"></i></button>
+<i class="material-symbols-outlined">Arrow_Downward_Alt</i></button>
 
 <div class="meta-container">
 <div id="meta-head">
 <div class="change-thumb" translate="no">
-<button id="showCoverBtn"><i class="fa-minimize"></i></button>
-<button id="deleteCoverBtn"><i class="fa-trash"></i></button>
+<button id="showCoverBtn"><i class="material-symbols-outlined">Pan_Zoom</i></button>
+<button id="deleteCoverBtn"><i class="material-symbols-outlined">Delete_Sweep</i></button>
 <img class="albumArtPreview" src="img.jpeg" style="visibility:hidden;" />
-<label><input type="file" id="albumArtInput" accept="image/*" style="display:none;" />+ picture </label>
+<label><input type="file" id="albumArtInput" accept="image/*" style="display:none;" /><i class="material-symbols-outlined">Add_A_Photo</i></label>
 </div>
 <div class="meta-input-box">
 <label><input type="text" id="fileInput" placeholder="File name" /></label>
@@ -541,13 +546,13 @@ LYRICS
 
 <nav id="sideMenu" class="hidden">
 <ul class="side-menu">
-<li id="installPrompt"><i class="fa-maap"></i><span>Create shortcut</span></li>
+<li id="installPrompt"><i class="material-symbols-outlined">Android</i><span>Create shortcut</span></li>
 <hr class="separator">
-<li id="changeInputBtn"><i class="fa-folder-open"></i>Change Input</li>
-<li id="modeMessageBtn"><i class="fa-bell"></i>Feedback </li>
+<li id="changeInputBtn"><i class="material-symbols-outlined">Folder_Open</i>Change Input</li>
+<li id="modeMessageBtn"><i class="material-symbols-outlined">Notifications</i>Feedback </li>
 <hr class="separator">
-<li id="dateBtn"> <i class="fa-database"></i>Data seved</li>
-<li id="date-seved" class="hidden"><i id="removeDateMp3" class="fa-times"></i><p id="dataSaveDb" style="opacity:0.5;"></p>
+<li id="dateBtn"><i class="material-symbols-outlined">Database</i>Data seved</li>
+<li id="date-seved" class="hidden"><i class="material-symbols-outlined" id="removeDateMp3">Close</i><p id="dataSaveDb" style="opacity:0.5;"></p>
 </li>
 <li id="langWatermark" aria-hidden="true" translate="no"></li>
 </ul>
@@ -592,7 +597,8 @@ LYRICS
 <audio id="cutAudioPlayer" style="display:none;"></audio>
 <a id="downloadLinka" style="opacity:0"></a>
 <a id="downloadLinke" style="opacity:0;"></a>
-
+<script>document.documentElement.classList.add("font-loaded");
+</script>
 <script src="static/lib/jsmediatags.min.js" defer></script>
 <script src="static/path/script.js" defer></script>
 <script src="static/path/nav.js" defer></script>
