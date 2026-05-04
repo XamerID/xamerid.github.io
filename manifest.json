@@ -4,6 +4,9 @@
   "description": "converter",
   "start_url": "index.html?utm_source=pwa",
   "display": "standalone",
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  },
   "orientation": "portrait",
   "theme_color": "#000000",
   "background_color": "#000000",
